@@ -392,6 +392,44 @@
         box-shadow: 0 4px 15px rgba(126, 34, 206, 0.35);
       }
 
+      /* Multi-option BEO Actions */
+      .card-actions-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        margin-top: auto;
+        border-top: 1px solid #f3f0ff;
+        padding-top: 12px;
+      }
+      .option-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 6px 0;
+      }
+      .option-name {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: #4b5563;
+        flex: 1 1 140px;
+      }
+      .option-buttons {
+        display: flex;
+        gap: 6px;
+        flex: 999 1 160px;
+      }
+      .option-buttons .card-btn {
+        flex: 1;
+        text-align: center;
+        padding: 5px 8px;
+        font-size: 11px;
+        margin-top: 0;
+        white-space: nowrap;
+      }
+
       /* Grid Empty State */
       .no-results {
         grid-column: 1 / -1;
@@ -1172,38 +1210,73 @@
               <span class="var-tag">.PropertyNote</span>
             </div>
           </div>
-          <div class="card-actions">
-            <a
-              href="export_beo.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="output_beo.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-              <svg
-                width="14"
-                height="14"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-                />
-              </svg>
-            </a>
+          <div class="card-actions-options">
+            <!-- Option 1 -->
+            <div class="option-row">
+              <span class="option-name">Opsi 1 (Word Columns)</span>
+              <div class="option-buttons">
+                <a
+                  href="export_beo_opsi1.html"
+                  target="_blank"
+                  class="card-btn"
+                  title="Lihat kode template Go HTML"
+                >
+                  Template
+                </a>
+                <a
+                  href="output_beo_opsi1.html"
+                  target="_blank"
+                  class="card-btn card-btn-primary card-btn-output"
+                  title="Lihat hasil cetak PDF"
+                >
+                  Hasil Cetak
+                </a>
+              </div>
+            </div>
+            <!-- Option 2 -->
+            <div class="option-row" style="border-top: 1px solid #f8f6ff; padding-top: 8px;">
+              <span class="option-name">Opsi 2 (Horizontal Grid)</span>
+              <div class="option-buttons">
+                <a
+                  href="export_beo_opsi2.html"
+                  target="_blank"
+                  class="card-btn"
+                  title="Lihat kode template Go HTML"
+                >
+                  Template
+                </a>
+                <a
+                  href="output_beo_opsi2.html"
+                  target="_blank"
+                  class="card-btn card-btn-primary card-btn-output"
+                  title="Lihat hasil cetak PDF"
+                >
+                  Hasil Cetak
+                </a>
+              </div>
+            </div>
+            <!-- Option 3 -->
+            <div class="option-row" style="border-top: 1px solid #f8f6ff; padding-top: 8px;">
+              <span class="option-name">Opsi 3 (Row-by-Row)</span>
+              <div class="option-buttons">
+                <a
+                  href="export_beo_opsi3.html"
+                  target="_blank"
+                  class="card-btn"
+                  title="Lihat kode template Go HTML"
+                >
+                  Template
+                </a>
+                <a
+                  href="output_beo_opsi3.html"
+                  target="_blank"
+                  class="card-btn card-btn-primary card-btn-output"
+                  title="Lihat hasil cetak PDF"
+                >
+                  Hasil Cetak
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 

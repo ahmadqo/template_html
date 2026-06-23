@@ -99,17 +99,17 @@ func main() {
 			{BreakdownDate: "14 Feb-15 Feb 2026", Nights: 2, Product: "Breakfast", Qty: 2, Price: "15,000", Amount: "30,000"},
 			{BreakdownDate: "14 Feb-15 Feb 2026", Nights: 2, Product: "Lunch", Qty: 2, Price: "50,000", Amount: "100,000"},
 			{BreakdownDate: "14 Feb-15 Feb 2026", Nights: 2, Product: "Dinner", Qty: 2, Price: "75,000", Amount: "150,000"},
-			// {BreakdownDate: "14 Feb-15 Feb 2026", Nights: 2, Product: "Breakfast", Qty: 2, Price: "15,000", Amount: "30,000"},
-			// {BreakdownDate: "14 Feb-15 Feb 2026", Nights: 2, Product: "Lunch", Qty: 2, Price: "50,000", Amount: "100,000"},
-			// {BreakdownDate: "14 Feb-15 Feb 2026", Nights: 2, Product: "Dinner", Qty: 2, Price: "75,000", Amount: "150,000"},
+			{BreakdownDate: "14 Feb-15 Feb 2026", Nights: 2, Product: "Breakfast", Qty: 2, Price: "15,000", Amount: "30,000"},
+			{BreakdownDate: "14 Feb-15 Feb 2026", Nights: 2, Product: "Lunch", Qty: 2, Price: "50,000", Amount: "100,000"},
+			{BreakdownDate: "14 Feb-15 Feb 2026", Nights: 2, Product: "Dinner", Qty: 2, Price: "75,000", Amount: "150,000"},
 		},
 		Schedules: []Schedule{
 			{ScheduleDate: "14 Feb-15 Feb 2026", Time: "08:00 - 09:00", Function: "Room", Venue: "Grantika Room", Layout: "No Layout", Pax: "300 (300 FOC Pax)"},
 			{ScheduleDate: "14 Feb-15 Feb 2026", Time: "08:00 - 09:00", Function: "Room", Venue: "Grantika Room", Layout: "No Layout", Pax: "300 (300 FOC Pax)"},
 			{ScheduleDate: "14 Feb-15 Feb 2026", Time: "08:00 - 09:00", Function: "Room", Venue: "Grantika Room", Layout: "No Layout", Pax: "300 (300 FOC Pax)"},
-			// {ScheduleDate: "14 Feb-15 Feb 2026", Time: "08:00 - 09:00", Function: "Room", Venue: "Grantika Room", Layout: "No Layout", Pax: "300 (300 FOC Pax)"},
-			// {ScheduleDate: "14 Feb-15 Feb 2026", Time: "08:00 - 09:00", Function: "Room", Venue: "Grantika Room", Layout: "No Layout", Pax: "300 (300 FOC Pax)"},
-			// {ScheduleDate: "14 Feb-15 Feb 2026", Time: "08:00 - 09:00", Function: "Room", Venue: "Grantika Room", Layout: "No Layout", Pax: "300 (300 FOC Pax)"},
+			{ScheduleDate: "14 Feb-15 Feb 2026", Time: "08:00 - 09:00", Function: "Room", Venue: "Grantika Room", Layout: "No Layout", Pax: "300 (300 FOC Pax)"},
+			{ScheduleDate: "14 Feb-15 Feb 2026", Time: "08:00 - 09:00", Function: "Room", Venue: "Grantika Room", Layout: "No Layout", Pax: "300 (300 FOC Pax)"},
+			{ScheduleDate: "14 Feb-15 Feb 2026", Time: "08:00 - 09:00", Function: "Room", Venue: "Grantika Room", Layout: "No Layout", Pax: "300 (300 FOC Pax)"},
 		},
 		Notes: []Note{
 			{
@@ -260,7 +260,8 @@ func main() {
 			// 	MEETING BANNER
 			// 	Please prepare 1pcs LCD & Screen at MEETSPACE
 			// 	aaaa`,
-			// }, {
+			// },
+			// {
 			// 	Title: "Engineering",
 			// 	Content: `SOUND SYSTEM:
 			// 	Please prepare standard sound system at MEETSPACE
@@ -338,11 +339,37 @@ func main() {
 		PropertyNote: "Catatan: Laporan ini diterbitkan secara otomatis oleh sistem maintenance properti.",
 	}
 
-	totalChars := 0
+	// Estimate total lines needed for rendering notes in narrow columns (~238px wide)
+	totalLines := 0
 	for _, note := range data.Notes {
-		totalChars += len(note.Content)
+		lines := strings.Split(note.Content, "\n")
+		totalLines += 2 // Add space for card header and margin
+		for _, line := range lines {
+			trimmed := strings.TrimSpace(line)
+			if len(trimmed) == 0 {
+				totalLines += 1
+				continue
+			}
+			// Estimate wrapping: assume max ~35 characters per line at font size 10px in 238px columns
+			wrapped := len(trimmed) / 35
+			if len(trimmed)%35 != 0 {
+				wrapped += 1
+			}
+			totalLines += wrapped
+		}
 	}
-	data.IsLongNotes = totalChars > 1600 || len(data.Notes) > 8
+
+	hasProducts := len(data.Products) > 0
+	hasSchedules := len(data.Schedules) > 0
+
+	limitLines := 130
+	if hasProducts && hasSchedules {
+		limitLines = 80
+	} else if hasProducts || hasSchedules {
+		limitLines = 105
+	}
+
+	data.IsLongNotes = totalLines > limitLines || len(data.Notes) > 8
 
 	funcMap := template.FuncMap{
 		"mod": func(a, b int) int {
@@ -372,21 +399,29 @@ func main() {
 		},
 	}
 
-	tmpl, err := template.New("export_beo.html").Funcs(funcMap).ParseFiles("export_beo.html")
-	if err != nil {
-		panic(err)
+	templates := map[string]string{
+		"export_beo.html":       "output_beo.html",
+		"export_beo_opsi1.html": "output_beo_opsi1.html",
+		"export_beo_opsi2.html": "output_beo_opsi2.html",
+		"export_beo_opsi3.html": "output_beo_opsi3.html",
 	}
 
-	outputFile, err := os.Create("output_beo.html")
-	if err != nil {
-		panic(err)
-	}
-	defer outputFile.Close()
+	for tmplFile, outFile := range templates {
+		tmpl, err := template.New(tmplFile).Funcs(funcMap).ParseFiles(tmplFile)
+		if err != nil {
+			panic(err)
+		}
 
-	err = tmpl.Execute(outputFile, data)
-	if err != nil {
-		panic(err)
-	}
+		outputFile, err := os.Create(outFile)
+		if err != nil {
+			panic(err)
+		}
 
-	println("Simulasi sukses! Silakan buka 'output_beo.html' di browser Anda.")
+		err = tmpl.Execute(outputFile, data)
+		outputFile.Close()
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("Simulasi sukses: %s -> %s\n", tmplFile, outFile)
+	}
 }

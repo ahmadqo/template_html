@@ -105,7 +105,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        height: auto;
+        height: auto; /* PERBAIKAN: Mengubah height statis menjadi auto agar tidak melar paksa */
         box-sizing: border-box;
       }
       .card {
@@ -123,6 +123,9 @@
         border-bottom: none;
         padding: 0 11px 11px 11px;
       }
+      /* .cell { */
+      /* padding: 11px; */
+      /* } */
       .cell:last-child {
         border-right: none;
       }
@@ -165,29 +168,33 @@
       }
       .print-layout-table {
         width: 100%;
-        border-collapse: collapse;
+        border-collapse: separate;
+        border-spacing: 0;
       }
       .print-layout-table td {
         padding: 0;
         border: none;
       }
       .print-layout-table tbody td {
-        height: auto;
+        height: auto; /* PERBAIKAN: Diubah dari 100% ke auto agar mengikuti tinggi konten riil */
+      }
+      .notes-and-signer-tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
       }
       .signer-spacer {
-        height: 28px;
-        flex-shrink: 0;
+        height: 10px;
       }
       @media print {
         .print-layout-table {
-          height: auto;
+          height: auto; /* PERBAIKAN SEKALIGUS KUNCI UTAMA: Menghapus vh kaku agar dokumen pas menjadi 1 halaman */
           width: 100%;
         }
         .body {
           height: auto;
         }
         .print-layout-table thead {
-          display: table-header-group;
+          display: table-header-group; /* Kop dokumen otomatis tercetak ulang di halaman lain jika meluber panjang */
         }
         .print-layout-table tfoot {
           display: table-footer-group;
@@ -327,19 +334,17 @@
         top: 14px;
         transform: rotate(45deg);
       }
-      .ribbon-approved span {
-        background-color: #00bd7d;
-      }
 
       /* ==========================================================================
-         PERBAIKAN TATA LETAK NOTES WORD STYLE (FLUID CO-EXISTENCE DENGAN SIGNER)
+         TATA LETAK NOTES WORD STYLE (FLUID SEKUENSAL MENGISI RUANG KOSONG)
          ========================================================================== */
       .notes-and-signer-container {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        page-break-before: auto;
+        break-before: auto;
         display: block;
         width: 100%;
-        /* PERBAIKAN UTAMA: Biarkan kontainer induk pecah natural antar halaman jika data panjang */
-        page-break-inside: auto !important;
-        break-inside: auto !important;
       }
 
       .notes-container {
@@ -349,13 +354,15 @@
 
         column-count: 3;
         column-gap: 10px;
-        column-fill: balance; /* Menggunakan balance agar tinggi kolom seimbang di halaman akhir dokumen */
-
-        height: auto;
+        /* Default: balance (untuk preview layar).
+           Script di bawah akan memilih antara:
+           - balance: jika notes muat 1 halaman (tinggi = auto, signer langsung mengikuti)
+           - auto + fixed height: jika notes meluber (Word-style, kolom 1 penuh → kolom 2 → dst) */
+        column-fill: balance;
       }
 
       .note-card {
-        display: inline-block; /* Mengunci kard agar runtut mengisi ruang vertikal */
+        display: block; /* Mengunci kard agar runtut mengisi ruang vertikal */
         width: 100%;
         border: 1px solid #ffecd7;
         border-radius: 10px;
@@ -384,19 +391,17 @@
       }
 
       /* ==========================================================================
-         PROTEKSI AREA TANDA TANGAN (LOCK DI BAWAH BARIS AKHIR NOTES)
+         PROTEKSI AREA TANDA TANGAN (SIGNER SECTION)
          ========================================================================== */
       .signer-section {
         display: grid;
         grid-template-columns: repeat(6, 1fr) 55px;
         gap: 8px;
+        margin-top: 20px;
         align-items: end;
 
-        /* KUNCI EMULASI WORD: Menolak tanda tangan terpotong atau berdiri sendirian di halaman baru */
         page-break-inside: avoid;
         break-inside: avoid;
-
-        /* Memaksa menyeret beberapa baris note di atasnya ikut turun jika halaman harus berganti */
         page-break-before: avoid;
         break-before: avoid;
       }
@@ -417,12 +422,6 @@
         font-weight: 400;
         color: #000000;
         margin-top: auto;
-        margin-left: auto;
-        margin-right: auto;
-        border-top: 0.5px solid #b0b0b5;
-        padding-top: 4px;
-        width: 102px;
-        white-space: nowrap;
       }
       .signer-qr {
         width: 55px;
@@ -474,14 +473,10 @@
         </thead>
         <tbody>
           <tr>
-            <td style="padding: 6px 30px 0 30px">
+            <td style="padding: 6px 30px 0 30px;">
               <div class="card card-event">
                 {{ if .IsDraft }}
                 <div class="ribbon-draft"><span>Draft</span></div>
-                {{ else }}
-                <div class="ribbon-draft ribbon-approved">
-                  <span>Approved</span>
-                </div>
                 {{ end }}
                 <div class="row-4col">
                   <div class="cell">
@@ -511,7 +506,11 @@
                     <div class="cell-value">
                       {{ if .Contacts }}
                       <div
-                        style="display: flex; flex-direction: column; gap: 5px"
+                        style="
+                          display: flex;
+                          flex-direction: column;
+                          gap: 5px;
+                        "
                       >
                         {{ range .Contacts }}
                         <div style="display: flex; gap: 3px">
@@ -548,7 +547,7 @@
 
           {{ if .Products }}
           <tr>
-            <td style="padding: 8px 30px 0 30px">
+            <td style="padding: 8px 30px 0 30px;">
               <div class="product-table-wrapper">
                 <table class="product-table">
                   <thead>
@@ -577,9 +576,11 @@
               </div>
             </td>
           </tr>
-          {{ end }} {{ if .Schedules }}
+          {{ end }}
+
+          {{ if .Schedules }}
           <tr>
-            <td style="padding: 8px 30px 0 30px">
+            <td style="padding: 8px 30px 0 30px;">
               <div class="product-table-wrapper">
                 <table class="product-table">
                   <thead>
@@ -610,8 +611,8 @@
           </tr>
           {{ end }}
 
-          <tr style="page-break-inside: auto; break-inside: auto">
-            <td style="padding: 8px 30px 8px 30px">
+          <tr class="notes-and-signer-tr" style="page-break-inside: avoid; break-inside: avoid;">
+            <td style="padding: 8px 30px 8px 30px;">
               <div class="notes-and-signer-container">
                 {{ if .Notes }}
                 <div class="notes-container">
@@ -687,5 +688,327 @@
         {{ end }}
       </div>
     </div>
+
+    <script>
+    (function () {
+      'use strict';
+
+      // ============================================================
+      // KONSTANTA — harus sesuai dengan nilai di CSS
+      // ============================================================
+      var FOOTER_SPACER_H   = 50;  // .print-footer-spacer { height: 50px }
+      var SIGNER_SPACER_H   = 10;  // .signer-spacer { height: 10px }
+      var SIGNER_MARGIN_TOP = 20;  // .signer-section { margin-top: 20px }
+      var NOTES_MARGIN_TOP  = 10;  // .notes-container { margin-top: 10px }
+      var NOTES_TD_PAD_V    = 16;  // td notes: padding 8px atas + 8px bawah
+
+      // Duplikat original notes row untuk keperluan reset/re-render
+      var originalNotesRow = null;
+
+      function initOriginalRow() {
+        var notesAndSignerTr = document.querySelector('.notes-and-signer-tr');
+        if (notesAndSignerTr && !originalNotesRow) {
+          originalNotesRow = notesAndSignerTr.cloneNode(true);
+        }
+      }
+
+      /**
+       * Menyesuaikan tinggi notes container secara adaptif:
+       *   - Jika notes MUAT 1 halaman → column-fill: balance (tinggi = auto)
+       *   - Jika notes MELUBER       → column-fill: auto + fixed height (Word-style)
+       *
+       * @param {number} [overridePageContentH]
+       *   Override tinggi konten halaman dalam px.
+       */
+      function adjustNotesForPrint(overridePageContentH) {
+        var tbody = document.querySelector('.print-layout-table tbody');
+        if (!tbody) return;
+
+        // Inisialisasi original row jika belum
+        initOriginalRow();
+        if (!originalNotesRow) return;
+
+        // Reset DOM notes ke keadaan semula sebelum re-layout
+        var existingTrs = tbody.querySelectorAll('.notes-and-signer-tr');
+        var insertBeforeNode = null;
+        if (existingTrs.length > 0) {
+          // Cari sibling setelah notes row terakhir agar insertBeforeNode tetap valid dan ada di DOM
+          var lastTr = existingTrs[existingTrs.length - 1];
+          insertBeforeNode = lastTr.nextSibling;
+          
+          var firstTr = existingTrs[0];
+          var restoredRow = originalNotesRow.cloneNode(true);
+          tbody.replaceChild(restoredRow, firstTr);
+          
+          for (var i = 1; i < existingTrs.length; i++) {
+            tbody.removeChild(existingTrs[i]);
+          }
+        } else {
+          var restoredRow = originalNotesRow.cloneNode(true);
+          tbody.appendChild(restoredRow);
+        }
+
+        // Cari ulang elemen yang baru di-restore
+        var notesAndSignerTr = document.querySelector('.notes-and-signer-tr');
+        var notesContainer = notesAndSignerTr.querySelector('.notes-container');
+        var signerSection = notesAndSignerTr.querySelector('.signer-section');
+        var signerSpacer = notesAndSignerTr.querySelector('.signer-spacer');
+
+        if (!notesContainer || !signerSection) return;
+
+        // Ukur elemen-elemen
+        var headerTd = document.querySelector('.print-layout-table thead td');
+        var headerH  = headerTd ? headerTd.offsetHeight : 90;
+        var signerH  = signerSection.offsetHeight || 55;
+        var signerAreaH = SIGNER_SPACER_H + SIGNER_MARGIN_TOP + signerH;
+
+        // Tentukan tinggi halaman konten
+        var pageH;
+        if (typeof overridePageContentH === 'number') {
+          pageH = overridePageContentH;
+        } else if (window.matchMedia && window.matchMedia('print').matches) {
+          pageH = window.innerHeight;
+        } else {
+          pageH = (297 - 10 - 10) / 25.4 * 96; // ≈ 1047px
+        }
+
+        // Hitung tinggi yang terpakai oleh elemen-elemen non-notes di Page 1
+        var occupiedHPage1 = headerH + FOOTER_SPACER_H;
+        var tbodyRows = tbody.querySelectorAll('tr');
+        tbodyRows.forEach(function(row) {
+          if (!row.classList.contains('notes-and-signer-tr')) {
+            occupiedHPage1 += row.offsetHeight;
+          }
+        });
+
+        // Hitung spaceLeft pada Page 1
+        var spaceLeft = pageH - occupiedHPage1 - NOTES_TD_PAD_V - NOTES_MARGIN_TOP;
+        var totalNeededH = notesAndSignerTr.offsetHeight;
+
+        if (totalNeededH <= spaceLeft) {
+          // Semua notes + signer muat di halaman ini tanpa modifikasi DOM!
+          // Biarkan DOM asli agar Chrome merendernya secara native (menghindari bug kolom 4 / card pecah).
+          return;
+        }
+        // Jika tidak muat, barulah kita lakukan splitting DOM secara dinamis
+        // Ambil semua note-cards dan ukur tingginya sebelum di-detach agar akurat di DOM asli
+        var cards = Array.prototype.slice.call(notesContainer.querySelectorAll('.note-card'));
+        var cardHeights = cards.map(function(card) {
+          return card.offsetHeight || 100;
+        });
+
+        // Detach cards dari DOM
+        cards.forEach(function(card) {
+          if (card.parentNode) {
+            card.parentNode.removeChild(card);
+          }
+        });
+
+        // Detach signer dan spacer
+        if (signerSpacer && signerSpacer.parentNode) {
+          signerSpacer.parentNode.removeChild(signerSpacer);
+        }
+        if (signerSection && signerSection.parentNode) {
+          signerSection.parentNode.removeChild(signerSection);
+        }
+
+        // Hapus tr original sementara
+        tbody.removeChild(notesAndSignerTr);
+
+        var remainingCards = cards.slice();
+        var currentPageNum = 1;
+
+        while (remainingCards.length > 0) {
+          var occupiedH = (currentPageNum === 1) ? occupiedHPage1 : (headerH + FOOTER_SPACER_H);
+          var spaceLeft = pageH - occupiedH - NOTES_TD_PAD_V - NOTES_MARGIN_TOP;
+
+          // Buat tr sementara untuk mengukur tinggi balanced card + signer
+          var tempTr = document.createElement('tr');
+          tempTr.className = 'notes-and-signer-tr';
+          tempTr.style.pageBreakInside = 'avoid';
+          tempTr.style.breakInside = 'avoid';
+          
+          var tempTd = document.createElement('td');
+          tempTd.style.padding = '8px 30px 8px 30px';
+          
+          var tempContainer = document.createElement('div');
+          tempContainer.className = 'notes-and-signer-container';
+          
+          var tempNotesContainer = document.createElement('div');
+          tempNotesContainer.className = 'notes-container';
+          tempNotesContainer.style.columnCount = '3';
+          tempNotesContainer.style.columnGap = '10px';
+          tempNotesContainer.style.columnFill = 'balance';
+          
+          remainingCards.forEach(function(card) {
+            tempNotesContainer.appendChild(card);
+          });
+          
+          tempContainer.appendChild(tempNotesContainer);
+          if (signerSpacer) tempContainer.appendChild(signerSpacer.cloneNode(true));
+          tempContainer.appendChild(signerSection.cloneNode(true));
+          tempTd.appendChild(tempContainer);
+          tempTr.appendChild(tempTd);
+          
+          tbody.appendChild(tempTr);
+          var totalNeededH = tempTr.offsetHeight;
+          tbody.removeChild(tempTr);
+
+          if (totalNeededH <= spaceLeft) {
+            // Semua sisa notes + signer muat di halaman ini
+            var finalTr = document.createElement('tr');
+            finalTr.className = 'notes-and-signer-tr';
+            finalTr.style.pageBreakInside = 'avoid';
+            finalTr.style.breakInside = 'avoid';
+            
+            var finalTd = document.createElement('td');
+            finalTd.style.padding = '8px 30px 8px 30px';
+            
+            var finalContainer = document.createElement('div');
+            finalContainer.className = 'notes-and-signer-container';
+            
+            var finalNotesContainer = document.createElement('div');
+            finalNotesContainer.className = 'notes-container';
+            finalNotesContainer.style.columnCount = '3';
+            finalNotesContainer.style.columnGap = '10px';
+            finalNotesContainer.style.columnFill = 'balance';
+            
+            remainingCards.forEach(function(card) {
+              finalNotesContainer.appendChild(card);
+            });
+            
+            finalContainer.appendChild(finalNotesContainer);
+            if (signerSpacer) finalContainer.appendChild(signerSpacer);
+            finalContainer.appendChild(signerSection);
+            finalTd.appendChild(finalContainer);
+            finalTr.appendChild(finalTd);
+            
+            if (insertBeforeNode) {
+              tbody.insertBefore(finalTr, insertBeforeNode);
+            } else {
+              tbody.appendChild(finalTr);
+            }
+
+            // Force browser reflow to fix Chrome multi-column overlapping bug
+            finalNotesContainer.style.display = 'none';
+            finalNotesContainer.offsetHeight; // trigger layout
+            finalNotesContainer.style.display = 'block';
+
+            break;
+          } else {
+            // Tidak muat di halaman ini, maka harus displit
+            var page1Cards = [];
+            var page2Cards = [];
+            var currentColumnHeight = 0;
+            var currentColumn = 1;
+            
+            for (var i = 0; i < remainingCards.length; i++) {
+              var card = remainingCards[i];
+              var cardIndex = cards.indexOf(card);
+              var cardH = cardIndex !== -1 ? cardHeights[cardIndex] : 100;
+              
+              if (currentColumnHeight + cardH <= spaceLeft) {
+                page1Cards.push(card);
+                currentColumnHeight += cardH + 8; // margin-bottom note-card
+              } else {
+                if (currentColumn < 3) {
+                  currentColumn++;
+                  currentColumnHeight = cardH + 8;
+                  page1Cards.push(card);
+                } else {
+                  // Sisa kartu masuk ke halaman berikutnya
+                  for (var j = i; j < remainingCards.length; j++) {
+                    page2Cards.push(remainingCards[j]);
+                  }
+                  break;
+                }
+              }
+            }            // Safety check: jika tidak ada kartu yang muat sama sekali
+            if (page1Cards.length === 0 && remainingCards.length > 0) {
+              if (currentPageNum === 1) {
+                // Di halaman 1, jika tidak muat sama sekali, lompat ke halaman 2
+                currentPageNum = 2;
+                continue;
+              } else {
+                // Paksa minimal 1 card di halaman berikutnya
+                page1Cards.push(remainingCards[0]);
+                page2Cards = remainingCards.slice(1);
+              }
+            }
+
+            var pageTr = document.createElement('tr');
+            pageTr.className = 'notes-and-signer-tr';
+            pageTr.style.pageBreakInside = 'avoid';
+            pageTr.style.breakInside = 'avoid';
+            
+            var pageTd = document.createElement('td');
+            pageTd.style.padding = '8px 30px 8px 30px';
+            
+            var pageContainer = document.createElement('div');
+            pageContainer.className = 'notes-and-signer-container';
+            
+            var pageNotesContainer = document.createElement('div');
+            pageNotesContainer.className = 'notes-container';
+            pageNotesContainer.style.columnCount = '3';
+            pageNotesContainer.style.columnGap = '10px';
+            pageNotesContainer.style.columnFill = 'auto';
+            pageNotesContainer.style.height = Math.floor(spaceLeft) + 'px';
+            
+            page1Cards.forEach(function(card) {
+              pageNotesContainer.appendChild(card);
+            });
+            
+            pageContainer.appendChild(pageNotesContainer);
+            pageTd.appendChild(pageContainer);
+            pageTr.appendChild(pageTd);
+            
+            if (insertBeforeNode) {
+              tbody.insertBefore(pageTr, insertBeforeNode);
+            } else {
+              tbody.appendChild(pageTr);
+            }
+
+            // Force browser reflow to fix Chrome multi-column overlapping bug
+            pageNotesContainer.style.display = 'none';
+            pageNotesContainer.offsetHeight; // trigger layout
+            pageNotesContainer.style.display = 'block';
+            
+            remainingCards = page2Cards;
+            currentPageNum++;
+          }
+        }
+      }
+
+      window.adjustNotesForPrint = adjustNotesForPrint;
+
+      // Inisialisasi awal saat dokumen diload
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          initOriginalRow();
+          adjustNotesForPrint();
+        });
+      } else {
+        initOriginalRow();
+        adjustNotesForPrint();
+      }
+
+      // Re-layout saat seluruh image loaded agar kalkulasi offsetHeight akurat
+      window.addEventListener('load', function() {
+        adjustNotesForPrint();
+      });
+
+      // Jalankan sebelum print
+      window.onbeforeprint = adjustNotesForPrint;
+
+      // Kompatibilitas browser
+      try {
+        var mq = window.matchMedia('print');
+        var mqHandler = function (e) { if (e.matches) adjustNotesForPrint(); };
+        if (mq.addEventListener)      mq.addEventListener('change', mqHandler);
+        else if (mq.addListener)      mq.addListener(mqHandler);
+      } catch (ignore) {}
+
+    }());
+    </script>
   </body>
 </html>
