@@ -8,6 +8,14 @@ import (
 	"time"
 )
 
+// SignerData mendefinisikan struktur data penandatangan
+type SignerData struct {
+	SignerBy       string
+	SignerName     string
+	SignerPosition string
+	SignerQR       string
+}
+
 // FolioPaymentData mendefinisikan struct yang sesuai dengan variabel di export_folio_payment.html
 type FolioPaymentData struct {
 	LogoURL        string
@@ -29,6 +37,7 @@ type FolioPaymentData struct {
 	PrintedBy      string
 	PrintedAt      string
 	PropertyNote   string
+	Signers        []SignerData
 }
 
 func main() {
@@ -57,6 +66,14 @@ func main() {
 		PrintedBy:    "Superadmin",
 		PrintedAt:    time.Now().Format("02 Jan 2006 15:04:05 MST"),
 		PropertyNote: "Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah. Pembayaran yang sudah dilakukan tidak dapat dibatalkan atau dikembalikan dengan alasan apapun.",
+		Signers: []SignerData{
+			{SignerBy: "Prepared by", SignerName: "User", SignerPosition: "Staff In Charge"},
+			{SignerBy: "Acknowledge by", SignerName: "Windah Basudara", SignerPosition: "Asst. FOM"},
+			// {SignerBy: "Acknowledge by", SignerName: "FBS", SignerPosition: "FBS Manager"},
+			// {SignerBy: "Acknowledge by", SignerName: "FO & HK", SignerPosition: "FO Supervisor"},
+			// {SignerBy: "Acknowledge by", SignerName: "CA", SignerPosition: "Chief Accountant"},
+			// {SignerBy: "Approved by", SignerName: "General Manager", SignerPosition: "General Manager", SignerQR: rawBase64},
+		},
 	}
 
 	// 2. Parse template HTML dengan mendaftarkan helper function qrCodeAttr

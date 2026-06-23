@@ -251,6 +251,59 @@
           overflow: hidden;
         }
       }
+
+      /* Dynamic Signer Styling */
+      .signer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        margin-top: 30px;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .signer-col {
+        width: calc(16.66% - 10px);
+        min-width: 75px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 85px;
+        text-align: center;
+      }
+      .signer-by {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        margin-bottom: 5px;
+      }
+      .signer-line {
+        width: 100%;
+        border-bottom: 0.5px solid #b0b0b5;
+        margin-top: auto;
+        margin-bottom: 5px;
+        height: 40px;
+      }
+      .signer-qr {
+        width: 72px;
+        height: 72px;
+        margin-top: auto;
+        margin-bottom: 5px;
+      }
+      .signer-name {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        white-space: nowrap;
+      }
+      .signer-position {
+        font-size: 12px;
+        font-weight: 300;
+        color: #000000;
+        white-space: nowrap;
+      }
     </style>
   </head>
   <body>
@@ -344,6 +397,33 @@
             {{ .Amount }}
           </div>
         </div>
+        <!-- Signer -->
+        {{ if .Signers }}
+        <div class="signer-container">
+          {{ range .Signers }}
+          <div class="signer-col">
+            {{ if .SignerQR }}
+            <div class="signer-qr" style="margin: auto 0">
+              <img
+                {{
+                qrCodeAttr
+                .SignerQR
+                }}
+                alt="Digital Signature QR"
+                style="width: 100%; height: 100%; object-fit: contain"
+              />
+            </div>
+            {{ else }}
+            <div class="signer-by">{{ .SignerBy }}</div>
+            <div class="signer-line"></div>
+            <div class="signer-name">{{ .SignerName }}</div>
+            <div class="signer-position">{{ .SignerPosition }}</div>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+        <!-- End Signer -->
         <div class="print-footer-wrapper">
           <div class="print-info">
             Printed: {{ .PrintedBy }} on {{ .PrintedAt }}
