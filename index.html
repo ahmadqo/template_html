@@ -1,0 +1,1337 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Katalog Template - Digital Solusindo</title>
+    <!-- Google Fonts: Outfit for UI, JetBrains Mono for Code reference -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-main: #f8f6fb; /* Sangat cerah, abu-abu dengan tint ungu sangat tipis */
+        --bg-card: #ffffff;
+        --bg-card-hover: #ffffff;
+        --border-color: rgba(126, 34, 206, 0.08);
+        --border-hover: rgba(126, 34, 206, 0.25);
+
+        --text-primary: #1e1b4b; /* Indigo gelap untuk keterbacaan tinggi */
+        --text-secondary: #475569; /* Slate gelap untuk sub-teks */
+        --text-muted: #64748b; /* Slate medium */
+
+        --accent-purple: #7e22ce;
+        --accent-pink: #d946ef;
+        --accent-gradient: linear-gradient(135deg, #d946ef 0%, #7e22ce 100%);
+        --accent-gradient-hover: linear-gradient(
+          135deg,
+          #e879f9 0%,
+          #9333ea 100%
+        );
+
+        --color-email: #7e22ce;
+        --color-pdf: #e11d48;
+
+        --font-sans: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+
+        --shadow-card:
+          0 10px 25px -5px rgba(126, 34, 206, 0.05),
+          0 8px 16px -6px rgba(126, 34, 206, 0.05);
+        --shadow-card-hover:
+          0 20px 35px -10px rgba(126, 34, 206, 0.12),
+          0 12px 20px -8px rgba(126, 34, 206, 0.08);
+        --shadow-glow: 0 4px 20px rgba(126, 34, 206, 0.04);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-main);
+        background-image:
+          radial-gradient(
+            at 0% 0%,
+            rgba(217, 70, 239, 0.06) 0px,
+            transparent 40%
+          ),
+          radial-gradient(
+            at 100% 100%,
+            rgba(126, 34, 206, 0.05) 0px,
+            transparent 40%
+          );
+        background-attachment: fixed;
+        color: var(--text-primary);
+        font-family: var(--font-sans);
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      /* ==========================================================================
+           Header Section
+           ========================================================================== */
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+      }
+
+      .logo-area {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 54px;
+        height: 54px;
+        background: var(--accent-gradient);
+        border-radius: 14px;
+        margin-bottom: 16px;
+        box-shadow: 0 8px 16px -4px rgba(126, 34, 206, 0.3);
+      }
+
+      .logo-area svg {
+        width: 28px;
+        height: 28px;
+        fill: white;
+      }
+
+      header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        margin-bottom: 8px;
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      header p {
+        color: var(--text-secondary);
+        font-size: 15px;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      /* ==========================================================================
+           Controls: Search & Filter Tabs
+           ========================================================================== */
+      .controls-wrapper {
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--border-color);
+        padding: 16px 20px;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        box-shadow: var(--shadow-glow);
+      }
+
+      @media (min-width: 768px) {
+        .controls-wrapper {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+      }
+
+      /* Filter Chips */
+      .filter-tabs {
+        display: flex;
+        gap: 8px;
+      }
+
+      .filter-btn {
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(126, 34, 206, 0.1);
+        color: var(--text-secondary);
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .filter-btn:hover {
+        color: var(--accent-purple);
+        background: #ffffff;
+        border-color: rgba(126, 34, 206, 0.25);
+      }
+
+      .filter-btn.active {
+        background: var(--accent-gradient);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 4px 12px rgba(126, 34, 206, 0.2);
+      }
+
+      /* Search Input */
+      .search-box {
+        position: relative;
+        flex: 1;
+        max-width: 360px;
+      }
+
+      .search-box input {
+        width: 100%;
+        background: #ffffff;
+        border: 1px solid rgba(126, 34, 206, 0.15);
+        border-radius: 10px;
+        padding: 10px 16px 10px 38px;
+        color: var(--text-primary);
+        font-family: var(--font-sans);
+        font-size: 14px;
+        transition: all 0.2s;
+      }
+
+      .search-box input:focus {
+        outline: none;
+        background: #ffffff;
+        border-color: var(--accent-pink);
+        box-shadow: 0 0 10px rgba(217, 70, 239, 0.15);
+      }
+
+      .search-box svg {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        fill: var(--text-muted);
+        pointer-events: none;
+      }
+
+      /* ==========================================================================
+           Templates Grid
+           ========================================================================== */
+      .templates-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      @media (min-width: 768px) {
+        .templates-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .templates-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* Template Card */
+      .card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--shadow-card);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--border-hover);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-card-hover);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        background: rgba(126, 34, 206, 0.04);
+        border: 1px solid rgba(126, 34, 206, 0.08);
+      }
+
+      .card-badge {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        padding: 4px 10px;
+        border-radius: 20px;
+      }
+
+      .badge-email {
+        background: rgba(126, 34, 206, 0.06);
+        color: var(--color-email);
+        border: 1px solid rgba(126, 34, 206, 0.12);
+      }
+
+      .badge-pdf {
+        background: rgba(225, 29, 72, 0.06);
+        color: var(--color-pdf);
+        border: 1px solid rgba(225, 29, 72, 0.12);
+      }
+
+      .card-body {
+        flex: 1;
+        margin-bottom: 24px;
+      }
+
+      .card-body h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: var(--text-primary);
+      }
+
+      .card-filename {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 12px;
+        word-break: break-all;
+      }
+
+      .card-desc {
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+
+      /* Variables Used Badge list */
+      .variables-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .var-tag {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--accent-purple);
+        background: rgba(126, 34, 206, 0.05);
+        border: 1px solid rgba(126, 34, 206, 0.1);
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+
+      /* Card Button Action */
+      .card-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background: rgba(126, 34, 206, 0.04);
+        border: 1px solid rgba(126, 34, 206, 0.1);
+        border-radius: 10px;
+        color: var(--accent-purple);
+        padding: 10px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        gap: 6px;
+      }
+
+      .card-btn:hover {
+        background: var(--accent-gradient);
+        border-color: transparent;
+        color: #ffffff;
+        box-shadow: 0 4px 15px rgba(126, 34, 206, 0.25);
+        transform: translateY(-1px);
+      }
+
+      /* Multi-button Action Container */
+      .card-actions {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+        margin-top: auto;
+      }
+
+      .card-actions .card-btn {
+        flex: 1;
+        margin-top: 0;
+      }
+
+      .card-btn-primary {
+        background: var(--accent-gradient);
+        color: #ffffff;
+        border-color: transparent;
+      }
+
+      .card-btn-primary:hover {
+        background: var(--accent-gradient-hover);
+        box-shadow: 0 4px 15px rgba(126, 34, 206, 0.35);
+      }
+
+      /* Grid Empty State */
+      .no-results {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+        background: rgba(126, 34, 206, 0.01);
+        border: 1px dashed rgba(126, 34, 206, 0.1);
+        border-radius: 16px;
+      }
+
+      .no-results svg {
+        width: 48px;
+        height: 48px;
+        fill: var(--text-muted);
+        margin-bottom: 12px;
+      }
+
+      /* Add Custom Mock Card Guide */
+      .card-add {
+        background: rgba(126, 34, 206, 0.01);
+        border: 2px dashed rgba(126, 34, 206, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: default;
+      }
+
+      .card-add:hover {
+        background: rgba(126, 34, 206, 0.02);
+        border-color: var(--border-hover);
+        transform: none;
+        box-shadow: none;
+      }
+
+      .add-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .add-icon {
+        font-size: 32px;
+        color: var(--text-muted);
+        margin-bottom: 12px;
+      }
+
+      .add-content h4 {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 6px;
+      }
+
+      .add-content p {
+        font-size: 12px;
+        color: var(--text-muted);
+        max-width: 220px;
+        line-height: 1.4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Dashboard Header -->
+      <header>
+        <div class="logo-area">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+            />
+          </svg>
+        </div>
+        <h1>Katalog Template</h1>
+        <p>
+          Repositori pusat untuk template HTML email transaksi dan printout
+          dokumen eksternal oleh backend team.
+        </p>
+      </header>
+
+      <!-- Search & Category Filters -->
+      <div class="controls-wrapper">
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">Semua</button>
+          <button class="filter-btn" data-filter="email">📧 Email</button>
+          <button class="filter-btn" data-filter="pdf">📄 PDF Printout</button>
+        </div>
+
+        <!-- Search Field -->
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+            />
+          </svg>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Cari nama atau file..."
+          />
+        </div>
+      </div>
+
+      <!-- Catalog Templates Grid -->
+      <div class="templates-grid" id="templates-grid">
+        <!-- Cards will be populated or filtered by simple JS -->
+
+        <!-- Template 1: Email Verification -->
+        <div
+          class="card"
+          data-type="email"
+          data-name="email verification verifikasi akun baru"
+        >
+          <div class="card-header">
+            <div class="card-icon">✉️</div>
+            <span class="card-badge badge-email">Email</span>
+          </div>
+          <div class="card-body">
+            <h3>Verifikasi Akun Baru</h3>
+            <div class="card-filename">email_verification_template.html</div>
+            <p class="card-desc">
+              Template email sambutan yang dikirimkan saat pendaftaran akun baru
+              untuk memverifikasi alamat email user.
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.Email</span>
+              <span class="var-tag">.Url</span>
+              <span class="var-tag">.InvitedBy</span>
+              <span class="var-tag">.Properties</span>
+            </div>
+          </div>
+          <a
+            href="email_verification_template.html"
+            target="_blank"
+            class="card-btn"
+          >
+            Buka Template
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+              <path
+                fill-rule="evenodd"
+                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Template 2: Email Invite Verification -->
+        <div
+          class="card"
+          data-type="email"
+          data-name="email invite verification verifikasi undangan properti baru"
+        >
+          <div class="card-header">
+            <div class="card-icon">📩</div>
+            <span class="card-badge badge-email">Email</span>
+          </div>
+          <div class="card-body">
+            <h3>Verifikasi Undangan Akun</h3>
+            <div class="card-filename">
+              email_invite_verification_template.html
+            </div>
+            <p class="card-desc">
+              Template email verifikasi akun baru yang dikirim saat pengguna
+              diundang ke dalam manajemen properti tertentu.
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.Email</span>
+              <span class="var-tag">.InvitedBy</span>
+              <span class="var-tag">.Properties</span>
+              <span class="var-tag">.Url</span>
+            </div>
+          </div>
+          <a
+            href="email_invite_verification_template.html"
+            target="_blank"
+            class="card-btn"
+          >
+            Buka Template
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+              <path
+                fill-rule="evenodd"
+                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Template 3: Email OTP Login -->
+        <div class="card" data-type="email" data-name="otp login masuk token">
+          <div class="card-header">
+            <div class="card-icon">🔑</div>
+            <span class="card-badge badge-email">Email</span>
+          </div>
+          <div class="card-body">
+            <h3>OTP Login</h3>
+            <div class="card-filename">email_otp_login_template.html</div>
+            <p class="card-desc">
+              Template email transaksi untuk verifikasi login menggunakan kode
+              OTP 6-digit demi keamanan ganda akun.
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.Email</span>
+              <span class="var-tag">.Otp</span>
+            </div>
+          </div>
+          <a
+            href="email_otp_login_template.html"
+            target="_blank"
+            class="card-btn"
+          >
+            Buka Template
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+              <path
+                fill-rule="evenodd"
+                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Template 4: Email Forget Password -->
+        <div
+          class="card"
+          data-type="email"
+          data-name="forget password reset kata sandi lupa"
+        >
+          <div class="card-header">
+            <div class="card-icon">🔓</div>
+            <span class="card-badge badge-email">Email</span>
+          </div>
+          <div class="card-body">
+            <h3>Lupa Kata Sandi</h3>
+            <div class="card-filename">email_forget_password_template.html</div>
+            <p class="card-desc">
+              Template email transaksi untuk memverifikasi dan menyetel ulang
+              kata sandi (reset password) akun user.
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.Email</span>
+              <span class="var-tag">.Url</span>
+            </div>
+          </div>
+          <a
+            href="email_forget_password_template.html"
+            target="_blank"
+            class="card-btn"
+          >
+            Buka Template
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+              <path
+                fill-rule="evenodd"
+                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Template 5: Mock PDF Printout Template -->
+        <!-- <div
+          class="card"
+          data-type="pdf"
+          data-name="invoice pdf printout cetak hasil tagihan bayar"
+        >
+          <div class="card-header">
+            <div class="card-icon">🖨️</div>
+            <span class="card-badge badge-pdf">PDF Printout</span>
+          </div>
+          <div class="card-body">
+            <h3>Invoice Pembelian</h3>
+            <div class="card-filename">invoice_pdf_template.html</div>
+            <p class="card-desc">
+              Template dokumen tagihan transaksi yang digunakan backend untuk
+              di-export menjadi PDF laporan printout.
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.InvoiceNo</span>
+              <span class="var-tag">.TotalAmount</span>
+              <span class="var-tag">.Items</span>
+            </div>
+          </div>
+          <button
+            class="card-btn"
+            disabled
+            style="opacity: 0.5; cursor: not-allowed"
+            title="File belum dibuat oleh developer"
+          >
+            Segera Hadir
+          </button>
+        </div> -->
+
+        <!-- Template 6: Export Folio Payment -->
+        <div
+          class="card"
+          data-type="pdf"
+          data-name="export folio payment printout cetak hasil bayar laporan tamu"
+        >
+          <div class="card-header">
+            <div class="card-icon">💵</div>
+            <span class="card-badge badge-pdf">PDF Printout</span>
+          </div>
+          <div class="card-body">
+            <h3>Folio Payment</h3>
+            <div class="card-filename">export_folio_payment.html</div>
+            <p class="card-desc">
+              Template printout laporan pembayaran tamu (folio payment) yang
+              berisi detail transaksi pembayaran, metode, dan jumlah.
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.GuestName</span>
+              <span class="var-tag">.Room</span>
+              <span class="var-tag">.PaymentMethod</span>
+              <span class="var-tag">.User</span>
+              <span class="var-tag">.Description</span>
+              <span class="var-tag">.Note</span>
+              <span class="var-tag">.Amount</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a
+              href="export_folio_payment.html"
+              target="_blank"
+              class="card-btn"
+              title="Lihat kode template Go HTML"
+            >
+              Buka Template
+            </a>
+            <a
+              href="output_folio_payment.html"
+              target="_blank"
+              class="card-btn card-btn-primary card-btn-output"
+              title="Lihat hasil cetak PDF simulasi"
+            >
+              Hasil Cetak
+              <svg
+                width="14"
+                height="14"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Template 7: Export Non-Stay Charge -->
+        <div
+          class="card"
+          data-type="pdf"
+          data-name="export non stay charge printout cetak biaya tambahan luar inap"
+        >
+          <div class="card-header">
+            <div class="card-icon">🧾</div>
+            <span class="card-badge badge-pdf">PDF Printout</span>
+          </div>
+          <div class="card-body">
+            <h3>Non-Stay Charge</h3>
+            <div class="card-filename">export_non_stay_charge.html</div>
+            <p class="card-desc">
+              Template printout dokumen untuk mencatat rincian biaya tambahan
+              tamu di luar biaya kamar (non-stay charges).
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.GuestName</span>
+              <span class="var-tag">.ChargeType</span>
+              <span class="var-tag">.Amount</span>
+              <span class="var-tag">.Note</span>
+              <span class="var-tag">.User</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a
+              href="export_non_stay_charge.html"
+              target="_blank"
+              class="card-btn"
+              title="Lihat kode template Go HTML"
+            >
+              Buka Template
+            </a>
+            <a
+              href="output_non_stay_charge.html"
+              target="_blank"
+              class="card-btn card-btn-primary card-btn-output"
+              title="Lihat hasil cetak PDF simulasi"
+            >
+              Hasil Cetak
+              <svg
+                width="14"
+                height="14"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Template 8: Export Deposit Reservation -->
+        <div
+          class="card"
+          data-type="pdf"
+          data-name="export deposit reservation printout cetak uang muka bukti reservasi"
+        >
+          <div class="card-header">
+            <div class="card-icon">🔑</div>
+            <span class="card-badge badge-pdf">PDF Printout</span>
+          </div>
+          <div class="card-body">
+            <h3>Deposit Reservation</h3>
+            <div class="card-filename">export_deposit_reservation.html</div>
+            <p class="card-desc">
+              Template printout bukti deposit/uang muka untuk reservasi kamar.
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.GuestName</span>
+              <span class="var-tag">.ReservationNo</span>
+              <span class="var-tag">.DepositAmount</span>
+              <span class="var-tag">.PaymentMethod</span>
+              <span class="var-tag">.Note</span>
+              <span class="var-tag">.User</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a
+              href="export_deposit_reservation.html"
+              target="_blank"
+              class="card-btn"
+              title="Lihat kode template Go HTML"
+            >
+              Buka Template
+            </a>
+            <a
+              href="output_deposit_reservation.html"
+              target="_blank"
+              class="card-btn card-btn-primary card-btn-output"
+              title="Lihat hasil cetak PDF simulasi"
+            >
+              Hasil Cetak
+              <svg
+                width="14"
+                height="14"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Template 9: Export Charges -->
+        <div
+          class="card"
+          data-type="pdf"
+          data-name="export charges printout cetak rincian biaya transaksi produk layan tambahan inap"
+        >
+          <div class="card-header">
+            <div class="card-icon">🧾</div>
+            <span class="card-badge badge-pdf">PDF Printout</span>
+          </div>
+          <div class="card-body">
+            <h3>Charges</h3>
+            <div class="card-filename">export_charges.html</div>
+            <p class="card-desc">
+              Template printout rincian biaya transaksi produk atau layanan
+              tambahan tamu selama menginap (laundry, late checkout, dll.).
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.GuestName</span>
+              <span class="var-tag">.RoomNumber</span>
+              <span class="var-tag">.PackageName</span>
+              <span class="var-tag">.Type</span>
+              <span class="var-tag">.Qty</span>
+              <span class="var-tag">.Price</span>
+              <span class="var-tag">.User</span>
+              <span class="var-tag">.Note</span>
+              <span class="var-tag">.Amount</span>
+              <span class="var-tag">.Products</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a
+              href="export_charges.html"
+              target="_blank"
+              class="card-btn"
+              title="Lihat kode template Go HTML"
+            >
+              Buka Template
+            </a>
+            <a
+              href="output_charges.html"
+              target="_blank"
+              class="card-btn card-btn-primary card-btn-output"
+              title="Lihat hasil cetak PDF simulasi"
+            >
+              Hasil Cetak
+              <svg
+                width="14"
+                height="14"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Template 10: Export Lost & Found Claim -->
+        <div
+          class="card"
+          data-type="pdf"
+          data-name="export lost found claim printout cetak barang hilang temu ambil"
+        >
+          <div class="card-header">
+            <div class="card-icon">🔍</div>
+            <span class="card-badge badge-pdf">PDF Printout</span>
+          </div>
+          <div class="card-body">
+            <h3>Lost & Found Claim</h3>
+            <div class="card-filename">export_lost&found.html</div>
+            <p class="card-desc">
+              Template printout bukti claim barang temuan (lost & found) lengkap
+              dengan rincian penemu, status, dan penerima klaim.
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.GuestName</span>
+              <span class="var-tag">.FoundDate</span>
+              <span class="var-tag">.ReportedTo</span>
+              <span class="var-tag">.FoundBy</span>
+              <span class="var-tag">.Status</span>
+              <span class="var-tag">.FoundLocation</span>
+              <span class="var-tag">.ClaimedBy</span>
+              <span class="var-tag">.ClaimedAt</span>
+              <span class="var-tag">.ClaimNote</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a
+              href="export_lost&found.html"
+              target="_blank"
+              class="card-btn"
+              title="Lihat kode template Go HTML"
+            >
+              Buka Template
+            </a>
+            <a
+              href="output_lost_found.html"
+              target="_blank"
+              class="card-btn card-btn-primary card-btn-output"
+              title="Lihat hasil cetak PDF simulasi"
+            >
+              Hasil Cetak
+              <svg
+                width="14"
+                height="14"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Template 11: Export Work Order -->
+        <div
+          class="card"
+          data-type="pdf"
+          data-name="export work order printout cetak maintenance pemeliharaan perbaikan"
+        >
+          <div class="card-header">
+            <div class="card-icon">🛠️</div>
+            <span class="card-badge badge-pdf">PDF Printout</span>
+          </div>
+          <div class="card-body">
+            <h3>Work Order</h3>
+            <div class="card-filename">export_workorder.html</div>
+            <p class="card-desc">
+              Template printout bukti perintah kerja (work order) untuk penugasan perbaikan, pemeliharaan, serta riwayat progress penanganan masalah.
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.DocumentID</span>
+              <span class="var-tag">.Source</span>
+              <span class="var-tag">.Urgency</span>
+              <span class="var-tag">.Status</span>
+              <span class="var-tag">.Location</span>
+              <span class="var-tag">.Object</span>
+              <span class="var-tag">.PIC</span>
+              <span class="var-tag">.Products</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a
+              href="export_workorder.html"
+              target="_blank"
+              class="card-btn"
+              title="Lihat kode template Go HTML"
+            >
+              Buka Template
+            </a>
+            <a
+              href="output_workorder.html"
+              target="_blank"
+              class="card-btn card-btn-primary card-btn-output"
+              title="Lihat hasil cetak PDF simulasi"
+            >
+              Hasil Cetak
+              <svg
+                width="14"
+                height="14"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Template 12: Export Flag -->
+        <div
+          class="card"
+          data-type="pdf"
+          data-name="export flag printout cetak penanda bermasalah pelanggaran catatan tamu guesthouse"
+        >
+          <div class="card-header">
+            <div class="card-icon">🚩</div>
+            <span class="card-badge badge-pdf">PDF Printout</span>
+          </div>
+          <div class="card-body">
+            <h3>Flag</h3>
+            <div class="card-filename">export_flag.html</div>
+            <p class="card-desc">
+              Template printout dokumen flag internal untuk mencatat penandaan khusus (flagging), riwayat tinggal, alasan urgensi, dan status penanganan catatan tamu.
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.FlagDate</span>
+              <span class="var-tag">.StayPeriod</span>
+              <span class="var-tag">.Room</span>
+              <span class="var-tag">.GuestName</span>
+              <span class="var-tag">.GuestHouse</span>
+              <span class="var-tag">.Status</span>
+              <span class="var-tag">.Urgent</span>
+              <span class="var-tag">.Items</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a
+              href="export_flag.html"
+              target="_blank"
+              class="card-btn"
+              title="Lihat kode template Go HTML"
+            >
+              Buka Template
+            </a>
+            <a
+              href="output_flag.html"
+              target="_blank"
+              class="card-btn card-btn-primary card-btn-output"
+              title="Lihat hasil cetak PDF simulasi"
+            >
+              Hasil Cetak
+              <svg
+                width="14"
+                height="14"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Template 13: Export Banquet Event Order (BEO) -->
+        <div
+          class="card"
+          data-type="pdf"
+          data-name="export banquet event order beo printout cetak acara pesta hotel"
+        >
+          <div class="card-header">
+            <div class="card-icon">📅</div>
+            <span class="card-badge badge-pdf">PDF Printout</span>
+          </div>
+          <div class="card-body">
+            <h3>Banquet Event Order (BEO)</h3>
+            <div class="card-filename">export_beo.html</div>
+            <p class="card-desc">
+              Template printout dokumen Banquet Event Order (BEO) untuk merinci informasi acara, rincian produk, jadwal fungsi ruangan, serta catatan khusus per departemen.
+            </p>
+            <div class="variables-list">
+              <span class="var-tag">.BEOID</span>
+              <span class="var-tag">.EventName</span>
+              <span class="var-tag">.EventType</span>
+              <span class="var-tag">.ExpectedPax</span>
+              <span class="var-tag">.GuaranteedPax</span>
+              <span class="var-tag">.Company</span>
+              <span class="var-tag">.Contacts</span>
+              <span class="var-tag">.Status</span>
+              <span class="var-tag">.StayPeriod</span>
+              <span class="var-tag">.StayDuration</span>
+              <span class="var-tag">.Products</span>
+              <span class="var-tag">.Schedules</span>
+              <span class="var-tag">.Notes</span>
+              <span class="var-tag">.QRCode</span>
+              <span class="var-tag">.PrintedBy</span>
+              <span class="var-tag">.PrintedAt</span>
+              <span class="var-tag">.PropertyNote</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a
+              href="export_beo.html"
+              target="_blank"
+              class="card-btn"
+              title="Lihat kode template Go HTML"
+            >
+              Buka Template
+            </a>
+            <a
+              href="output_beo.html"
+              target="_blank"
+              class="card-btn card-btn-primary card-btn-output"
+              title="Lihat hasil cetak PDF simulasi"
+            >
+              Hasil Cetak
+              <svg
+                width="14"
+                height="14"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Add Card Guide -->
+        <div class="card card-add" id="card-add-guide">
+          <div class="add-content">
+            <div class="add-icon">➕</div>
+            <h4>Tambah Baru?</h4>
+            <p>
+              Cukup buat file HTML template Anda di folder ini, lalu tambahkan
+              elemen kartu baru di dalam `index.html` ini.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty Results Alert -->
+      <div id="no-results" class="no-results" style="display: none">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+          />
+        </svg>
+        <p>Tidak ada template yang cocok dengan pencarian Anda.</p>
+      </div>
+    </div>
+
+    <!-- Scripting for Filter and Search -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const searchInput = document.getElementById("search-input");
+        const cards = document.querySelectorAll(
+          ".templates-grid .card:not(#card-add-guide)",
+        );
+        const noResults = document.getElementById("no-results");
+        const cardAddGuide = document.getElementById("card-add-guide");
+
+        let currentFilter = "all";
+        let searchQuery = "";
+
+        function updateCardsVisibility() {
+          let visibleCount = 0;
+
+          cards.forEach((card) => {
+            const cardType = card.getAttribute("data-type");
+            const cardSearchText =
+              card.getAttribute("data-name").toLowerCase() +
+              " " +
+              card.querySelector("h3").textContent.toLowerCase() +
+              " " +
+              card.querySelector(".card-filename").textContent.toLowerCase();
+
+            const matchesFilter =
+              currentFilter === "all" || cardType === currentFilter;
+            const matchesSearch = cardSearchText.includes(searchQuery);
+
+            if (matchesFilter && matchesSearch) {
+              card.style.display = "flex";
+              visibleCount++;
+            } else {
+              card.style.display = "none";
+            }
+          });
+
+          // Show/hide 'Add Card' guide depending on filter
+          if (currentFilter === "all" && searchQuery === "") {
+            cardAddGuide.style.display = "flex";
+          } else {
+            cardAddGuide.style.display = "none";
+          }
+
+          // Show empty state if no templates found
+          if (visibleCount === 0) {
+            noResults.style.display = "block";
+          } else {
+            noResults.style.display = "none";
+          }
+        }
+
+        // Tabs click handler
+        filterButtons.forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            filterButtons.forEach((b) => b.classList.remove("active"));
+            e.target.classList.add("active");
+            currentFilter = e.target.getAttribute("data-filter");
+            updateCardsVisibility();
+          });
+        });
+
+        // Search input handler
+        searchInput.addEventListener("input", (e) => {
+          searchQuery = e.target.value.toLowerCase().trim();
+          updateCardsVisibility();
+        });
+
+        // Intercept clicks on PDF template links to trigger print preview from dashboard
+        const pdfLinks = document.querySelectorAll(
+          '.card[data-type="pdf"] .card-btn-output',
+        );
+        pdfLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const url = link.getAttribute("href");
+            if (!url) return;
+
+            // Open window
+            const win = window.open(url, "_blank");
+            if (win) {
+              const timer = setInterval(() => {
+                try {
+                  if (win.document.readyState === "complete") {
+                    clearInterval(timer);
+                    // Trigger print in the child window
+                    win.print();
+                  }
+                } catch (err) {
+                  // Catch cross-origin security block (e.g. if loaded via file:// protocol directly)
+                  clearInterval(timer);
+                  console.warn(
+                    "Auto-print preview is disabled on direct file:// protocol due to browser security restrictions. Please serve this project via HTTP/local server to enable auto-print preview.",
+                  );
+                }
+              }, 100);
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

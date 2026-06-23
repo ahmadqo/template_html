@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP Login</title>
+    <style>
+      @media screen and (max-width: 600px) {
+        .container-table {
+          width: 100% !important;
+          max-width: 100% !important;
+          border-radius: 0 !important;
+        }
+        .header-padding {
+          padding: 24px 20px !important;
+        }
+        .content-padding {
+          padding: 30px 20px !important;
+        }
+        .otp-text {
+          font-size: 28px !important;
+          padding: 12px 24px !important;
+          letter-spacing: 4px !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f5f0ff;
+      font-family: Arial, sans-serif;
+    "
+  >
+    <table
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      style="background-color: #f5f0ff; padding: 40px 0"
+    >
+      <tr>
+        <td align="center">
+          <table
+            class="container-table"
+            width="600"
+            cellpadding="0"
+            cellspacing="0"
+            style="
+              background: #ffffff;
+              border-radius: 20px;
+              overflow: hidden;
+              border: 1px solid #eadcff;
+              box-shadow: 0 4px 18px rgba(139, 0, 255, 0.08);
+            "
+          >
+            <tr>
+              <td
+                class="header-padding"
+                style="
+                  background: linear-gradient(90deg, #d946ef 0%, #7e22ce 100%);
+                  padding: 30px 36px;
+                  color: #ffffff;
+                "
+              >
+                <table
+                  align="center"
+                  cellpadding="0"
+                  cellspacing="0"
+                  border="0"
+                  style="border-collapse: collapse; margin: 0 auto"
+                >
+                  <tr>
+                    <!-- Logo Column -->
+                    <td width="60" valign="middle" style="padding-right: 20px">
+                      <div style="display: block">
+                        <img
+                          src="https://i.ibb.co.com/ZzT4SJn5/logo-bigdeals.png"
+                          width="60"
+                          height="75"
+                          alt="Logo Big Deals"
+                          style="
+                            display: block;
+                            border: none;
+                            outline: none;
+                            text-decoration: none;
+                          "
+                        />
+                      </div>
+                    </td>
+                    <!-- Text Column -->
+                    <td valign="middle" align="left" style="color: #ffffff">
+                      <h1
+                        style="
+                          margin: 0;
+                          font-size: 26px;
+                          font-weight: bold;
+                          line-height: 1.2;
+                        "
+                      >
+                        Big Deals OTP Login
+                      </h1>
+                      <p
+                        style="
+                          margin: 6px 0 0 0;
+                          font-size: 14px;
+                          opacity: 0.9;
+                          line-height: 1.2;
+                        "
+                      >
+                        Secure verification for your account
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td class="content-padding" style="padding: 42px 36px; color: #374151; line-height: 1.8">
+                <p style="font-size: 16px">
+                  Hi <strong style="color: #7e22ce">{{ .Email }}</strong>,
+                </p>
+
+                <p>Use the OTP code below to continue your login process.</p>
+
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="margin: 36px 0"
+                >
+                  <tr>
+                    <td align="center">
+                      <table
+                        cellpadding="0"
+                        cellspacing="0"
+                        style="
+                          background: linear-gradient(
+                            90deg,
+                            #d946ef 0%,
+                            #7e22ce 100%
+                          );
+                          border-radius: 16px;
+                          box-shadow: 0 4px 14px rgba(126, 34, 206, 0.35);
+                        "
+                      >
+                        <tr>
+                          <td
+                            class="otp-text"
+                            align="center"
+                            style="
+                              padding: 16px 36px;
+                              color: #ffffff;
+                              font-weight: bold;
+                              font-size: 36px;
+                              font-family:
+                                &quot;SF Mono&quot;, Consolas, Monaco,
+                                &quot;Courier New&quot;, Courier, monospace;
+                              letter-spacing: 8px;
+                            "
+                          >
+                            <span
+                              style="
+                                user-select: all;
+                                -webkit-user-select: all;
+                                -moz-user-select: all;
+                                -ms-user-select: all;
+                              "
+                              >{{ .Otp }}</span
+                            >
+                          </td>
+                        </tr>
+                      </table>
+
+                      <p
+                        style="
+                          margin: 12px 0 0 0;
+                          font-size: 13px;
+                          color: #8b5cf6;
+                        "
+                      >
+                        Double-click the code above to select and copy
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+
+                <div
+                  style="
+                    background: #faf5ff;
+                    border: 1px solid #eadcff;
+                    padding: 18px;
+                    border-radius: 12px;
+                    margin-top: 24px;
+                  "
+                >
+                  <p style="margin: 0; font-size: 14px; color: #6b7280">
+                    This OTP code will expire in
+                    <strong style="color: #7e22ce">60 second</strong>.
+                  </p>
+                </div>
+
+                <p style="margin-top: 32px; color: #6b7280; font-size: 14px">
+                  Never share this OTP with anyone for security reasons.
+                </p>
+
+                <hr
+                  style="
+                    border: none;
+                    border-top: 1px solid #f1e8ff;
+                    margin: 36px 0;
+                  "
+                />
+
+                <p style="font-size: 13px; color: #9ca3af">
+                  If you did not request this login, you can safely ignore this
+                  email.
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                align="center"
+                style="
+                  padding: 24px;
+                  background: #faf5ff;
+                  color: #a78bfa;
+                  font-size: 12px;
+                "
+              >
+                © 2026 Digital Solusindo. All rights reserved.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
