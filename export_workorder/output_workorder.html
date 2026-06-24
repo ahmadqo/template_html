@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Non Stay Charge</title>
+    <title>Work Order</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -139,6 +139,30 @@
         color: #000000;
         font-weight: 400;
       }
+      .badge-blue {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 12px;
+        border: 1px solid #2b7efe;
+        border-radius: 50px;
+        background: #eff6ff;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #1547e6;
+        height: 20px;
+      }
+      .badge-green {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 12px;
+        border: 1px solid #00bd7d;
+        border-radius: 50px;
+        background: #dbfce7;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #008234;
+        height: 20px;
+      }
       .sep-dot {
         margin: 0 5px;
       }
@@ -216,47 +240,47 @@
         text-align: justify;
         line-height: 1.4;
       }
-      .card-total {
-        background: #fff6eb;
-        border: 1px solid #ffecd7;
+
+      .product-table-wrapper {
+        border: 1px solid #f3e5ff;
         border-radius: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0px 20px;
-        margin-top: 11px;
-        height: 63px;
+        overflow: hidden;
+        margin-top: 10px;
+        background: #ffffff;
       }
-      .badge-stay {
-        display: inline-flex;
-        align-items: center;
+      .product-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Roboto", sans-serif;
+        color: #111111;
       }
-      .badge-stay-date {
-        height: 26px;
-        display: flex;
-        align-items: center;
-        padding: 0px 9px;
+      .product-table th {
+        background-color: #faf5ff;
+        color: #111111;
+        font-weight: 600;
+        text-align: left;
+        padding: 9px 11px;
         font-size: 12px;
-        color: #44444c;
-        font-weight: 500;
-        white-space: nowrap;
-        border-width: 1px 0px 1px 1px;
-        border-style: solid;
-        border-color: #b0b0b5;
-        border-radius: 12px 0px 0px 12px;
       }
-      .badge-stay-duration {
-        height: 26px;
-        display: flex;
-        align-items: center;
-        padding: 0px 10px;
-        background-color: #000000;
-        color: #ffffff;
+      .product-table td {
+        padding: 9px 11px;
+        border-bottom: 1px solid #ececec;
         font-size: 12px;
-        font-weight: 500;
-        border-radius: 0px 20px 20px 0px;
-        white-space: nowrap;
+        color: #111111;
       }
+      .product-table tr:last-child td {
+        border-bottom: none;
+      }
+      .product-table .text-right {
+        text-align: right;
+      }
+      .product-table tr.total-row td {
+        background-color: #faf5ff;
+        font-weight: 600;
+        border-top: 1px solid #f3e5ff;
+        color: #111111;
+      }
+
       @media print {
         body {
           margin: 0;
@@ -268,6 +292,59 @@
           page-break-after: always;
           overflow: hidden;
         }
+      }
+
+       
+      .signer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        margin-top: 30px;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .signer-col {
+        width: calc(16.66% - 10px);
+        min-width: 75px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 85px;
+        text-align: center;
+      }
+      .signer-by {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        margin-bottom: 5px;
+      }
+      .signer-line {
+        width: 100%;
+        border-bottom: 0.5px solid #b0b0b5;
+        margin-top: auto;
+        margin-bottom: 5px;
+        height: 40px;
+      }
+      .signer-qr {
+        width: 72px;
+        height: 72px;
+        margin-top: auto;
+        margin-bottom: 5px;
+      }
+      .signer-name {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        white-space: nowrap;
+      }
+      .signer-position {
+        font-size: 12px;
+        font-weight: 300;
+        color: #000000;
+        white-space: nowrap;
       }
     </style>
   </head>
@@ -295,14 +372,14 @@
                 support@propertydeveloper.com &nbsp;•&nbsp; 08123456789
               </div>
               
-              <div class="company-sub">Catatan Header: Harap konfirmasi pembayaran ke WhatsApp jika belum terverifikasi.</div>
+              <div class="company-sub">Catatan Header: Harap konfirmasi pekerjaan ke WhatsApp jika sudah selesai.</div>
               
             </div>
           </div>
         </div>
         <div class="header-right">
-          <div class="doc-title">Non Stay Charge</div>
-          <div class="doc-id-badge">NS.SCH2604.00012</div>
+          <div class="doc-title">Work Order</div>
+          <div class="doc-id-badge">WO.SCH2604.00012</div>
         </div>
       </header>
       
@@ -310,50 +387,67 @@
         <div class="card">
           <div class="row-2col">
             <div class="cell">
-              <div class="cell-label">Deposit Date</div>
-              <div class="cell-value">15 Jun 2026</div>
+              <div class="cell-label">Source</div>
+              <div class="cell-value">Guest</div>
             </div>
             <div class="cell">
-              <div class="cell-label">Payment Type &amp; Method</div>
-              <div class="cell-value">
-                Card<span class="sep-dot">•</span>Credit Card
-              </div>
+              <div class="cell-label">Source Name</div>
+              <div class="cell-value">Arlene McCoy</div>
             </div>
           </div>
           <div class="row-2col">
             <div class="cell">
-              <div class="cell-label">Product</div>
-              <div class="cell-value">Laundry &amp; Dry Cleaning Service</div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  gap: 10px;
+                "
+              >
+                <div>
+                  <div class="cell-label">Urgency</div>
+                  <div class="cell-value">
+                    <span class="badge-green">High</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="cell-label">Status</div>
+                  <div class="cell-value">
+                    <span class="badge-blue">In Progress</span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="cell">
-              <div class="cell-label">Payment Note</div>
-              <div class="cell-value">Paid in full</div>
+              <div class="cell-label">Location</div>
+              <div class="cell-value">Room 104 - Bed Room</div>
             </div>
           </div>
           <div class="row-2col">
             <div class="cell">
-              <div style="display: flex; gap: 20px">
-                <div>
-                  <div class="cell-label">Qty</div>
-                  <div class="cell-value">2</div>
-                </div>
-                <div>
-                  <div class="cell-label">Price</div>
-                  <div class="cell-value">75,000</div>
-                </div>
-              </div>
+              <div class="cell-label">Object</div>
+              <div class="cell-value">AC Split 1.5 PK</div>
+            </div>
+            <div class="cell">
+              <div class="cell-label">PIC</div>
+              <div class="cell-value">John Maintenance</div>
+            </div>
+          </div>
+          <div class="row-2col">
+            <div class="cell">
+              <div class="cell-label">Room</div>
+              <div class="cell-value">104 - Arlene McCoy</div>
             </div>
             <div class="cell">
               <div class="cell-label">User</div>
-              <div class="cell-value">John Doe</div>
+              <div class="cell-value">Receptionist (Eka)</div>
             </div>
           </div>
           <div class="row-desc">
             <div class="desc-content">
-              <div class="desc-label">Description</div>
-              <div class="desc-value">Layanan cuci pakaian (laundry) ekspres 2 jam untuk pakaian formal.</div>
-              <div class="desc-label mt">Note</div>
-              <div class="desc-value">Biaya cuci pakaian tambahan tamu Kamar 104 selama masa tinggal.</div>
+              <div class="desc-label">Note</div>
+              <div class="desc-value">Tamu kamar 104 mengeluhkan unit AC berisik dan tidak dingin sama sekali sejak pagi hari.</div>
             </div>
             
             <div class="qr-wrap">
@@ -366,21 +460,89 @@
             
           </div>
         </div>
-        <div class="card-total">
-          <div style="font-size: 14px; font-weight: 500; color: #996122">
-            Total
-          </div>
-          <div style="font-size: 14px; font-weight: 600; color: #996122">
-            150,000
-          </div>
+        
+        <div class="product-table-wrapper">
+          <table class="product-table">
+            <thead>
+              <tr>
+                <th style="width: 100px">Date</th>
+                <th>Progress</th>
+                <th style="width: 150px; text-align: center">
+                  Estimation Date
+                </th>
+                <th style="width: 130px; text-align: center">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <tr>
+                <td>18 Jun 2026</td>
+                <td>Work Order created and assigned to maintenance team</td>
+                <td style="text-align: center">18 Jun 2026 12:00</td>
+                <td style="text-align: center">
+                  
+                  <span class="badge-green">New</span>
+                  
+                </td>
+              </tr>
+              
+              <tr>
+                <td>18 Jun 2026</td>
+                <td>Technician John Maintenance arrived on site, started checking electrical and compressor units</td>
+                <td style="text-align: center">18 Jun 2026 12:00</td>
+                <td style="text-align: center">
+                  
+                  <span class="badge-blue">On Progress</span>
+                  
+                </td>
+              </tr>
+              
+              <tr>
+                <td>18 Jun 2026</td>
+                <td>Cleaned filter compressor, refilled Freon R32, unit verified cold and quiet</td>
+                <td style="text-align: center">18 Jun 2026 11:00</td>
+                <td style="text-align: center">
+                  
+                  <span class="badge-green">Completed</span>
+                  
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
         </div>
+        
+        
+        <div class="signer-container">
+          
+          <div class="signer-col">
+            
+            <div class="signer-by">Prepared by</div>
+            <div class="signer-line"></div>
+            <div class="signer-name">User</div>
+            <div class="signer-position">Staff In Charge</div>
+            
+          </div>
+          
+          <div class="signer-col">
+            
+            <div class="signer-by">Acknowledge by</div>
+            <div class="signer-line"></div>
+            <div class="signer-name">Windah Basudara</div>
+            <div class="signer-position">Asst. FOM</div>
+            
+          </div>
+          
+        </div>
+        
+        
         <div class="print-footer-wrapper">
           <div class="print-info">
-            Printed: Superadmin on 21 Jun 2026 15:40:17 WIB
+            Printed: Superadmin on 24 Jun 2026 09:27:55 WIB
           </div>
           
           <hr class="print-footer-separator" />
-          <div class="print-footer-note">Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah. Pembayaran yang sudah dilakukan tidak dapat dibatalkan atau dikembalikan dengan alasan apapun.</div>
+          <div class="print-footer-note">Catatan: Laporan ini diterbitkan secara otomatis oleh sistem maintenance properti.</div>
           
         </div>
       </main>

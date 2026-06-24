@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 )
@@ -152,13 +153,16 @@ func main() {
 		},
 	}
 
-	tmpl, err := template.New("export_charges.html").Funcs(funcMap).ParseFiles("export_charges.html")
+	tmplFile := "export_charges/export_charges.html"
+	outFile := "export_charges/output_charges.html"
+
+	tmpl, err := template.New(filepath.Base(tmplFile)).Funcs(funcMap).ParseFiles(tmplFile)
 	if err != nil {
 		panic(err)
 	}
 
 	// 5. Buat file output hasil compile
-	outputFile, err := os.Create("output_charges.html")
+	outputFile, err := os.Create(outFile)
 	if err != nil {
 		panic(err)
 	}
@@ -170,5 +174,5 @@ func main() {
 		panic(err)
 	}
 
-	println("Simulasi sukses! Silakan buka 'output_charges.html' di browser Anda.")
+	fmt.Printf("Simulasi sukses: %s -> %s\n", tmplFile, outFile)
 }

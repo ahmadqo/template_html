@@ -152,7 +152,7 @@
 
       .print-footer-wrapper {
         margin-top: 8px;
-        padding: 10px 30px 10px 30px;
+        padding: 6px 30px 10px 30px;
         display: flex;
         flex-direction: column;
         gap: 4px;
@@ -202,7 +202,7 @@
           left: 0;
           right: 0;
           height: 50px;
-          padding: 10px 30px 10px 30px;
+          padding: 6px 30px 10px 30px;
           background: #ffffff;
           box-sizing: border-box;
           z-index: 9999;
@@ -217,7 +217,7 @@
       }
       .print-footer-separator {
         border: none;
-        border-top: 1px solid #d7dedd;
+        border-top: 1px solid #d1d5db;
         margin: 0;
       }
       .print-footer-note {
@@ -335,33 +335,31 @@
       .notes-and-signer-container {
         display: block;
         width: 100%;
+         
         page-break-inside: auto !important;
         break-inside: auto !important;
       }
 
-       
       .notes-container {
-        display: flex;
-        gap: 10px;
-        margin-top: 10px;
+        display: block;
         width: 100%;
+        margin-top: 10px;
+
+        column-count: 3;
+        column-gap: 10px;
+        column-fill: balance;  
+
         height: auto;
-      }
-      .notes-column {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        min-width: 0;
       }
 
       .note-card {
-        display: block;
+        display: inline-block;  
         width: 100%;
         border: 1px solid #ffecd7;
         border-radius: 10px;
         background: #ffffff;
-        margin-bottom: 0;
+        margin-bottom: 8px;
+
         break-inside: avoid;
         -webkit-column-break-inside: avoid;
         page-break-inside: avoid;
@@ -384,67 +382,17 @@
       }
 
        
-      .layout-switcher {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999;
-        display: flex;
-        gap: 6px;
-        padding: 5px;
-        background-color: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border-radius: 30px;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      }
-      .layout-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 14px;
-        background: transparent;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-        font-family: inherit;
-        font-size: 10px;
-        font-weight: 500;
-        color: #475569;
-        transition: all 0.2s ease;
-        text-decoration: none;
-      }
-      .layout-btn svg {
-        width: 12px;
-        height: 12px;
-        fill: currentColor;
-      }
-      .layout-btn:hover {
-        background-color: rgba(0, 0, 0, 0.04);
-        color: #0f172a;
-      }
-      .layout-btn.active {
-        background-color: #008234;
-        color: #ffffff;
-        font-weight: 600;
-        box-shadow: 0 2px 8px rgba(0, 130, 52, 0.25);
-      }
-
-      @media print {
-        .layout-switcher {
-          display: none !important;
-        }
-      }
-
-       
       .signer-section {
         display: grid;
         grid-template-columns: repeat(6, 1fr) 55px;
         gap: 8px;
         align-items: end;
+
+         
         page-break-inside: avoid;
         break-inside: avoid;
+
+         
         page-break-before: avoid;
         break-before: avoid;
       }
@@ -480,30 +428,6 @@
     </style>
   </head>
   <body>
-    <div class="layout-switcher">
-      <a href="output_beo_opsi1.html" class="layout-btn" title="Word Columns">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 4h4v16H4V4zm6 0h4v16h-4V4zm6 0h4v16h-4V4z" />
-        </svg>
-        <span>Columns</span>
-      </a>
-      <a
-        href="output_beo_opsi2.html"
-        class="layout-btn active"
-        title="Horizontal Grid"
-      >
-        <svg viewBox="0 0 24 24">
-          <path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zm-9 9h7v7H4v-7zm9 0h7v7h-7v-7z" />
-        </svg>
-        <span>Grid</span>
-      </a>
-      <a href="output_beo_opsi3.html" class="layout-btn" title="Full Row">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 5h16v3H4V5zm0 6h16v3H4v-3zm0 6h16v3H4v-3z" />
-        </svg>
-        <span>Rows</span>
-      </a>
-    </div>
     <div class="page">
       <table class="print-layout-table">
         <thead>
@@ -628,7 +552,7 @@
 
           
           <tr>
-            <td style="padding: 0 30px 0 30px">
+            <td style="padding: 8px 30px 0 30px">
               <div class="product-table-wrapper">
                 <table class="product-table">
                   <thead>
@@ -704,7 +628,7 @@
           </tr>
            
           <tr>
-            <td style="padding: 0 30px 0 30px">
+            <td style="padding: 8px 30px 0 30px">
               <div class="product-table-wrapper">
                 <table class="product-table">
                   <thead>
@@ -781,15 +705,14 @@
           
 
           <tr style="page-break-inside: auto; break-inside: auto">
-            <td style="padding: 0 30px 0 30px">
+            <td style="padding: 8px 30px 8px 30px">
               <div class="notes-and-signer-container">
                 
                 <div class="notes-container">
-                  <div class="notes-column">
-                     
-                    <div class="note-card">
-                      <div class="note-header">Kitchen</div>
-                      <div class="note-body">Concern: 
+                  
+                  <div class="note-card">
+                    <div class="note-header">Kitchen</div>
+                    <div class="note-body">Concern: 
 				Stok bahan habis tanpa diketahui. 
 				Selisih antara stok sistem dan stok fisik. 
 				Food waste tinggi. 
@@ -800,34 +723,11 @@
 				Minimum stock alert. 
 				Expired date tracking. 
 				Inventory adjustment.</div>
-                    </div>
-                          
-                    <div class="note-card">
-                      <div class="note-header">Front Office</div>
-                      <div class="note-body">Banquet revenue will be charge by FB/FO Please assist to the guest to meeting room</div>
-                    </div>
-                          
-                    <div class="note-card">
-                      <div class="note-header">Engineering</div>
-                      <div class="note-body">SOUND SYSTEM:
-				Please prepare standard sound system at MEETSPACE
-
-				WIRELESS MIC
-				Please prepare 2pcs Wireless MIC at MEETSPACE
-
-				LCD &amp; SCREEN
-				Please prepare 1pcs LCD &amp; Screen at MEETSPACE
-
-				MEETING BANNER
-				Please prepare 1pcs LCD &amp; Screen at MEETSPACE</div>
-                    </div>
-                     
                   </div>
-                  <div class="notes-column">
-                       
-                    <div class="note-card">
-                      <div class="note-header">FB Service</div>
-                      <div class="note-body">PACKAGE XXX Meeting Package: IDR xxx.xxx/pax 
+                  
+                  <div class="note-card">
+                    <div class="note-header">FB Service</div>
+                    <div class="note-body">PACKAGE XXX Meeting Package: IDR xxx.xxx/pax 
 				BREAKDOWN 
 				Morning CB:  
 				Lunch:  
@@ -843,19 +743,11 @@
 				TOTAL BANQUET REVENUE:
 				
 				NOTES: Please set-up meeting room with Class Room Style Please set up handsanitizer in front of meeting room Please prepare signage for this meeting Please assigned 1 banquet staff during the event All billling must be signed by PIC of the meeting If any additional meeting package, please have direct  communication with PIC All payment will be settled before event done.</div>
-                    </div>
-                          
-                    <div class="note-card">
-                      <div class="note-header">House Keeping</div>
-                      <div class="note-body">Please make sure meeting room in clean and tidy Please check public rest room clean and have good smell</div>
-                    </div>
-                         
                   </div>
-                  <div class="notes-column">
-                         
-                    <div class="note-card">
-                      <div class="note-header">Accounting</div>
-                      <div class="note-body">PACKAGE 
+                  
+                  <div class="note-card">
+                    <div class="note-header">Accounting</div>
+                    <div class="note-body">PACKAGE 
 				XXX Meeting Package: IDR xxx.xxx/pax 
 
 				BREAKDOWN 
@@ -867,14 +759,38 @@
 				TOTAL BANQUET REVENUE: 
 
 				Notes: Payment will be settled by GL/Before event done</div>
-                    </div>
-                          
-                    <div class="note-card">
-                      <div class="note-header">Security</div>
-                      <div class="note-body">Please assist to the guest to meeting room</div>
-                    </div>
-                       
                   </div>
+                  
+                  <div class="note-card">
+                    <div class="note-header">Front Office</div>
+                    <div class="note-body">Banquet revenue will be charge by FB/FO Please assist to the guest to meeting room</div>
+                  </div>
+                  
+                  <div class="note-card">
+                    <div class="note-header">House Keeping</div>
+                    <div class="note-body">Please make sure meeting room in clean and tidy Please check public rest room clean and have good smell</div>
+                  </div>
+                  
+                  <div class="note-card">
+                    <div class="note-header">Security</div>
+                    <div class="note-body">Please assist to the guest to meeting room</div>
+                  </div>
+                  
+                  <div class="note-card">
+                    <div class="note-header">Engineering</div>
+                    <div class="note-body">SOUND SYSTEM:
+				Please prepare standard sound system at MEETSPACE
+
+				WIRELESS MIC
+				Please prepare 2pcs Wireless MIC at MEETSPACE
+
+				LCD &amp; SCREEN
+				Please prepare 1pcs LCD &amp; Screen at MEETSPACE
+
+				MEETING BANNER
+				Please prepare 1pcs LCD &amp; Screen at MEETSPACE</div>
+                  </div>
+                  
                 </div>
                 
 
@@ -930,7 +846,7 @@
 
       <div class="print-footer-wrapper">
         <div class="print-info">
-          Printed: Superadmin on 23 Jun 2026 16:17:17 WIB
+          Printed: Superadmin on 24 Jun 2026 05:38:24 WIB
         </div>
         
         <hr class="print-footer-separator" />

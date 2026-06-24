@@ -279,8 +279,6 @@
       .card-badge {
         font-size: 11px;
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
         padding: 4px 10px;
         border-radius: 20px;
       }
@@ -517,8 +515,8 @@
         <!-- Filter Tabs -->
         <div class="filter-tabs">
           <button class="filter-btn active" data-filter="all">Semua</button>
-          <button class="filter-btn" data-filter="email">📧 Email</button>
-          <button class="filter-btn" data-filter="pdf">📄 PDF Printout</button>
+          <button class="filter-btn" data-filter="email">Email</button>
+          <button class="filter-btn" data-filter="pdf">PDF Printout</button>
         </div>
 
         <!-- Search Field -->
@@ -538,8 +536,6 @@
 
       <!-- Catalog Templates Grid -->
       <div class="templates-grid" id="templates-grid">
-        <!-- Cards will be populated or filtered by simple JS -->
-
         <!-- Template 1: Email Verification -->
         <div
           class="card"
@@ -547,22 +543,11 @@
           data-name="email verification verifikasi akun baru"
         >
           <div class="card-header">
-            <div class="card-icon">✉️</div>
             <span class="card-badge badge-email">Email</span>
           </div>
           <div class="card-body">
             <h3>Verifikasi Akun Baru</h3>
             <div class="card-filename">email_verification_template.html</div>
-            <p class="card-desc">
-              Template email sambutan yang dikirimkan saat pendaftaran akun baru
-              untuk memverifikasi alamat email user.
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.Email</span>
-              <span class="var-tag">.Url</span>
-              <span class="var-tag">.InvitedBy</span>
-              <span class="var-tag">.Properties</span>
-            </div>
           </div>
           <a
             href="email_verification_template.html"
@@ -570,16 +555,6 @@
             class="card-btn"
           >
             Buka Template
-            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-              <path
-                fill-rule="evenodd"
-                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-              />
-              <path
-                fill-rule="evenodd"
-                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-              />
-            </svg>
           </a>
         </div>
 
@@ -590,23 +565,12 @@
           data-name="email invite verification verifikasi undangan properti baru"
         >
           <div class="card-header">
-            <div class="card-icon">📩</div>
             <span class="card-badge badge-email">Email</span>
           </div>
           <div class="card-body">
             <h3>Verifikasi Undangan Akun</h3>
             <div class="card-filename">
               email_invite_verification_template.html
-            </div>
-            <p class="card-desc">
-              Template email verifikasi akun baru yang dikirim saat pengguna
-              diundang ke dalam manajemen properti tertentu.
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.Email</span>
-              <span class="var-tag">.InvitedBy</span>
-              <span class="var-tag">.Properties</span>
-              <span class="var-tag">.Url</span>
             </div>
           </div>
           <a
@@ -615,36 +579,17 @@
             class="card-btn"
           >
             Buka Template
-            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-              <path
-                fill-rule="evenodd"
-                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-              />
-              <path
-                fill-rule="evenodd"
-                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-              />
-            </svg>
           </a>
         </div>
 
         <!-- Template 3: Email OTP Login -->
         <div class="card" data-type="email" data-name="otp login masuk token">
           <div class="card-header">
-            <div class="card-icon">🔑</div>
             <span class="card-badge badge-email">Email</span>
           </div>
           <div class="card-body">
             <h3>OTP Login</h3>
             <div class="card-filename">email_otp_login_template.html</div>
-            <p class="card-desc">
-              Template email transaksi untuk verifikasi login menggunakan kode
-              OTP 6-digit demi keamanan ganda akun.
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.Email</span>
-              <span class="var-tag">.Otp</span>
-            </div>
           </div>
           <a
             href="email_otp_login_template.html"
@@ -652,16 +597,6 @@
             class="card-btn"
           >
             Buka Template
-            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-              <path
-                fill-rule="evenodd"
-                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-              />
-              <path
-                fill-rule="evenodd"
-                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-              />
-            </svg>
           </a>
         </div>
 
@@ -672,20 +607,11 @@
           data-name="forget password reset kata sandi lupa"
         >
           <div class="card-header">
-            <div class="card-icon">🔓</div>
             <span class="card-badge badge-email">Email</span>
           </div>
           <div class="card-body">
             <h3>Lupa Kata Sandi</h3>
             <div class="card-filename">email_forget_password_template.html</div>
-            <p class="card-desc">
-              Template email transaksi untuk memverifikasi dan menyetel ulang
-              kata sandi (reset password) akun user.
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.Email</span>
-              <span class="var-tag">.Url</span>
-            </div>
           </div>
           <a
             href="email_forget_password_template.html"
@@ -693,52 +619,8 @@
             class="card-btn"
           >
             Buka Template
-            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-              <path
-                fill-rule="evenodd"
-                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-              />
-              <path
-                fill-rule="evenodd"
-                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-              />
-            </svg>
           </a>
         </div>
-
-        <!-- Template 5: Mock PDF Printout Template -->
-        <!-- <div
-          class="card"
-          data-type="pdf"
-          data-name="invoice pdf printout cetak hasil tagihan bayar"
-        >
-          <div class="card-header">
-            <div class="card-icon">🖨️</div>
-            <span class="card-badge badge-pdf">PDF Printout</span>
-          </div>
-          <div class="card-body">
-            <h3>Invoice Pembelian</h3>
-            <div class="card-filename">invoice_pdf_template.html</div>
-            <p class="card-desc">
-              Template dokumen tagihan transaksi yang digunakan backend untuk
-              di-export menjadi PDF laporan printout.
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.InvoiceNo</span>
-              <span class="var-tag">.TotalAmount</span>
-              <span class="var-tag">.Items</span>
-            </div>
-          </div>
-          <button
-            class="card-btn"
-            disabled
-            style="opacity: 0.5; cursor: not-allowed"
-            title="File belum dibuat oleh developer"
-          >
-            Segera Hadir
-          </button>
-        </div> -->
-
         <!-- Template 6: Export Folio Payment -->
         <div
           class="card"
@@ -746,29 +628,15 @@
           data-name="export folio payment printout cetak hasil bayar laporan tamu"
         >
           <div class="card-header">
-            <div class="card-icon">💵</div>
             <span class="card-badge badge-pdf">PDF Printout</span>
           </div>
           <div class="card-body">
             <h3>Folio Payment</h3>
             <div class="card-filename">export_folio_payment.html</div>
-            <p class="card-desc">
-              Template printout laporan pembayaran tamu (folio payment) yang
-              berisi detail transaksi pembayaran, metode, dan jumlah.
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.GuestName</span>
-              <span class="var-tag">.Room</span>
-              <span class="var-tag">.PaymentMethod</span>
-              <span class="var-tag">.User</span>
-              <span class="var-tag">.Description</span>
-              <span class="var-tag">.Note</span>
-              <span class="var-tag">.Amount</span>
-            </div>
           </div>
           <div class="card-actions">
             <a
-              href="export_folio_payment.html"
+              href="export_folio_payment/export_folio_payment.html"
               target="_blank"
               class="card-btn"
               title="Lihat kode template Go HTML"
@@ -776,27 +644,12 @@
               Buka Template
             </a>
             <a
-              href="output_folio_payment.html"
+              href="export_folio_payment/output_folio_payment.html"
               target="_blank"
               class="card-btn card-btn-primary card-btn-output"
               title="Lihat hasil cetak PDF simulasi"
             >
               Hasil Cetak
-              <svg
-                width="14"
-                height="14"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-                />
-              </svg>
             </a>
           </div>
         </div>
@@ -808,27 +661,15 @@
           data-name="export non stay charge printout cetak biaya tambahan luar inap"
         >
           <div class="card-header">
-            <div class="card-icon">🧾</div>
             <span class="card-badge badge-pdf">PDF Printout</span>
           </div>
           <div class="card-body">
             <h3>Non-Stay Charge</h3>
             <div class="card-filename">export_non_stay_charge.html</div>
-            <p class="card-desc">
-              Template printout dokumen untuk mencatat rincian biaya tambahan
-              tamu di luar biaya kamar (non-stay charges).
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.GuestName</span>
-              <span class="var-tag">.ChargeType</span>
-              <span class="var-tag">.Amount</span>
-              <span class="var-tag">.Note</span>
-              <span class="var-tag">.User</span>
-            </div>
           </div>
           <div class="card-actions">
             <a
-              href="export_non_stay_charge.html"
+              href="export_non_stay_charge/export_non_stay_charge.html"
               target="_blank"
               class="card-btn"
               title="Lihat kode template Go HTML"
@@ -836,27 +677,12 @@
               Buka Template
             </a>
             <a
-              href="output_non_stay_charge.html"
+              href="export_non_stay_charge/output_non_stay_charge.html"
               target="_blank"
               class="card-btn card-btn-primary card-btn-output"
               title="Lihat hasil cetak PDF simulasi"
             >
               Hasil Cetak
-              <svg
-                width="14"
-                height="14"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-                />
-              </svg>
             </a>
           </div>
         </div>
@@ -868,27 +694,15 @@
           data-name="export deposit reservation printout cetak uang muka bukti reservasi"
         >
           <div class="card-header">
-            <div class="card-icon">🔑</div>
             <span class="card-badge badge-pdf">PDF Printout</span>
           </div>
           <div class="card-body">
             <h3>Deposit Reservation</h3>
             <div class="card-filename">export_deposit_reservation.html</div>
-            <p class="card-desc">
-              Template printout bukti deposit/uang muka untuk reservasi kamar.
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.GuestName</span>
-              <span class="var-tag">.ReservationNo</span>
-              <span class="var-tag">.DepositAmount</span>
-              <span class="var-tag">.PaymentMethod</span>
-              <span class="var-tag">.Note</span>
-              <span class="var-tag">.User</span>
-            </div>
           </div>
           <div class="card-actions">
             <a
-              href="export_deposit_reservation.html"
+              href="export_deposit_reservation/export_deposit_reservation.html"
               target="_blank"
               class="card-btn"
               title="Lihat kode template Go HTML"
@@ -896,27 +710,12 @@
               Buka Template
             </a>
             <a
-              href="output_deposit_reservation.html"
+              href="export_deposit_reservation/output_deposit_reservation.html"
               target="_blank"
               class="card-btn card-btn-primary card-btn-output"
               title="Lihat hasil cetak PDF simulasi"
             >
               Hasil Cetak
-              <svg
-                width="14"
-                height="14"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-                />
-              </svg>
             </a>
           </div>
         </div>
@@ -928,32 +727,15 @@
           data-name="export charges printout cetak rincian biaya transaksi produk layan tambahan inap"
         >
           <div class="card-header">
-            <div class="card-icon">🧾</div>
             <span class="card-badge badge-pdf">PDF Printout</span>
           </div>
           <div class="card-body">
             <h3>Charges</h3>
             <div class="card-filename">export_charges.html</div>
-            <p class="card-desc">
-              Template printout rincian biaya transaksi produk atau layanan
-              tambahan tamu selama menginap (laundry, late checkout, dll.).
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.GuestName</span>
-              <span class="var-tag">.RoomNumber</span>
-              <span class="var-tag">.PackageName</span>
-              <span class="var-tag">.Type</span>
-              <span class="var-tag">.Qty</span>
-              <span class="var-tag">.Price</span>
-              <span class="var-tag">.User</span>
-              <span class="var-tag">.Note</span>
-              <span class="var-tag">.Amount</span>
-              <span class="var-tag">.Products</span>
-            </div>
           </div>
           <div class="card-actions">
             <a
-              href="export_charges.html"
+              href="export_charges/export_charges.html"
               target="_blank"
               class="card-btn"
               title="Lihat kode template Go HTML"
@@ -961,27 +743,12 @@
               Buka Template
             </a>
             <a
-              href="output_charges.html"
+              href="export_charges/output_charges.html"
               target="_blank"
               class="card-btn card-btn-primary card-btn-output"
               title="Lihat hasil cetak PDF simulasi"
             >
               Hasil Cetak
-              <svg
-                width="14"
-                height="14"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-                />
-              </svg>
             </a>
           </div>
         </div>
@@ -993,31 +760,15 @@
           data-name="export lost found claim printout cetak barang hilang temu ambil"
         >
           <div class="card-header">
-            <div class="card-icon">🔍</div>
             <span class="card-badge badge-pdf">PDF Printout</span>
           </div>
           <div class="card-body">
             <h3>Lost & Found Claim</h3>
             <div class="card-filename">export_lost&found.html</div>
-            <p class="card-desc">
-              Template printout bukti claim barang temuan (lost & found) lengkap
-              dengan rincian penemu, status, dan penerima klaim.
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.GuestName</span>
-              <span class="var-tag">.FoundDate</span>
-              <span class="var-tag">.ReportedTo</span>
-              <span class="var-tag">.FoundBy</span>
-              <span class="var-tag">.Status</span>
-              <span class="var-tag">.FoundLocation</span>
-              <span class="var-tag">.ClaimedBy</span>
-              <span class="var-tag">.ClaimedAt</span>
-              <span class="var-tag">.ClaimNote</span>
-            </div>
           </div>
           <div class="card-actions">
             <a
-              href="export_lost&found.html"
+              href="export_lost_found/export_lost_found.html"
               target="_blank"
               class="card-btn"
               title="Lihat kode template Go HTML"
@@ -1025,27 +776,12 @@
               Buka Template
             </a>
             <a
-              href="output_lost_found.html"
+              href="export_lost_found/output_lost_found.html"
               target="_blank"
               class="card-btn card-btn-primary card-btn-output"
               title="Lihat hasil cetak PDF simulasi"
             >
               Hasil Cetak
-              <svg
-                width="14"
-                height="14"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-                />
-              </svg>
             </a>
           </div>
         </div>
@@ -1057,29 +793,15 @@
           data-name="export work order printout cetak maintenance pemeliharaan perbaikan"
         >
           <div class="card-header">
-            <div class="card-icon">🛠️</div>
             <span class="card-badge badge-pdf">PDF Printout</span>
           </div>
           <div class="card-body">
             <h3>Work Order</h3>
             <div class="card-filename">export_workorder.html</div>
-            <p class="card-desc">
-              Template printout bukti perintah kerja (work order) untuk penugasan perbaikan, pemeliharaan, serta riwayat progress penanganan masalah.
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.DocumentID</span>
-              <span class="var-tag">.Source</span>
-              <span class="var-tag">.Urgency</span>
-              <span class="var-tag">.Status</span>
-              <span class="var-tag">.Location</span>
-              <span class="var-tag">.Object</span>
-              <span class="var-tag">.PIC</span>
-              <span class="var-tag">.Products</span>
-            </div>
           </div>
           <div class="card-actions">
             <a
-              href="export_workorder.html"
+              href="export_workorder/export_workorder.html"
               target="_blank"
               class="card-btn"
               title="Lihat kode template Go HTML"
@@ -1087,27 +809,12 @@
               Buka Template
             </a>
             <a
-              href="output_workorder.html"
+              href="export_workorder/output_workorder.html"
               target="_blank"
               class="card-btn card-btn-primary card-btn-output"
               title="Lihat hasil cetak PDF simulasi"
             >
               Hasil Cetak
-              <svg
-                width="14"
-                height="14"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-                />
-              </svg>
             </a>
           </div>
         </div>
@@ -1119,29 +826,15 @@
           data-name="export flag printout cetak penanda bermasalah pelanggaran catatan tamu guesthouse"
         >
           <div class="card-header">
-            <div class="card-icon">🚩</div>
             <span class="card-badge badge-pdf">PDF Printout</span>
           </div>
           <div class="card-body">
             <h3>Flag</h3>
             <div class="card-filename">export_flag.html</div>
-            <p class="card-desc">
-              Template printout dokumen flag internal untuk mencatat penandaan khusus (flagging), riwayat tinggal, alasan urgensi, dan status penanganan catatan tamu.
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.FlagDate</span>
-              <span class="var-tag">.StayPeriod</span>
-              <span class="var-tag">.Room</span>
-              <span class="var-tag">.GuestName</span>
-              <span class="var-tag">.GuestHouse</span>
-              <span class="var-tag">.Status</span>
-              <span class="var-tag">.Urgent</span>
-              <span class="var-tag">.Items</span>
-            </div>
           </div>
           <div class="card-actions">
             <a
-              href="export_flag.html"
+              href="export_flag/export_flag.html"
               target="_blank"
               class="card-btn"
               title="Lihat kode template Go HTML"
@@ -1149,27 +842,12 @@
               Buka Template
             </a>
             <a
-              href="output_flag.html"
+              href="export_flag/output_flag.html"
               target="_blank"
               class="card-btn card-btn-primary card-btn-output"
               title="Lihat hasil cetak PDF simulasi"
             >
               Hasil Cetak
-              <svg
-                width="14"
-                height="14"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"
-                />
-              </svg>
             </a>
           </div>
         </div>
@@ -1181,114 +859,29 @@
           data-name="export banquet event order beo printout cetak acara pesta hotel"
         >
           <div class="card-header">
-            <div class="card-icon">📅</div>
             <span class="card-badge badge-pdf">PDF Printout</span>
           </div>
           <div class="card-body">
             <h3>Banquet Event Order (BEO)</h3>
             <div class="card-filename">export_beo.html</div>
-            <p class="card-desc">
-              Template printout dokumen Banquet Event Order (BEO) untuk merinci informasi acara, rincian produk, jadwal fungsi ruangan, serta catatan khusus per departemen.
-            </p>
-            <div class="variables-list">
-              <span class="var-tag">.BEOID</span>
-              <span class="var-tag">.EventName</span>
-              <span class="var-tag">.EventType</span>
-              <span class="var-tag">.ExpectedPax</span>
-              <span class="var-tag">.GuaranteedPax</span>
-              <span class="var-tag">.Company</span>
-              <span class="var-tag">.Contacts</span>
-              <span class="var-tag">.Status</span>
-              <span class="var-tag">.StayPeriod</span>
-              <span class="var-tag">.StayDuration</span>
-              <span class="var-tag">.Products</span>
-              <span class="var-tag">.Schedules</span>
-              <span class="var-tag">.Notes</span>
-              <span class="var-tag">.QRCode</span>
-              <span class="var-tag">.PrintedBy</span>
-              <span class="var-tag">.PrintedAt</span>
-              <span class="var-tag">.PropertyNote</span>
-            </div>
           </div>
-          <div class="card-actions-options">
-            <!-- Option 1 -->
-            <div class="option-row">
-              <span class="option-name">Opsi 1 (Word Columns)</span>
-              <div class="option-buttons">
-                <a
-                  href="export_beo_opsi1.html"
-                  target="_blank"
-                  class="card-btn"
-                  title="Lihat kode template Go HTML"
-                >
-                  Template
-                </a>
-                <a
-                  href="output_beo_opsi1.html"
-                  target="_blank"
-                  class="card-btn card-btn-primary card-btn-output"
-                  title="Lihat hasil cetak PDF"
-                >
-                  Hasil Cetak
-                </a>
-              </div>
-            </div>
-            <!-- Option 2 -->
-            <div class="option-row" style="border-top: 1px solid #f8f6ff; padding-top: 8px;">
-              <span class="option-name">Opsi 2 (Horizontal Grid)</span>
-              <div class="option-buttons">
-                <a
-                  href="export_beo_opsi2.html"
-                  target="_blank"
-                  class="card-btn"
-                  title="Lihat kode template Go HTML"
-                >
-                  Template
-                </a>
-                <a
-                  href="output_beo_opsi2.html"
-                  target="_blank"
-                  class="card-btn card-btn-primary card-btn-output"
-                  title="Lihat hasil cetak PDF"
-                >
-                  Hasil Cetak
-                </a>
-              </div>
-            </div>
-            <!-- Option 3 -->
-            <div class="option-row" style="border-top: 1px solid #f8f6ff; padding-top: 8px;">
-              <span class="option-name">Opsi 3 (Row-by-Row)</span>
-              <div class="option-buttons">
-                <a
-                  href="export_beo_opsi3.html"
-                  target="_blank"
-                  class="card-btn"
-                  title="Lihat kode template Go HTML"
-                >
-                  Template
-                </a>
-                <a
-                  href="output_beo_opsi3.html"
-                  target="_blank"
-                  class="card-btn card-btn-primary card-btn-output"
-                  title="Lihat hasil cetak PDF"
-                >
-                  Hasil Cetak
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Add Card Guide -->
-        <div class="card card-add" id="card-add-guide">
-          <div class="add-content">
-            <div class="add-icon">➕</div>
-            <h4>Tambah Baru?</h4>
-            <p>
-              Cukup buat file HTML template Anda di folder ini, lalu tambahkan
-              elemen kartu baru di dalam `index.html` ini.
-            </p>
+          <div class="card-actions">
+            <a
+              href="export_beo/export_beo_opsi1.html"
+              target="_blank"
+              class="card-btn"
+              title="Lihat kode template Go HTML"
+            >
+              Buka Template
+            </a>
+            <a
+              href="export_beo/output_beo_opsi1.html"
+              target="_blank"
+              class="card-btn card-btn-primary card-btn-output"
+              title="Lihat hasil cetak PDF simulasi"
+            >
+              Hasil Cetak
+            </a>
           </div>
         </div>
       </div>

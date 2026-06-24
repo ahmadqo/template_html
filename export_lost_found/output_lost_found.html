@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Folio Payment</title>
+    <title>Lost & Found</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -228,16 +228,47 @@
         text-align: justify;
         line-height: 1.4;
       }
-      .card-total {
-        background: #fff6eb;
-        border: 1px solid #ffecd7;
-        border-radius: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0px 20px;
+      .card-claimed {
+        background: #f0fdf4;
+        border: 1px solid #b9f7ce;
+        border-radius: 12px;
+        display: grid;
+        grid-template-columns: 1.2fr 2fr;
         margin-top: 11px;
-        height: 63px;
+      }
+      .claimed-left {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        padding: 16px 20px;
+        border-right: 1px solid #b9f7ce;
+      }
+      .claimed-right {
+        padding: 16px 20px;
+      }
+      .claimed-col {
+        display: flex;
+        flex-direction: column;
+      }
+      .claimed-label {
+        font-size: 12px;
+        color: #8a8a91;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+      .claimed-value {
+        font-size: 14px;
+        color: #0d542a;
+        font-weight: 400;
+        line-height: 1.4;
+      }
+      @media (max-width: 600px) {
+        .card-claimed {
+          grid-template-columns: 1fr;
+        }
+        .claimed-left {
+          border-right: none;
+          border-bottom: 1px solid #b9f7ce;
+        }
       }
       @media print {
         body {
@@ -336,8 +367,8 @@
           </div>
         </div>
         <div class="header-right">
-          <div class="doc-title">Folio Payment</div>
-          <div class="doc-id-badge">P.SCH2604.00012</div>
+          <div class="doc-title">Lost & Found</div>
+          <div class="doc-id-badge">LF.SCH2604.00012</div>
         </div>
       </header>
       
@@ -345,34 +376,40 @@
         <div class="card">
           <div class="row-2col">
             <div class="cell">
-              <div class="cell-label">Guest Name</div>
-              <div class="cell-value">Arlene McCoy</div>
+              <div class="cell-label">Found Date</div>
+              <div class="cell-value">20-02-2026 14:30</div>
             </div>
             <div class="cell">
-              <div class="cell-label">Room</div>
+              <div class="cell-label">Reported To</div>
+              <div class="cell-value">Security Supervisor</div>
+            </div>
+          </div>
+          <div class="row-2col">
+            <div class="cell">
+              <div class="cell-label">Found By</div>
+              <div class="cell-value">Room Attendant (Devi)</div>
+            </div>
+            <div class="cell">
+              <div class="cell-label">Status</div>
               <div class="cell-value">
-                <span class="badge-green">104</span>
+                <span class="badge-green">Claimed</span>
               </div>
             </div>
           </div>
           <div class="row-2col">
             <div class="cell">
-              <div class="cell-label">Payment Type &amp; Method</div>
-              <div class="cell-value">
-                Card<span class="sep-dot">•</span>Credit/Debit Card
-              </div>
+              <div class="cell-label">Guest Name</div>
+              <div class="cell-value">212 - Ahmad Qomaruddin</div>
             </div>
             <div class="cell">
-              <div class="cell-label">User</div>
-              <div class="cell-value">John Doe</div>
+              <div class="cell-label">Location</div>
+              <div class="cell-value">Room 204</div>
             </div>
           </div>
           <div class="row-desc">
             <div class="desc-content">
-              <div class="desc-label">Description</div>
-              <div class="desc-value">Pembayaran cicilan uang muka (DP) ke-3 untuk unit Apartemen Cluster Sakura.</div>
-              <div class="desc-label mt">Note</div>
-              <div class="desc-value">Harap simpan bukti pembayaran ini sebagai tanda bukti pelunasan yang sah.</div>
+              <div class="desc-label">Note</div>
+              <div class="desc-value">Black leather wallet containing ID card and some cash.</div>
             </div>
             
             <div class="qr-wrap">
@@ -385,12 +422,22 @@
             
           </div>
         </div>
-        <div class="card-total">
-          <div style="font-size: 14px; font-weight: 500; color: #996122">
-            Payment Amount
+        <div class="card-claimed">
+          <div class="claimed-left">
+            <div class="claimed-col">
+              <div class="claimed-label">Claimed By</div>
+              <div class="claimed-value">Ahmad</div>
+            </div>
+            <div class="claimed-col">
+              <div class="claimed-label">Claimed At</div>
+              <div class="claimed-value">25-02-2026 10:00</div>
+            </div>
           </div>
-          <div style="font-size: 14px; font-weight: 600; color: #996122">
-            1,500,000
+          <div class="claimed-right">
+            <div class="claimed-col">
+              <div class="claimed-label">Claim Note</div>
+              <div class="claimed-value">Lupa mengambil uang di atas meja</div>
+            </div>
           </div>
         </div>
         
@@ -420,11 +467,11 @@
         
         <div class="print-footer-wrapper">
           <div class="print-info">
-            Printed: Superadmin on 24 Jun 2026 03:44:58 WIB
+            Printed: Superadmin on 24 Jun 2026 05:51:14 WIB
           </div>
           
           <hr class="print-footer-separator" />
-          <div class="print-footer-note">Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah. Pembayaran yang sudah dilakukan tidak dapat dibatalkan atau dikembalikan dengan alasan apapun.</div>
+          <div class="print-footer-note">Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah.</div>
           
         </div>
       </main>

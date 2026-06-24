@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lost & Found</title>
+    <title>Deposit Reservation</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -139,18 +139,6 @@
         color: #000000;
         font-weight: 400;
       }
-      .badge-green {
-        display: inline-flex;
-        align-items: center;
-        padding: 0px 12px;
-        border: 1px solid #00bd7d;
-        border-radius: 50px;
-        background: #dbfce7;
-        font-size: 12.5px;
-        font-weight: 500;
-        color: #008234;
-        height: 20px;
-      }
       .sep-dot {
         margin: 0 5px;
       }
@@ -228,47 +216,46 @@
         text-align: justify;
         line-height: 1.4;
       }
-      .card-claimed {
-        background: #f0fdf4;
-        border: 1px solid #b9f7ce;
-        border-radius: 12px;
-        display: grid;
-        grid-template-columns: 1.2fr 2fr;
-        margin-top: 11px;
-      }
-      .claimed-left {
-        display: grid;
-        grid-template-columns: 1fr 1.5fr;
-        padding: 16px 20px;
-        border-right: 1px solid #b9f7ce;
-      }
-      .claimed-right {
-        padding: 16px 20px;
-      }
-      .claimed-col {
+      .card-total {
+        background: #fff6eb;
+        border: 1px solid #ffecd7;
+        border-radius: 10px;
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 20px;
+        margin-top: 11px;
+        height: 63px;
       }
-      .claimed-label {
+      .badge-stay {
+        display: inline-flex;
+        align-items: center;
+      }
+      .badge-stay-date {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        padding: 0px 9px;
         font-size: 12px;
-        color: #8a8a91;
+        color: #44444c;
         font-weight: 500;
-        margin-bottom: 5px;
+        white-space: nowrap;
+        border-width: 1px 0px 1px 1px;
+        border-style: solid;
+        border-color: #b0b0b5;
+        border-radius: 12px 0px 0px 12px;
       }
-      .claimed-value {
-        font-size: 14px;
-        color: #0d542a;
-        font-weight: 400;
-        line-height: 1.4;
-      }
-      @media (max-width: 600px) {
-        .card-claimed {
-          grid-template-columns: 1fr;
-        }
-        .claimed-left {
-          border-right: none;
-          border-bottom: 1px solid #b9f7ce;
-        }
+      .badge-stay-duration {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        padding: 0px 10px;
+        background-color: #000000;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 0px 20px 20px 0px;
+        white-space: nowrap;
       }
       @media print {
         body {
@@ -281,6 +268,59 @@
           page-break-after: always;
           overflow: hidden;
         }
+      }
+
+       
+      .signer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        margin-top: 30px;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .signer-col {
+        width: calc(16.66% - 10px);
+        min-width: 75px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 85px;
+        text-align: center;
+      }
+      .signer-by {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        margin-bottom: 5px;
+      }
+      .signer-line {
+        width: 100%;
+        border-bottom: 0.5px solid #b0b0b5;
+        margin-top: auto;
+        margin-bottom: 5px;
+        height: 40px;
+      }
+      .signer-qr {
+        width: 72px;
+        height: 72px;
+        margin-top: auto;
+        margin-bottom: 5px;
+      }
+      .signer-name {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        white-space: nowrap;
+      }
+      .signer-position {
+        font-size: 12px;
+        font-weight: 300;
+        color: #000000;
+        white-space: nowrap;
       }
     </style>
   </head>
@@ -314,8 +354,8 @@
           </div>
         </div>
         <div class="header-right">
-          <div class="doc-title">Lost & Found</div>
-          <div class="doc-id-badge">LF.SCH2604.00012</div>
+          <div class="doc-title">Deposit Reservation</div>
+          <div class="doc-id-badge">D.SCH2604.00012</div>
         </div>
       </header>
       
@@ -323,40 +363,45 @@
         <div class="card">
           <div class="row-2col">
             <div class="cell">
-              <div class="cell-label">Found Date</div>
-              <div class="cell-value">20-02-2026 14:30</div>
+              <div class="cell-label">Deposit Date</div>
+              <div class="cell-value">15 Feb 2026</div>
             </div>
             <div class="cell">
-              <div class="cell-label">Reported To</div>
-              <div class="cell-value">Security Supervisor</div>
-            </div>
-          </div>
-          <div class="row-2col">
-            <div class="cell">
-              <div class="cell-label">Found By</div>
-              <div class="cell-value">Room Attendant (Devi)</div>
-            </div>
-            <div class="cell">
-              <div class="cell-label">Status</div>
+              <div class="cell-label">Check In - Checkout</div>
               <div class="cell-value">
-                <span class="badge-green">Claimed</span>
+                <div class="badge-stay">
+                  <div class="badge-stay-date">15 Feb - 17 Feb 2026</div>
+                  <div class="badge-stay-duration">2 Nights</div>
+                </div>
               </div>
             </div>
           </div>
           <div class="row-2col">
             <div class="cell">
               <div class="cell-label">Guest Name</div>
-              <div class="cell-value">212 - Ahmad Qomaruddin</div>
+              <div class="cell-value">Arlene McCoy</div>
             </div>
             <div class="cell">
-              <div class="cell-label">Location</div>
-              <div class="cell-value">Room 204</div>
+              <div class="cell-label">Company Name</div>
+              <div class="cell-value">Property Developer Inc.</div>
+            </div>
+          </div>
+          <div class="row-2col">
+            <div class="cell">
+              <div class="cell-label">Payment Type &amp; Method</div>
+              <div class="cell-value">
+                Cash<span class="sep-dot">•</span>Credit/Debit Card
+              </div>
+            </div>
+            <div class="cell">
+              <div class="cell-label">User</div>
+              <div class="cell-value">John Doe</div>
             </div>
           </div>
           <div class="row-desc">
             <div class="desc-content">
               <div class="desc-label">Note</div>
-              <div class="desc-value">Black leather wallet containing ID card and some cash.</div>
+              <div class="desc-value">Uang muka reservasi kamar Deluxe untuk periode menginap 15 Feb - 17 Feb 2026.</div>
             </div>
             
             <div class="qr-wrap">
@@ -369,31 +414,46 @@
             
           </div>
         </div>
-        <div class="card-claimed">
-          <div class="claimed-left">
-            <div class="claimed-col">
-              <div class="claimed-label">Claimed By</div>
-              <div class="claimed-value">Ahmad</div>
-            </div>
-            <div class="claimed-col">
-              <div class="claimed-label">Claimed At</div>
-              <div class="claimed-value">25-02-2026 10:00</div>
-            </div>
+        <div class="card-total">
+          <div style="font-size: 14px; font-weight: 500; color: #996122">
+            Amount
           </div>
-          <div class="claimed-right">
-            <div class="claimed-col">
-              <div class="claimed-label">Claim Note</div>
-              <div class="claimed-value">Lupa mengambil uang di atas meja</div>
-            </div>
+          <div style="font-size: 14px; font-weight: 600; color: #996122">
+            500,000
           </div>
         </div>
+        
+        
+        <div class="signer-container">
+          
+          <div class="signer-col">
+            
+            <div class="signer-by">Prepared by</div>
+            <div class="signer-line"></div>
+            <div class="signer-name">User</div>
+            <div class="signer-position">Staff In Charge</div>
+            
+          </div>
+          
+          <div class="signer-col">
+            
+            <div class="signer-by">Acknowledge by</div>
+            <div class="signer-line"></div>
+            <div class="signer-name">Windah Basudara</div>
+            <div class="signer-position">Asst. FOM</div>
+            
+          </div>
+          
+        </div>
+        
+        
         <div class="print-footer-wrapper">
           <div class="print-info">
-            Printed: Superadmin on 21 Jun 2026 15:41:18 WIB
+            Printed: Superadmin on 24 Jun 2026 05:47:36 WIB
           </div>
           
           <hr class="print-footer-separator" />
-          <div class="print-footer-note">Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah.</div>
+          <div class="print-footer-note">Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah. Pembayaran yang sudah dilakukan tidak dapat dibatalkan atau dikembalikan dengan alasan apapun.</div>
           
         </div>
       </main>

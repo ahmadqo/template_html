@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 )
@@ -400,14 +401,14 @@ func main() {
 	}
 
 	templates := map[string]string{
-		"export_beo.html":       "output_beo.html",
-		"export_beo_opsi1.html": "output_beo_opsi1.html",
-		"export_beo_opsi2.html": "output_beo_opsi2.html",
-		"export_beo_opsi3.html": "output_beo_opsi3.html",
+		"export_beo/export_beo.html":       "export_beo/output_beo.html",
+		"export_beo/export_beo_opsi1.html": "export_beo/output_beo_opsi1.html",
+		"export_beo/export_beo_opsi2.html": "export_beo/output_beo_opsi2.html",
+		"export_beo/export_beo_opsi3.html": "export_beo/output_beo_opsi3.html",
 	}
 
 	for tmplFile, outFile := range templates {
-		tmpl, err := template.New(tmplFile).Funcs(funcMap).ParseFiles(tmplFile)
+		tmpl, err := template.New(filepath.Base(tmplFile)).Funcs(funcMap).ParseFiles(tmplFile)
 		if err != nil {
 			panic(err)
 		}

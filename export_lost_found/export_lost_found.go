@@ -4,9 +4,18 @@ import (
 	"fmt"
 	"html/template"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 )
+
+// SignerData mendefinisikan struktur data penandatangan
+type SignerData struct {
+	SignerBy       string
+	SignerName     string
+	SignerPosition string
+	SignerQR       string
+}
 
 // LostFoundData mendefinisikan struct yang sesuai dengan variabel di export_lost&found.html
 type LostFoundData struct {
@@ -33,6 +42,7 @@ type LostFoundData struct {
 	PrintedBy      string
 	PrintedAt      string
 	PropertyNote   string
+	Signers        []SignerData
 }
 
 func main() {
@@ -64,6 +74,11 @@ func main() {
 		PrintedBy:      "Superadmin",
 		PrintedAt:      time.Now().Format("02 Jan 2006 15:04:05 MST"),
 		PropertyNote:   "Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah.",
+		Signers: []SignerData{
+			{SignerBy: "Prepared by", SignerName: "User", SignerPosition: "Staff In Charge"},
+			{SignerBy: "Acknowledge by", SignerName: "Windah Basudara", SignerPosition: "Asst. FOM"},
+			// {SignerBy: "Approved by", SignerName: "General Manager", SignerPosition: "General Manager", SignerQR: rawBase64},
+		},
 	}
 
 	// 3. Parse template HTML dengan mendaftarkan helper function qrCodeAttr
@@ -92,13 +107,16 @@ func main() {
 		},
 	}
 
-	tmpl, err := template.New("export_lost&found.html").Funcs(funcMap).ParseFiles("export_lost&found.html")
+	tmplFile := "export_lost_found/export_lost_found.html"
+	outFile := "export_lost_found/output_lost_found.html"
+
+	tmpl, err := template.New(filepath.Base(tmplFile)).Funcs(funcMap).ParseFiles(tmplFile)
 	if err != nil {
 		panic(err)
 	}
 
 	// 4. Buat file output hasil compile
-	outputFile, err := os.Create("output_lost_found.html")
+	outputFile, err := os.Create(outFile)
 	if err != nil {
 		panic(err)
 	}
@@ -110,5 +128,5 @@ func main() {
 		panic(err)
 	}
 
-	println("Simulasi sukses! Silakan buka 'output_lost_found.html' di browser Anda.")
+	fmt.Printf("Simulasi sukses: %s -> %s\n", tmplFile, outFile)
 }
