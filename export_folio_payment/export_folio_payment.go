@@ -70,8 +70,11 @@ func main() {
 		Signers: []SignerData{
 			{SignerBy: "Prepared by", SignerName: "User", SignerPosition: "Staff In Charge"},
 			{SignerBy: "Acknowledge by", SignerName: "Windah Basudara", SignerPosition: "Asst. FOM"},
-			// {SignerBy: "Acknowledge by", SignerName: "FBS", SignerPosition: "FBS Manager"},
+			{SignerBy: "Acknowledge by", SignerName: "FBS", SignerPosition: "FBS Manager"},
 			// {SignerBy: "Acknowledge by", SignerName: "FO & HK", SignerPosition: "FO Supervisor"},
+			// {SignerBy: "Acknowledge by", SignerName: "CA", SignerPosition: "Chief Accountant"},
+			// {SignerBy: "Acknowledge by", SignerName: "CA", SignerPosition: "Chief Accountant"},
+			// {SignerBy: "Acknowledge by", SignerName: "CA", SignerPosition: "Chief Accountant"},
 			// {SignerBy: "Acknowledge by", SignerName: "CA", SignerPosition: "Chief Accountant"},
 			// {SignerBy: "Approved by", SignerName: "General Manager", SignerPosition: "General Manager", SignerQR: rawBase64},
 		},

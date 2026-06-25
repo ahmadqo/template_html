@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banquet Event Order</title>
+    <!-- Google Fonts Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+      body {
+        font-family:
+          "Roboto",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background-color: #ffffff;
+        color: #111111;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+      }
+      .header {
+        width: 100%;
+        background: #ffffff;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 12px 30px 12px 30px;
+      }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .company-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding-top: 2px;
+      }
+      .company-name {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #000000;
+      }
+      .company-sub {
+        font-size: 11.5px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 1.3;
+      }
+      .header-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 7px;
+        padding-top: 4px;
+      }
+      .doc-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #111111;
+        line-height: 1.2;
+      }
+      .doc-id-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 14px;
+        border: 1px solid #00bd7d;
+        border-radius: 50px;
+        background: #dbfce7;
+        font-size: 12px;
+        font-weight: 500;
+        color: #008234;
+        letter-spacing: 0.01em;
+        height: 20px;
+      }
+      .body {
+        background: #ffffff;
+        padding: 6px 30px 8px 30px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        box-sizing: border-box;
+      }
+      .card {
+        border: 0.8px solid #d7dedd;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+      .row-4col {
+        display: grid;
+        grid-template-columns: 25% 25% 23% 27%;
+        padding: 11px;
+      }
+      .row-4col:last-child {
+        border-bottom: none;
+        padding: 0 11px 11px 11px;
+      }
+      .cell:last-child {
+        border-right: none;
+      }
+      .cell-label {
+        font-size: 10px;
+        color: #8a8a91;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+      .cell-value {
+        font-size: 10px;
+        color: #000000;
+        font-weight: 400;
+      }
+      .badge-yellow {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 12px;
+        border: 1px solid #f0b101;
+        border-radius: 50px;
+        background: #fefbe8;
+        font-size: 10px;
+        font-weight: 500;
+        color: #a55f00;
+        height: 20px;
+      }
+
+      .print-footer-wrapper {
+        margin-top: 8px;
+        padding: 10px 30px 10px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 100%;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .print-footer-spacer {
+        display: none;
+      }
+      .print-layout-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .print-layout-table td {
+        padding: 0;
+        border: none;
+      }
+      .print-layout-table tbody td {
+        height: auto;
+      }
+      /* .signer-spacer {
+        height: 28px;
+        flex-shrink: 0;
+      } */
+      @media print {
+        .print-layout-table {
+          height: auto;
+          width: 100%;
+        }
+        .body {
+          height: auto;
+        }
+        .print-layout-table thead {
+          display: table-header-group;
+        }
+        .print-layout-table tfoot {
+          display: table-footer-group;
+        }
+        .print-footer-spacer {
+          display: block;
+          height: 165px;
+        }
+        .signer-container {
+          position: fixed;
+          bottom: 65px;
+          left: 0;
+          right: 0;
+          height: 100px;
+          padding: 0 30px;
+          background: #ffffff;
+          box-sizing: border-box;
+          z-index: 9999;
+          margin-top: 0;
+          display: flex;
+          align-items: flex-end;
+        }
+        .print-footer-wrapper {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 50px;
+          padding: 10px 30px 10px 30px;
+          background: #ffffff;
+          box-sizing: border-box;
+          z-index: 9999;
+          margin-top: 0;
+        }
+      }
+      .print-info {
+        font-size: 10px;
+        color: #8a8a91;
+        font-weight: 500;
+        text-align: left;
+      }
+      .print-footer-separator {
+        border: none;
+        border-top: 1px solid #d7dedd;
+        margin: 0;
+      }
+      .print-footer-note {
+        font-size: 10px;
+        color: #111827;
+        text-align: justify;
+        line-height: 1.4;
+      }
+
+      .product-table-wrapper {
+        border: 1px solid #f3e5ff;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 8px;
+        background: #ffffff;
+      }
+      .product-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Roboto", sans-serif;
+        color: #111111;
+      }
+      .product-table th {
+        background-color: #faf5ff;
+        color: #111111;
+        font-weight: 600;
+        text-align: left;
+        padding: 4px 8px;
+        font-size: 10px;
+      }
+      .product-table td {
+        padding: 4px 8px;
+        border-bottom: 1px solid #ececec;
+        font-size: 10px;
+        color: #111111;
+      }
+      .product-table tr:last-child td {
+        border-bottom: none;
+      }
+      .badge-stay {
+        display: inline-flex;
+        align-items: center;
+      }
+      .badge-stay-date {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        padding: 0px 9px;
+        font-size: 10px;
+        color: #44444c;
+        font-weight: 500;
+        white-space: nowrap;
+        border-width: 1px 0px 1px 1px;
+        border-style: solid;
+        border-color: #b0b0b5;
+        border-radius: 12px 0px 0px 12px;
+      }
+      .badge-stay-duration {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        padding: 0px 10px;
+        background-color: #000000;
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 500;
+        border-radius: 0px 20px 20px 0px;
+        white-space: nowrap;
+      }
+      @media print {
+        .notes-container {
+          column-fill: auto !important;
+          max-height: 480px; /* Default A4 Portrait */
+        }
+        @media (max-height: 1080px) {
+          .notes-container {
+            max-height: 400px; /* Letter Portrait */
+          }
+        }
+        @media (max-height: 850px) {
+          .notes-container {
+            max-height: 145px; /* A5 Portrait / A4 Landscape / Letter Landscape */
+          }
+        }
+        body {
+          margin: 0;
+        }
+        .page {
+          width: 210mm;
+          min-height: auto;
+          height: auto;
+          margin: 0;
+          page-break-after: avoid;
+          overflow: visible;
+        }
+      }
+      .card-event {
+        position: relative;
+        overflow: hidden;
+      }
+      .ribbon-draft {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 70px;
+        height: 70px;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .ribbon-draft span {
+        position: absolute;
+        display: block;
+        width: 100px;
+        padding: 4px 0;
+        background-color: #8a8a91;
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 700;
+        text-align: center;
+        right: -24px;
+        top: 14px;
+        transform: rotate(45deg);
+      }
+      .ribbon-approved span {
+        background-color: #00bd7d;
+      }
+
+      /* ==========================================================================
+         PERBAIKAN TATA LETAK NOTES WORD STYLE (FLUID CO-EXISTENCE DENGAN SIGNER)
+         ========================================================================== */
+      .notes-and-signer-container {
+        display: block;
+        width: 100%;
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+      }
+
+      /* OPSI 1: Word Columns Layout (Default) */
+      .notes-container {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        column-count: 3;
+        column-gap: 10px;
+        column-fill: auto;
+        height: auto;
+      }
+
+      .note-card {
+        display: block;
+        width: 100%;
+        border: 1px solid #ffecd7;
+        border-radius: 10px;
+        background: #ffffff;
+        margin-bottom: 6px;
+        break-inside: auto;
+        -webkit-column-break-inside: auto;
+        page-break-inside: auto;
+      }
+      .note-header {
+        background-color: #fffaf5;
+        padding: 5px 10px;
+        font-size: 10px;
+        font-weight: 700;
+        color: #000000;
+        border-bottom: 1px solid #ffecd7;
+        border-radius: 10px 10px 0 0;
+      }
+      .note-body {
+        padding: 5px 10px;
+        font-size: 10px;
+        color: #111111;
+        line-height: 1.4;
+        white-space: pre-line;
+      }
+      /* ==========================================================================
+         PROTEKSI AREA TANDA TANGAN (LOCK DI BAWAH BARIS AKHIR NOTES)
+         ========================================================================== */
+      .signer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        page-break-inside: avoid;
+        break-inside: avoid;
+        min-height: 80px;
+        margin-top: 28px;
+        padding: 0 30px;
+      }
+      .signer-col {
+        width: calc((100% - 72px) / 7);
+        min-width: 75px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 80px;
+        text-align: center;
+      }
+      .signer-by {
+        font-size: 10px;
+        font-weight: 400;
+        color: #000000;
+        margin-bottom: 5px;
+      }
+      .signer-line {
+        width: 100%;
+        border-bottom: 0.5px solid #b0b0b5;
+        margin-top: auto;
+        margin-bottom: 5px;
+        height: 40px;
+      }
+      .signer-qr {
+        width: 72px;
+        height: 72px;
+        margin-top: auto;
+        margin-bottom: 5px;
+      }
+      .signer-name {
+        font-size: 10px;
+        font-weight: 400;
+        color: #000000;
+        white-space: nowrap;
+      }
+      .signer-position {
+        font-size: 10px;
+        font-weight: 300;
+        color: #000000;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <table class="print-layout-table">
+        <thead>
+          <tr>
+            <td>
+              <header class="header">
+                <div class="header-left">
+                  {{ if .LogoURL }}
+                  <div style="width: 51px; height: 51px; padding: 8px 10px">
+                    <img
+                      src="{{ .LogoURL }}"
+                      alt="Logo"
+                      style="width: 100%; height: 100%"
+                    />
+                  </div>
+                  {{ end }}
+
+                  <div class="company-info">
+                    <div class="company-name">{{ .CompanyName }}</div>
+                    <div>
+                      <div class="company-sub" style="font-weight: 500">
+                        {{ .CompanyAddress }}
+                      </div>
+                      <div class="company-sub">
+                        {{ .CompanyEmail }} &nbsp;•&nbsp; {{ .CompanyPhone }}
+                      </div>
+                      {{ if .HeaderNote }}
+                      <div class="company-sub">{{ .HeaderNote }}</div>
+                      {{ end }}
+                    </div>
+                  </div>
+                </div>
+                <div class="header-right">
+                  <div class="doc-title">Banquet Event Order</div>
+                  <div class="doc-id-badge">{{ .BEOID }}</div>
+                </div>
+              </header>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 6px 30px 0 30px">
+              <div class="card card-event">
+                {{ if .IsDraft }}
+                <div class="ribbon-draft"><span>Draft</span></div>
+                {{ else }}
+                <div class="ribbon-draft ribbon-approved">
+                  <span>Approved</span>
+                </div>
+                {{ end }}
+                <div class="row-4col">
+                  <div class="cell">
+                    <div class="cell-label">Event Name</div>
+                    <div class="cell-value">{{ .EventName }}</div>
+                  </div>
+                  <div class="cell">
+                    <div class="cell-label">Event Type</div>
+                    <div class="cell-value">{{ .EventType }}</div>
+                  </div>
+                  <div class="cell">
+                    <div class="cell-label">Expected Pax</div>
+                    <div class="cell-value">{{ .ExpectedPax }}</div>
+                  </div>
+                  <div class="cell">
+                    <div class="cell-label">Guaranteed Pax</div>
+                    <div class="cell-value">{{ .GuaranteedPax }}</div>
+                  </div>
+                </div>
+                <div class="row-4col">
+                  <div class="cell">
+                    <div class="cell-label">Company</div>
+                    <div class="cell-value">{{ .Company }}</div>
+                  </div>
+                  <div class="cell">
+                    <div class="cell-label">Contact</div>
+                    <div class="cell-value">
+                      {{ if .Contacts }}
+                      <div
+                        style="display: flex; flex-direction: column; gap: 5px"
+                      >
+                        {{ range .Contacts }}
+                        <div style="display: flex; gap: 3px">
+                          <span>{{ .Name }}</span>
+                          <span>-</span>
+                          <span>{{ .Phone }}</span>
+                        </div>
+                        {{ end }}
+                      </div>
+                      {{ else }} - {{ end }}
+                    </div>
+                  </div>
+                  <div class="cell">
+                    <div class="cell-label">Status</div>
+                    <div class="cell-value">
+                      <span class="badge-yellow">{{ .Status }}</span>
+                    </div>
+                  </div>
+                  <div class="cell">
+                    <div class="cell-label">Start - End Date</div>
+                    <div class="cell-value">
+                      <div class="badge-stay">
+                        <span class="badge-stay-date">{{ .StayPeriod }}</span>
+                        <span class="badge-stay-duration"
+                          >{{ .StayDuration }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          {{ if .Products }}
+          <tr>
+            <td style="padding: 0 30px 0 30px">
+              <div class="product-table-wrapper">
+                <table class="product-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 150px">Breakdown Date</th>
+                      <th style="width: 100px">Nights</th>
+                      <th>Product</th>
+                      <th style="width: 130px; text-align: center">Qty</th>
+                      <th style="width: 130px; text-align: right">Price</th>
+                      <th style="width: 130px; text-align: right">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{ range .Products }}
+                    <tr>
+                      <td>{{ .BreakdownDate }}</td>
+                      <td>{{ .Nights }}</td>
+                      <td>{{ .Product }}</td>
+                      <td style="text-align: center">{{ .Qty }}</td>
+                      <td style="text-align: right">{{ .Price }}</td>
+                      <td style="text-align: right">{{ .Amount }}</td>
+                    </tr>
+                    {{ end }}
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          {{ end }} {{ if .Schedules }}
+          <tr>
+            <td style="padding: 0 30px 0 30px">
+              <div class="product-table-wrapper">
+                <table class="product-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 150px">Schedule Date</th>
+                      <th style="width: 100px">Time</th>
+                      <th>Function</th>
+                      <th>Venue</th>
+                      <th>Layout</th>
+                      <th>Pax</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{ range .Schedules }}
+                    <tr>
+                      <td>{{ .ScheduleDate }}</td>
+                      <td>{{ .Time }}</td>
+                      <td>{{ .Function }}</td>
+                      <td>{{ .Venue }}</td>
+                      <td>{{ .Layout }}</td>
+                      <td>{{ .Pax }}</td>
+                    </tr>
+                    {{ end }}
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+          {{ end }}
+
+          <tr style="page-break-inside: auto; break-inside: auto">
+            <td style="padding: 0 30px 0 30px">
+              <div class="notes-and-signer-container">
+                {{ if .Notes }}
+                <div class="notes-container">
+                  {{ range .Notes }}
+                  <div class="note-card">
+                    <div class="note-header">{{ .Title }}</div>
+                    <div class="note-body">{{ .Content }}</div>
+                  </div>
+                  {{ end }}
+                </div>
+                {{ end }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>
+              <div class="print-footer-spacer"></div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+      {{ if .Signers }}
+      <div class="signer-container">
+        {{ range .Signers }}
+        <div class="signer-col">
+          {{ if .SignerQR }}
+          <div class="signer-qr" style="margin: auto 0">
+            <img
+              {{
+              qrCodeAttr
+              .SignerQR
+              }}
+              alt="Digital Signature QR"
+              style="width: 100%; height: 100%; object-fit: contain"
+            />
+          </div>
+          {{ else }}
+          <div class="signer-by">{{ .SignerBy }}</div>
+          <div class="signer-line"></div>
+          <div class="signer-name">{{ .SignerName }}</div>
+          <div class="signer-position">{{ .SignerPosition }}</div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+
+      <div class="print-footer-wrapper">
+        <div class="print-info">
+          Printed: {{ .PrintedBy }} on {{ .PrintedAt }}
+        </div>
+        {{ if .PropertyNote }}
+        <hr class="print-footer-separator" />
+        <div class="print-footer-note">{{ .PropertyNote }}</div>
+        {{ end }}
+      </div>
+    </div>
+  </body>
+</html>
