@@ -47,6 +47,7 @@ type SignerData struct {
 	SignerName     string
 	SignerPosition string
 	SignerQR       string
+	SignerImage    string
 }
 
 // BEOData mendefinisikan struct utama untuk data BEO
@@ -354,7 +355,7 @@ func main() {
 		PropertyNote: "Catatan: Laporan ini diterbitkan secara otomatis oleh sistem maintenance properti.",
 		Signers: []SignerData{
 			{SignerBy: "Prepared by", SignerName: "Sales In Charge", SignerPosition: "Sales Executive"},
-			{SignerBy: "Acknowledge by", SignerName: "FBS", SignerPosition: "FBS Manager"},
+			{SignerBy: "Acknowledge by", SignerName: "FBS", SignerPosition: "FBS Manager", SignerImage: "https://asset.dsisistem.top/image_testing/0b824059c781489ab12759491f5163ec.webp"},
 			{SignerBy: "Acknowledge by", SignerName: "FBP", SignerPosition: "FBP Manager"},
 			{SignerBy: "Acknowledge by", SignerName: "FO & HK", SignerPosition: "FO Supervisor"},
 			{SignerBy: "Acknowledge by", SignerName: "CA", SignerPosition: "Chief Accountant"},

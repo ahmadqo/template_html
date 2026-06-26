@@ -302,7 +302,10 @@
         border-bottom: 0.5px solid #b0b0b5;
         margin-top: auto;
         margin-bottom: 5px;
-        height: 40px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       .signer-qr {
         width: 72px;
@@ -444,7 +447,15 @@
             </div>
             {{ else }}
             <div class="signer-by">{{ .SignerBy }}</div>
-            <div class="signer-line"></div>
+            <div class="signer-line">
+              {{ if .SignerImage }}
+              <img
+                src="{{ .SignerImage }}"
+                alt="Signature"
+                style="max-height: 48px; max-width: 100%; object-fit: contain"
+              />
+              {{ end }}
+            </div>
             <div class="signer-name">{{ .SignerName }}</div>
             <div class="signer-position">{{ .SignerPosition }}</div>
             {{ end }}

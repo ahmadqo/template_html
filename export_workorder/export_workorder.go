@@ -23,6 +23,7 @@ type SignerData struct {
 	SignerName     string
 	SignerPosition string
 	SignerQR       string
+	SignerImage    string
 }
 
 // WorkOrderData mendefinisikan struct yang sesuai dengan variabel di export_workorder.html
@@ -83,7 +84,7 @@ func main() {
 		PropertyNote:   "Catatan: Laporan ini diterbitkan secara otomatis oleh sistem maintenance properti.",
 		Signers: []SignerData{
 			{SignerBy: "Prepared by", SignerName: "User", SignerPosition: "Staff In Charge"},
-			{SignerBy: "Acknowledge by", SignerName: "Windah Basudara", SignerPosition: "Asst. FOM"},
+			{SignerBy: "Acknowledge by", SignerName: "Windah Basudara", SignerPosition: "Asst. FOM", SignerImage: "https://asset.dsisistem.top/image_testing/0b824059c781489ab12759491f5163ec.webp"},
 			// {SignerBy: "Approved by", SignerName: "General Manager", SignerPosition: "General Manager", SignerQR: rawBase64},
 		},
 		Products: []WorkOrderProgress{

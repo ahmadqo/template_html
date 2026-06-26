@@ -15,6 +15,7 @@ type SignerData struct {
 	SignerName     string
 	SignerPosition string
 	SignerQR       string
+	SignerImage    string
 }
 
 // FolioPaymentData mendefinisikan struct yang sesuai dengan variabel di export_folio_payment.html
@@ -70,7 +71,7 @@ func main() {
 		Signers: []SignerData{
 			{SignerBy: "Prepared by", SignerName: "User", SignerPosition: "Staff In Charge"},
 			{SignerBy: "Acknowledge by", SignerName: "Windah Basudara", SignerPosition: "Asst. FOM"},
-			{SignerBy: "Acknowledge by", SignerName: "FBS", SignerPosition: "FBS Manager"},
+			{SignerBy: "Acknowledge by", SignerName: "FBS", SignerPosition: "FBS Manager", SignerImage: "https://asset.dsisistem.top/image_testing/0b824059c781489ab12759491f5163ec.webp"},
 			// {SignerBy: "Acknowledge by", SignerName: "FO & HK", SignerPosition: "FO Supervisor"},
 			// {SignerBy: "Acknowledge by", SignerName: "CA", SignerPosition: "Chief Accountant"},
 			// {SignerBy: "Acknowledge by", SignerName: "CA", SignerPosition: "Chief Accountant"},

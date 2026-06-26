@@ -15,6 +15,7 @@ type SignerData struct {
 	SignerName     string
 	SignerPosition string
 	SignerQR       string
+	SignerImage    string
 }
 
 // DepositReservationData mendefinisikan struct yang sesuai dengan variabel di export_deposit_reservation.html
@@ -70,7 +71,7 @@ func main() {
 		PropertyNote:   "Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah. Pembayaran yang sudah dilakukan tidak dapat dibatalkan atau dikembalikan dengan alasan apapun.",
 		Signers: []SignerData{
 			{SignerBy: "Prepared by", SignerName: "User", SignerPosition: "Staff In Charge"},
-			{SignerBy: "Acknowledge by", SignerName: "Windah Basudara", SignerPosition: "Asst. FOM"},
+			{SignerBy: "Acknowledge by", SignerName: "Windah Basudara", SignerPosition: "Asst. FOM", SignerImage: "https://asset.dsisistem.top/image_testing/0b824059c781489ab12759491f5163ec.webp"},
 			// {SignerBy: "Approved by", SignerName: "General Manager", SignerPosition: "General Manager", SignerQR: rawBase64},
 		},
 	}
