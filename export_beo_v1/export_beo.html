@@ -459,12 +459,14 @@
         font-weight: 400;
         color: #000000;
         white-space: nowrap;
+        min-height: 12px;
       }
       .signer-position {
         font-size: 10px;
         font-weight: 300;
         color: #000000;
         white-space: nowrap;
+        min-height: 12px;
       }
     </style>
   </head>
@@ -702,8 +704,8 @@
             />
             {{ end }}
           </div>
-          <div class="signer-name">{{ .SignerName }}</div>
-          <div class="signer-position">{{ .SignerPosition }}</div>
+          <div class="signer-name">{{ if .SignerName }}{{ .SignerName }}{{ else }}&nbsp;{{ end }}</div>
+          <div class="signer-position">{{ if .SignerPosition }}{{ .SignerPosition }}{{ else }}&nbsp;{{ end }}</div>
           {{ end }}
         </div>
         {{ end }}
