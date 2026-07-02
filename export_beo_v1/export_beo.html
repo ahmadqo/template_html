@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Banquet Event Order</title>
+    <title>{{ .Data.DocumentTitle }}</title>
     <!-- Google Fonts Roboto -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -476,10 +476,10 @@
             <td>
               <header class="header">
                 <div class="header-left">
-                  {{ if .LogoURL }}
-                  <div style="width: 51px; height: 51px; padding: 8px 10px">
+                  {{ if .Property.LogoURL }}
+                  <div style="width: 51px; height: 51px">
                     <img
-                      src="{{ .LogoURL }}"
+                      src="{{ .Property.LogoURL }}"
                       alt="Logo"
                       style="width: 100%; height: 100%"
                     />
@@ -487,23 +487,24 @@
                   {{ end }}
 
                   <div class="company-info">
-                    <div class="company-name">{{ .CompanyName }}</div>
+                    <div class="company-name">{{ .Property.Name }}</div>
                     <div>
                       <div class="company-sub" style="font-weight: 500">
-                        {{ .CompanyAddress }}
+                        {{ .Property.Address }}
                       </div>
                       <div class="company-sub">
-                        {{ .CompanyEmail }} &nbsp;•&nbsp; {{ .CompanyPhone }}
+                        {{ .Property.Email }} &nbsp;•&nbsp; {{ .Property.Phone
+                        }}
                       </div>
-                      {{ if .HeaderNote }}
-                      <div class="company-sub">{{ .HeaderNote }}</div>
+                      {{ if .Property.HeaderNote }}
+                      <div class="company-sub">{{ .Property.HeaderNote }}</div>
                       {{ end }}
                     </div>
                   </div>
                 </div>
                 <div class="header-right">
-                  <div class="doc-title">Banquet Event Order</div>
-                  <div class="doc-id-badge">{{ .BEOID }}</div>
+                  <div class="doc-title">{{ .Data.DocumentTitle }}</div>
+                  <div class="doc-id-badge">{{ .Data.TransNo }}</div>
                 </div>
               </header>
             </td>
@@ -513,7 +514,7 @@
           <tr>
             <td style="padding: 6px 30px 0 30px">
               <div class="card card-event">
-                {{ if .IsDraft }}
+                {{ if .Data.IsDraft }}
                 <div class="ribbon-draft"><span>Draft</span></div>
                 {{ else }}
                 <div class="ribbon-draft ribbon-approved">
@@ -523,34 +524,34 @@
                 <div class="row-4col">
                   <div class="cell">
                     <div class="cell-label">Event Name</div>
-                    <div class="cell-value">{{ .EventName }}</div>
+                    <div class="cell-value">{{ .Data.EventName }}</div>
                   </div>
                   <div class="cell">
                     <div class="cell-label">Event Type</div>
-                    <div class="cell-value">{{ .EventType }}</div>
+                    <div class="cell-value">{{ .Data.EventType }}</div>
                   </div>
                   <div class="cell">
                     <div class="cell-label">Expected Pax</div>
-                    <div class="cell-value">{{ .ExpectedPax }}</div>
+                    <div class="cell-value">{{ .Data.ExpectedPax }}</div>
                   </div>
                   <div class="cell">
                     <div class="cell-label">Guaranteed Pax</div>
-                    <div class="cell-value">{{ .GuaranteedPax }}</div>
+                    <div class="cell-value">{{ .Data.GuaranteedPax }}</div>
                   </div>
                 </div>
                 <div class="row-4col">
                   <div class="cell">
                     <div class="cell-label">Company</div>
-                    <div class="cell-value">{{ .Company }}</div>
+                    <div class="cell-value">{{ .Data.Company }}</div>
                   </div>
                   <div class="cell">
                     <div class="cell-label">Contact</div>
                     <div class="cell-value">
-                      {{ if .Contacts }}
+                      {{ if .Data.Contacts }}
                       <div
                         style="display: flex; flex-direction: column; gap: 5px"
                       >
-                        {{ range .Contacts }}
+                        {{ range .Data.Contacts }}
                         <div style="display: flex; gap: 3px">
                           <span>{{ .Name }}</span>
                           <span>-</span>
@@ -564,16 +565,18 @@
                   <div class="cell">
                     <div class="cell-label">Status</div>
                     <div class="cell-value">
-                      <span class="badge-yellow">{{ .Status }}</span>
+                      <span class="badge-yellow">{{ .Data.Status }}</span>
                     </div>
                   </div>
                   <div class="cell">
                     <div class="cell-label">Start - End Date</div>
                     <div class="cell-value">
                       <div class="badge-stay">
-                        <span class="badge-stay-date">{{ .StayPeriod }}</span>
+                        <span class="badge-stay-date"
+                          >{{ .Data.StayPeriod }}</span
+                        >
                         <span class="badge-stay-duration"
-                          >{{ .StayDuration }}</span
+                          >{{ .Data.StayDuration }}</span
                         >
                       </div>
                     </div>
@@ -583,7 +586,7 @@
             </td>
           </tr>
 
-          {{ if .Products }}
+          {{ if .Data.Products }}
           <tr>
             <td style="padding: 0 30px 0 30px">
               <div class="product-table-wrapper">
@@ -599,7 +602,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {{ range .Products }}
+                    {{ range .Data.Products }}
                     <tr>
                       <td>{{ .BreakdownDate }}</td>
                       <td>{{ .Nights }}</td>
@@ -614,7 +617,7 @@
               </div>
             </td>
           </tr>
-          {{ end }} {{ if .Schedules }}
+          {{ end }} {{ if .Data.Schedules }}
           <tr>
             <td style="padding: 0 30px 0 30px">
               <div class="product-table-wrapper">
@@ -630,7 +633,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {{ range .Schedules }}
+                    {{ range .Data.Schedules }}
                     <tr>
                       <td>{{ .ScheduleDate }}</td>
                       <td>{{ .Time }}</td>
@@ -650,9 +653,9 @@
           <tr style="page-break-inside: auto; break-inside: auto">
             <td style="padding: 0 30px 0 30px">
               <div class="notes-and-signer-container">
-                {{ if .Notes }}
+                {{ if .Data.Notes }}
                 <div class="notes-container">
-                  {{ range .Notes }}
+                  {{ range .Data.Notes }}
                   <div class="note-card">
                     <div class="note-header">{{ .Title }}</div>
                     <div class="note-body">{{ .Content }}</div>
@@ -673,9 +676,9 @@
         </tfoot>
       </table>
 
-      {{ if .Signers }}
+      {{ if .Signature }}
       <div class="signer-container">
-        {{ range .Signers }}
+        {{ range .Signature }}
         <div class="signer-col">
           {{ if .SignerQR }}
           <div class="signer-qr" style="margin: auto 0">
@@ -689,7 +692,7 @@
             />
           </div>
           {{ else }}
-          <div class="signer-by">{{ .SignerBy }}</div>
+          <div class="signer-by">{{ .SignerAddInfo }}</div>
           <div class="signer-line">
             {{ if .SignerImage }}
             <img
@@ -709,11 +712,11 @@
 
       <div class="print-footer-wrapper">
         <div class="print-info">
-          Printed: {{ .PrintedBy }} on {{ .PrintedAt }}
+          Printed: {{ .Data.PrintedBy }} on {{ .Data.PrintedAt }}
         </div>
-        {{ if .PropertyNote }}
+        {{ if .Property.FooterNote }}
         <hr class="print-footer-separator" />
-        <div class="print-footer-note">{{ .PropertyNote }}</div>
+        <div class="print-footer-note">{{ .Property.FooterNote }}</div>
         {{ end }}
       </div>
     </div>

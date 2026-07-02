@@ -11,7 +11,7 @@ import (
 
 // SignerData mendefinisikan struktur data penandatangan
 type SignerData struct {
-	SignerBy       string
+	SignerAddInfo  string
 	SignerName     string
 	SignerPosition string
 	SignerQR       string
@@ -30,28 +30,32 @@ type ProductItem struct {
 	Gross   string
 }
 
-// ChargesData mendefinisikan struct yang sesuai dengan variabel di export_charges.html
-type ChargesData struct {
-	LogoURL        string
-	CompanyName    string
-	CompanyAddress string
-	CompanyEmail   string
-	CompanyPhone   string
-	HeaderNote     string
-	DocumentID     string
-	GuestName      string
-	RoomNumber     string
-	PackageName    string
-	Type           string
-	Qty            string
-	Price          string
-	User           string
-	Note           string
-	Amount         string
-	PrintedBy      string
-	PrintedAt      string
-	PropertyNote   string
-	Signers        []SignerData
+// PropertyData mendefinisikan informasi properti
+type PropertyData struct {
+	Name       string
+	LogoURL    string
+	Address    string
+	Email      string
+	Phone      string
+	HeaderNote string
+	FooterNote string
+}
+
+// ChargesContentData mendefinisikan konten utama dokumen Charges
+type ChargesContentData struct {
+	DocumentTitle string
+	TransNo       string
+	GuestName     string
+	RoomNumber    string
+	PackageName   string
+	Type          string
+	Qty           string
+	Price         string
+	User          string
+	Note          string
+	Amount        string
+	PrintedBy     string
+	PrintedAt     string
 
 	// Fields untuk list produk
 	Products     []ProductItem
@@ -60,6 +64,13 @@ type ChargesData struct {
 	TotalService string
 	TotalTax     string
 	TotalGross   string
+}
+
+// ChargesReportData mendefinisikan struct utama untuk laporan Charges
+type ChargesReportData struct {
+	Property  PropertyData
+	Data      ChargesContentData
+	Signature []SignerData
 }
 
 func main() {
@@ -91,38 +102,41 @@ func main() {
 	}
 
 	// 3. Definisikan struct data
-	data := ChargesData{
-		LogoURL:        "https://i.ibb.co.com/ZzT4SJn5/logo-bigdeals.png",
-		CompanyName:    "Property Developer Inc.",
-		CompanyAddress: "Jl. Kaliurang Km. 12 Dekat UII, Sleman, Yogyakarta",
-		CompanyEmail:   "support@propertydeveloper.com",
-		CompanyPhone:   "08123456789",
-		HeaderNote:     "Catatan Header: Harap konfirmasi pembayaran ke WhatsApp jika belum terverifikasi.",
-		DocumentID:     "Family Stay Package",
-		GuestName:      "Arlene McCoy",
-		RoomNumber:     "104",
-		PackageName:    "Standard Package",
-		Type:           "Charges",
-		Qty:            "3.00",
-		Price:          "120,000",
-		User:           "John Doe",
-		Note:           "Product charges for Room 104 stay period.",
-		Amount:         "120,000",
-		PrintedBy:      "Superadmin",
-		PrintedAt:      time.Now().Format("02 Jan 2006 15:04:05 MST"),
-		PropertyNote:   "Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah. Pembayaran yang sudah dilakukan tidak dapat dibatalkan atau dikembalikan dengan alasan apapun.",
-		Signers: []SignerData{
-			{SignerBy: "Prepared by", SignerName: "User", SignerPosition: "Staff In Charge"},
-			{SignerBy: "Acknowledge by", SignerName: "Windah Basudara", SignerPosition: "Asst. FOM", SignerImage: "https://asset.dsisistem.top/image_testing/0b824059c781489ab12759491f5163ec.webp"},
-			// {SignerBy: "Approved by", SignerName: "General Manager", SignerPosition: "General Manager", SignerQR: rawBase64},
+	data := ChargesReportData{
+		Property: PropertyData{
+			Name:       "Property Developer Inc.",
+			LogoURL:    "https://i.ibb.co.com/ZzT4SJn5/logo-bigdeals.png",
+			Address:    "Jl. Kaliurang Km. 12 Dekat UII, Sleman, Yogyakarta",
+			Email:      "support@propertydeveloper.com",
+			Phone:      "08123456789",
+			HeaderNote: "Catatan Header: Harap konfirmasi pembayaran ke WhatsApp jika belum terverifikasi.",
+			FooterNote: "Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah. Pembayaran yang sudah dilakukan tidak dapat dibatalkan atau dikembalikan dengan alasan apapun.",
 		},
-
-		Products:     products,
-		TotalPrice:   "120,000",
-		TotalNett:    "113,400.20",
-		TotalService: "7,522.20",
-		TotalTax:     "0.00",
-		TotalGross:   "120,000",
+		Data: ChargesContentData{
+			DocumentTitle: "Charges",
+			TransNo:       "Family Stay Package",
+			GuestName:     "Arlene McCoy",
+			RoomNumber:    "104",
+			PackageName:   "Standard Package",
+			Type:          "Charges",
+			Qty:           "3.00",
+			Price:         "120,000",
+			User:          "John Doe",
+			Note:          "Product charges for Room 104 stay period.",
+			Amount:        "120,000",
+			PrintedBy:     "Superadmin",
+			PrintedAt:     time.Now().Format("02 Jan 2006 15:04:05 MST"),
+			Products:      products,
+			TotalPrice:    "120,000",
+			TotalNett:     "113,400.20",
+			TotalService:  "7,522.20",
+			TotalTax:      "0.00",
+			TotalGross:    "120,000",
+		},
+		Signature: []SignerData{
+			{SignerAddInfo: "Prepared by", SignerName: "User", SignerPosition: "Staff In Charge"},
+			{SignerAddInfo: "Acknowledge by", SignerName: "Windah Basudara", SignerPosition: "Asst. FOM", SignerImage: "https://asset.dsisistem.top/image_testing/0b824059c781489ab12759491f5163ec.webp"},
+		},
 	}
 
 	// 4. Parse template HTML dengan mendaftarkan helper function qrCodeAttr

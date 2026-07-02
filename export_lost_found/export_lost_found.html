@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lost & Found</title>
+    <title>{{ .Data.DocumentTitle }}</title>
     <!-- Google Fonts Roboto -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -345,33 +345,33 @@
       <!--HEADER-->
       <header class="header">
         <div class="header-left">
-          {{ if .LogoURL }}
-          <div style="width: 51px; height: 51px; padding: 8px 10px">
+          {{ if .Property.LogoURL }}
+          <div style="width: 51px; height: 51px">
             <img
-              src="{{ .LogoURL }}"
+              src="{{ .Property.LogoURL }}"
               alt="Logo"
               style="width: 100%; height: 100%"
             />
           </div>
           {{ end }}
           <div class="company-info">
-            <div class="company-name">{{ .CompanyName }}</div>
+            <div class="company-name">{{ .Property.Name }}</div>
             <div>
               <div class="company-sub" style="font-weight: 500">
-                {{ .CompanyAddress }}
+                {{ .Property.Address }}
               </div>
               <div class="company-sub">
-                {{ .CompanyEmail }} &nbsp;•&nbsp; {{ .CompanyPhone }}
+                {{ .Property.Email }} &nbsp;•&nbsp; {{ .Property.Phone }}
               </div>
-              {{ if .HeaderNote }}
-              <div class="company-sub">{{ .HeaderNote }}</div>
+              {{ if .Property.HeaderNote }}
+              <div class="company-sub">{{ .Property.HeaderNote }}</div>
               {{ end }}
             </div>
           </div>
         </div>
         <div class="header-right">
-          <div class="doc-title">Lost & Found</div>
-          <div class="doc-id-badge">{{ .DocumentID }}</div>
+          <div class="doc-title">{{ .Data.DocumentTitle }}</div>
+          <div class="doc-id-badge">{{ .Data.TransNo }}</div>
         </div>
       </header>
       <!--BODY-->
@@ -380,46 +380,50 @@
           <div class="row-2col">
             <div class="cell">
               <div class="cell-label">Found Date</div>
-              <div class="cell-value">{{ .FoundDate }} {{ .FoundTime }}</div>
+              <div class="cell-value">
+                {{ .Data.FoundDate }} {{ .Data.FoundTime }}
+              </div>
             </div>
             <div class="cell">
               <div class="cell-label">Reported To</div>
-              <div class="cell-value">{{ .ReportedTo }}</div>
+              <div class="cell-value">{{ .Data.ReportedTo }}</div>
             </div>
           </div>
           <div class="row-2col">
             <div class="cell">
               <div class="cell-label">Found By</div>
-              <div class="cell-value">{{ .FoundBy }}</div>
+              <div class="cell-value">{{ .Data.FoundBy }}</div>
             </div>
             <div class="cell">
               <div class="cell-label">Status</div>
               <div class="cell-value">
-                <span class="badge-green">{{ .Status }}</span>
+                <span class="badge-green">{{ .Data.Status }}</span>
               </div>
             </div>
           </div>
           <div class="row-2col">
             <div class="cell">
               <div class="cell-label">Guest Name</div>
-              <div class="cell-value">{{ .RoomName }} - {{ .GuestName }}</div>
+              <div class="cell-value">
+                {{ .Data.RoomName }} - {{ .Data.GuestName }}
+              </div>
             </div>
             <div class="cell">
               <div class="cell-label">Location</div>
-              <div class="cell-value">{{ .FoundLocation }}</div>
+              <div class="cell-value">{{ .Data.FoundLocation }}</div>
             </div>
           </div>
           <div class="row-desc">
             <div class="desc-content">
               <div class="desc-label">Note</div>
-              <div class="desc-value">{{ .Note }}</div>
+              <div class="desc-value">{{ .Data.Note }}</div>
             </div>
-            {{ if .QRCode }}
+            {{ if .Data.QRCode }}
             <div class="qr-wrap">
               <img
                 {{
                 qrCodeAttr
-                .QRCode
+                .Data.QRCode
                 }}
                 alt="QR Code"
                 style="width: 100%; height: 100%; object-fit: contain"
@@ -432,24 +436,24 @@
           <div class="claimed-left">
             <div class="claimed-col">
               <div class="claimed-label">Claimed By</div>
-              <div class="claimed-value">{{ .ClaimedBy }}</div>
+              <div class="claimed-value">{{ .Data.ClaimedBy }}</div>
             </div>
             <div class="claimed-col">
               <div class="claimed-label">Claimed At</div>
-              <div class="claimed-value">{{ .ClaimedAt }}</div>
+              <div class="claimed-value">{{ .Data.ClaimedAt }}</div>
             </div>
           </div>
           <div class="claimed-right">
             <div class="claimed-col">
               <div class="claimed-label">Claim Note</div>
-              <div class="claimed-value">{{ .ClaimNote }}</div>
+              <div class="claimed-value">{{ .Data.ClaimNote }}</div>
             </div>
           </div>
         </div>
         <!-- Signer -->
-        {{ if .Signers }}
+        {{ if .Signature }}
         <div class="signer-container">
-          {{ range .Signers }}
+          {{ range .Signature }}
           <div class="signer-col">
             {{ if .SignerQR }}
             <div class="signer-qr" style="margin: auto 0">
@@ -463,7 +467,7 @@
               />
             </div>
             {{ else }}
-            <div class="signer-by">{{ .SignerBy }}</div>
+            <div class="signer-by">{{ .SignerAddInfo }}</div>
             <div class="signer-line">
               {{ if .SignerImage }}
               <img
@@ -483,11 +487,11 @@
         <!-- End Signer -->
         <div class="print-footer-wrapper">
           <div class="print-info">
-            Printed: {{ .PrintedBy }} on {{ .PrintedAt }}
+            Printed: {{ .Data.PrintedBy }} on {{ .Data.PrintedAt }}
           </div>
-          {{ if .PropertyNote }}
+          {{ if .Property.FooterNote }}
           <hr class="print-footer-separator" />
-          <div class="print-footer-note">{{ .PropertyNote }}</div>
+          <div class="print-footer-note">{{ .Property.FooterNote }}</div>
           {{ end }}
         </div>
       </main>
