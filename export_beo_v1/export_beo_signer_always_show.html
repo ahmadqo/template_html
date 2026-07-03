@@ -60,7 +60,7 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
-        /* padding-top: 2px; */
+        padding-top: 2px;
       }
       .company-name {
         font-size: 13.5px;
@@ -78,7 +78,7 @@
         flex-direction: column;
         align-items: flex-end;
         gap: 7px;
-        /* padding-top: 4px; */
+        padding-top: 4px;
       }
       .doc-title {
         font-size: 16px;
@@ -150,13 +150,6 @@
         height: 20px;
       }
 
-      .print-beo-footer-group {
-        order: 9999;
-        margin-top: auto;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-      }
       .print-footer-wrapper {
         margin-top: 8px;
         padding: 10px 30px 10px 30px;
@@ -166,21 +159,6 @@
         width: 100%;
         page-break-inside: avoid;
         break-inside: avoid;
-      }
-      .print-footer-info-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 4px;
-      }
-      .print-page-number {
-        font-size: 10px;
-        color: #8a8a91;
-        font-weight: 500;
-      }
-      .print-page-number::after {
-        content: "1 of 1";
       }
       .print-footer-spacer {
         display: none;
@@ -201,82 +179,48 @@
         flex-shrink: 0;
       } */
       @media print {
-        @page {
-          size: A4 portrait;
-          margin: 25mm 0 52mm 0;
-
-          @top-center {
-            content: element(headerGroup);
-            width: 100%;
-          }
-          @bottom-center {
-            content: element(footerGroup);
-            width: 100%;
-          }
-        }
-        body {
-          margin: 0;
-        }
-        .page {
-          width: 100%;
-          min-height: auto;
-          height: auto;
-          margin: 0;
-          overflow: visible;
-        }
         .print-layout-table {
-          width: 100%;
           height: auto;
-        }
-        .print-layout-table thead {
-          display: none !important;
+          width: 100%;
         }
         .body {
           height: auto;
         }
+        .print-layout-table thead {
+          display: table-header-group;
+        }
+        .print-layout-table tfoot {
+          display: table-footer-group;
+        }
         .print-footer-spacer {
-          display: none !important;
+          display: block;
+          height: 165px;
         }
-        .header {
-          position: running(headerGroup);
-          margin: 0;
-          padding: 10px 30px 12px 30px;
-          width: 100%;
+        .signer-container {
+          position: fixed;
+          bottom: 65px;
+          left: 0;
+          right: 0;
+          height: 100px;
+          padding: 0 30px;
           background: #ffffff;
+          box-sizing: border-box;
+          z-index: 9999;
+          margin-top: 0;
+          display: flex;
+          align-items: flex-end;
         }
-        .pagedjs_margin .header {
-          display: table !important;
-        }
-        .pagedjs_margin .header-left {
-          display: table-cell !important;
-          vertical-align: middle !important;
-          text-align: left !important;
-        }
-        .pagedjs_margin .header-left > div {
-          display: inline-block !important;
-          vertical-align: middle !important;
-        }
-        .pagedjs_margin .company-info {
-          margin-left: 6px !important;
-          text-align: left !important;
-          display: inline-flex !important;
-          flex-direction: column !important;
-        }
-        .pagedjs_margin .company-info .company-name {
-          margin-bottom: 5px;
-        }
-        .pagedjs_margin .header-right {
-          /* display: table-cell !important; */
-          /* vertical-align: middle !important; */
-          text-align: right !important;
-        }
-        .print-beo-footer-group {
-          position: running(footerGroup);
-          margin: 0;
-          width: 100%;
-        }
-        .print-page-number::after {
-          content: counter(page) " of " counter(pages);
+        .print-footer-wrapper {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 50px;
+          padding: 10px 30px 10px 30px;
+          background: #ffffff;
+          box-sizing: border-box;
+          z-index: 9999;
+          margin-top: 0;
         }
       }
       .print-info {
@@ -360,14 +304,23 @@
       @media print {
         .notes-container {
           column-fill: auto !important;
-          max-height: none !important;
-          height: auto !important;
+          max-height: 480px; /* Default A4 Portrait */
+        }
+        @media (max-height: 1080px) {
+          .notes-container {
+            max-height: 400px; /* Letter Portrait */
+          }
+        }
+        @media (max-height: 850px) {
+          .notes-container {
+            max-height: 145px; /* A5 Portrait / A4 Landscape / Letter Landscape */
+          }
         }
         body {
           margin: 0;
         }
         .page {
-          width: 100%;
+          width: 210mm;
           min-height: auto;
           height: auto;
           margin: 0;
@@ -516,97 +469,49 @@
         min-height: 12px;
       }
     </style>
-    <!-- Paged.js polyfill for printable document pagination -->
-    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
   </head>
   <body>
     <div class="page">
-      <div class="print-beo-footer-group">
-        {{ if .Signature }}
-        <div class="signer-container">
-          {{ range .Signature }}
-          <div class="signer-col">
-            {{ if .SignerQR }}
-            <div class="signer-qr" style="margin: auto 0">
-              <img
-                {{
-                qrCodeAttr
-                .SignerQR
-                }}
-                alt="Digital Signature QR"
-                style="width: 100%; height: 100%; object-fit: contain"
-              />
-            </div>
-            {{ else }}
-            <div class="signer-by">{{ .SignerAddInfo }}</div>
-            <div class="signer-line">
-              {{ if .SignerImage }}
-              <img
-                src="{{ .SignerImage }}"
-                alt="Signature"
-                style="max-height: 48px; max-width: 100%; object-fit: contain"
-              />
-              {{ end }}
-            </div>
-            <div class="signer-name">
-              {{ if .SignerName }}{{ .SignerName }}{{ else }}&nbsp;{{ end }}
-            </div>
-            <div class="signer-position">
-              {{ if .SignerPosition }}{{ .SignerPosition }}{{ else }}&nbsp;{{
-              end }}
-            </div>
-            {{ end }}
-          </div>
-          {{ end }}
-        </div>
-        {{ end }}
-
-        <div class="print-footer-wrapper">
-          <div class="print-footer-info-row">
-            <div class="print-info">
-              Printed: {{ .Data.PrintedBy }} on {{ .Data.PrintedAt }}
-            </div>
-            <div class="print-page-number">Page&nbsp;</div>
-          </div>
-          {{ if .Property.FooterNote }}
-          <hr class="print-footer-separator" />
-          <div class="print-footer-note">{{ .Property.FooterNote }}</div>
-          {{ end }}
-        </div>
-      </div>
-      <header class="header">
-        <div class="header-left">
-          {{ if .Property.LogoURL }}
-          <div style="width: 51px">
-            <img
-              src="{{ .Property.LogoURL }}"
-              alt="Logo"
-              style="width: 100%; height: 100; border-radius: 6px"
-            />
-          </div>
-          {{ end }}
-
-          <div class="company-info">
-            <div class="company-name">{{ .Property.Name }}</div>
-            <div>
-              <div class="company-sub" style="font-weight: 500">
-                {{ .Property.Address }}
-              </div>
-              <div class="company-sub">
-                {{ .Property.Email }} &nbsp;•&nbsp; {{ .Property.Phone }}
-              </div>
-              {{ if .Property.HeaderNote }}
-              <div class="company-sub">{{ .Property.HeaderNote }}</div>
-              {{ end }}
-            </div>
-          </div>
-        </div>
-        <div class="header-right">
-          <div class="doc-title">{{ .Data.DocumentTitle }}</div>
-          <div class="doc-id-badge">{{ .Data.TransNo }}</div>
-        </div>
-      </header>
       <table class="print-layout-table">
+        <thead>
+          <tr>
+            <td>
+              <header class="header">
+                <div class="header-left">
+                  {{ if .Property.LogoURL }}
+                  <div style="width: 51px">
+                    <img
+                      src="{{ .Property.LogoURL }}"
+                      alt="Logo"
+                      style="width: 100%; height: 100; border-radius: 6px"
+                    />
+                  </div>
+                  {{ end }}
+
+                  <div class="company-info">
+                    <div class="company-name">{{ .Property.Name }}</div>
+                    <div>
+                      <div class="company-sub" style="font-weight: 500">
+                        {{ .Property.Address }}
+                      </div>
+                      <div class="company-sub">
+                        {{ .Property.Email }} &nbsp;•&nbsp; {{ .Property.Phone
+                        }}
+                      </div>
+                      {{ if .Property.HeaderNote }}
+                      <div class="company-sub">{{ .Property.HeaderNote }}</div>
+                      {{ end }}
+                    </div>
+                  </div>
+                </div>
+                <div class="header-right">
+                  <div class="doc-title">{{ .Data.DocumentTitle }}</div>
+                  <div class="doc-id-badge">{{ .Data.TransNo }}</div>
+                </div>
+              </header>
+            </td>
+          </tr>
+        </thead>
         <tbody>
           <tr>
             <td style="padding: 6px 30px 0 30px">
@@ -772,6 +677,50 @@
           </tr>
         </tfoot>
       </table>
+
+      {{ if .Signature }}
+      <div class="signer-container">
+        {{ range .Signature }}
+        <div class="signer-col">
+          {{ if .SignerQR }}
+          <div class="signer-qr" style="margin: auto 0">
+            <img
+              {{
+              qrCodeAttr
+              .SignerQR
+              }}
+              alt="Digital Signature QR"
+              style="width: 100%; height: 100%; object-fit: contain"
+            />
+          </div>
+          {{ else }}
+          <div class="signer-by">{{ .SignerAddInfo }}</div>
+          <div class="signer-line">
+            {{ if .SignerImage }}
+            <img
+              src="{{ .SignerImage }}"
+              alt="Signature"
+              style="max-height: 48px; max-width: 100%; object-fit: contain"
+            />
+            {{ end }}
+          </div>
+          <div class="signer-name">{{ if .SignerName }}{{ .SignerName }}{{ else }}&nbsp;{{ end }}</div>
+          <div class="signer-position">{{ if .SignerPosition }}{{ .SignerPosition }}{{ else }}&nbsp;{{ end }}</div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+
+      <div class="print-footer-wrapper">
+        <div class="print-info">
+          Printed: {{ .Data.PrintedBy }} on {{ .Data.PrintedAt }}
+        </div>
+        {{ if .Property.FooterNote }}
+        <hr class="print-footer-separator" />
+        <div class="print-footer-note">{{ .Property.FooterNote }}</div>
+        {{ end }}
+      </div>
     </div>
   </body>
 </html>

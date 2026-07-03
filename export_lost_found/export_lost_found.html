@@ -83,7 +83,6 @@
         flex-direction: column;
         align-items: flex-end;
         gap: 7px;
-        padding-top: 4px;
       }
       .doc-title {
         font-size: 16px;
@@ -527,15 +526,19 @@
               />
               {{ end }}
             </div>
-            <div class="signer-name">{{ if .SignerName }}{{ .SignerName }}{{ else }}&nbsp;{{ end }}</div>
-            <div class="signer-position">{{ if .SignerPosition }}{{ .SignerPosition }}{{ else }}&nbsp;{{ end }}</div>
+            <div class="signer-name">
+              {{ if .SignerName }}{{ .SignerName }}{{ else }}&nbsp;{{ end }}
+            </div>
+            <div class="signer-position">
+              {{ if .SignerPosition }}{{ .SignerPosition }}{{ else }}&nbsp;{{
+              end }}
+            </div>
             {{ end }}
           </div>
           {{ end }}
         </div>
         {{ end }}
         <!-- End Signer -->
-        
       </main>
     </div>
   </body>
