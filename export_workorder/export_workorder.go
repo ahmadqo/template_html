@@ -53,7 +53,7 @@ type WorkOrderContentData struct {
 	User          string
 	Note          string
 	QRCode        string
-	Products      []WorkOrderProgress
+	Progress      []WorkOrderProgress
 	PrintedBy     string
 	PrintedAt     string
 }
@@ -97,7 +97,7 @@ func main() {
 			QRCode:        rawBase64,
 			PrintedBy:     "Superadmin",
 			PrintedAt:     time.Now().Format("02 Jan 2006 15:04:05 MST"),
-			Products: []WorkOrderProgress{
+			Progress: []WorkOrderProgress{
 				{
 					Date:           "18 Jun 2026",
 					Progress:       "Work Order created and assigned to maintenance team",

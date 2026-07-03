@@ -202,19 +202,35 @@
         color: #b45309;
       }
       .print-footer-wrapper {
+        order: 9999;
         margin-top: auto;
         padding-top: 24px;
+        padding-left: 30px;
+        padding-right: 30px;
         display: flex;
         flex-direction: column;
-        gap: 8px;
         width: 100%;
         page-break-inside: avoid;
+      }
+      .print-footer-info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 4px;
       }
       .print-info {
         font-size: 12px;
         color: #8a8a91;
         font-weight: 500;
         text-align: left;
+      }
+      .print-page-number {
+        font-size: 12px;
+        color: #8a8a91;
+      }
+      .print-page-number::after {
+        content: "1 of 1";
       }
       .print-footer-separator {
         border: none;
@@ -226,6 +242,7 @@
         color: #111827;
         text-align: justify;
         line-height: 1.4;
+        margin-top: 4px;
       }
       .card-total {
         background: #fff6eb;
@@ -239,15 +256,32 @@
         height: 63px;
       }
       @media print {
+        @page {
+          size: A4 portrait;
+          margin: 0 0 25mm 0;
+
+          @bottom-center {
+            content: element(footer);
+            width: 100%;
+          }
+        }
         body {
           margin: 0;
         }
         .page {
-          width: 210mm;
-          height: 297mm;
+          width: 100%;
+          min-height: auto;
+          height: auto;
           margin: 0;
-          page-break-after: always;
-          overflow: hidden;
+          overflow: visible;
+        }
+        .print-footer-wrapper {
+          position: running(footer);
+          margin: 0;
+          width: 100%;
+        }
+        .print-page-number::after {
+          content: counter(page) " of " counter(pages);
         }
       }
        
@@ -308,9 +342,23 @@
         min-height: 14px;
       }
     </style>
+    
+    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
   </head>
   <body>
     <div class="page">
+      <div class="print-footer-wrapper">
+        <div class="print-footer-info-row">
+          <div class="print-info">
+            Printed: Superadmin on 03 Jul 2026 14:56:11 WIB
+          </div>
+          <div class="print-page-number">Page&nbsp;</div>
+        </div>
+        
+        <hr class="print-footer-separator" />
+        <div class="print-footer-note">Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah. Pembayaran yang sudah dilakukan tidak dapat dibatalkan atau dikembalikan dengan alasan apapun.</div>
+        
+      </div>
       
       <header class="header">
         <div class="header-left">
@@ -442,15 +490,7 @@
         </div>
         
         
-        <div class="print-footer-wrapper">
-          <div class="print-info">
-            Printed: Superadmin on 02 Jul 2026 14:53:13 WIB
-          </div>
-          
-          <hr class="print-footer-separator" />
-          <div class="print-footer-note">Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah. Pembayaran yang sudah dilakukan tidak dapat dibatalkan atau dikembalikan dengan alasan apapun.</div>
-          
-        </div>
+        
       </main>
     </div>
   </body>

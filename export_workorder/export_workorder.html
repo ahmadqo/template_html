@@ -163,6 +163,42 @@
         color: #008234;
         height: 20px;
       }
+      .badge-red {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 12px;
+        border: 1px solid #ff4d4f;
+        border-radius: 50px;
+        background: #fff1f0;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #dc2626;
+        height: 20px;
+      }
+      .badge-gray {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 12px;
+        border: 1px solid #44444c;
+        border-radius: 50px;
+        background: #d8d8da;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #44444c;
+        height: 20px;
+      }
+      .badge-yellow {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 12px;
+        border: 1px solid #f6a400;
+        border-radius: 50px;
+        background: #fff7e6;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #b7791f;
+        height: 20px;
+      }
       .sep-dot {
         margin: 0 5px;
       }
@@ -215,19 +251,34 @@
         color: #b45309;
       }
       .print-footer-wrapper {
+        order: 9999;
         margin-top: auto;
         padding-top: 24px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+        padding-left: 30px;
+        padding-right: 30px;
         width: 100%;
         page-break-inside: avoid;
+      }
+      .print-footer-info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 4px;
       }
       .print-info {
         font-size: 12px;
         color: #8a8a91;
         font-weight: 500;
         text-align: left;
+      }
+      .print-page-number {
+        font-size: 12px;
+        color: #8a8a91;
+        /* font-weight: 500; */
+      }
+      .print-page-number::after {
+        content: "1 of 1";
       }
       .print-footer-separator {
         border: none;
@@ -239,42 +290,43 @@
         color: #111827;
         text-align: justify;
         line-height: 1.4;
+        margin-top: 4px;
       }
 
-      .product-table-wrapper {
+      .progress-table-wrapper {
         border: 1px solid #f3e5ff;
         border-radius: 10px;
         overflow: hidden;
         margin-top: 10px;
         background: #ffffff;
       }
-      .product-table {
+      .progress-table {
         width: 100%;
         border-collapse: collapse;
         font-family: "Roboto", sans-serif;
         color: #111111;
       }
-      .product-table th {
+      .progress-table th {
         background-color: #faf5ff;
         color: #111111;
         font-weight: 600;
         text-align: left;
-        padding: 9px 11px;
+        padding: 5px 11px;
         font-size: 12px;
       }
-      .product-table td {
-        padding: 9px 11px;
+      .progress-table td {
+        padding: 4px 11px;
         border-bottom: 1px solid #ececec;
         font-size: 12px;
         color: #111111;
       }
-      .product-table tr:last-child td {
+      .progress-table tr:last-child td {
         border-bottom: none;
       }
-      .product-table .text-right {
+      .progress-table .text-right {
         text-align: right;
       }
-      .product-table tr.total-row td {
+      .progress-table tr.total-row td {
         background-color: #faf5ff;
         font-weight: 600;
         border-top: 1px solid #f3e5ff;
@@ -282,15 +334,32 @@
       }
 
       @media print {
+        @page {
+          size: A4 portrait;
+          margin: 0 0 25mm 0;
+
+          @bottom-center {
+            content: element(footer);
+            width: 100%;
+          }
+        }
         body {
           margin: 0;
         }
         .page {
-          width: 210mm;
-          height: 297mm;
+          width: 100%;
+          min-height: auto;
+          height: auto;
           margin: 0;
-          page-break-after: always;
-          overflow: hidden;
+          overflow: visible;
+        }
+        .print-footer-wrapper {
+          position: running(footer);
+          margin: 0;
+          width: 100%;
+        }
+        .print-page-number::after {
+          content: counter(page) " of " counter(pages);
         }
       }
 
@@ -352,9 +421,23 @@
         min-height: 14px;
       }
     </style>
+    <!-- Paged.js polyfill for printable document pagination -->
+    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
   </head>
   <body>
     <div class="page">
+      <div class="print-footer-wrapper">
+        <div class="print-footer-info-row">
+          <div class="print-info">
+            Printed: {{ .Data.PrintedBy }} on {{ .Data.PrintedAt }}
+          </div>
+          <div class="print-page-number">Page&nbsp;</div>
+        </div>
+        {{ if .Property.FooterNote }}
+        <hr class="print-footer-separator" />
+        <div class="print-footer-note">{{ .Property.FooterNote }}</div>
+        {{ end }}
+      </div>
       <!--HEADER-->
       <header class="header">
         <div class="header-left">
@@ -413,13 +496,29 @@
                 <div>
                   <div class="cell-label">Urgency</div>
                   <div class="cell-value">
+                    {{ $urgency := .Data.Urgency }} {{ if eq $urgency "Low" }}
                     <span class="badge-green">{{ .Data.Urgency }}</span>
+                    {{ else if eq $urgency "Medium" }}
+                    <span class="badge-yellow">{{ .Data.Urgency }}</span>
+                    {{ else if eq $urgency "High" }}
+                    <span class="badge-red">{{ .Data.Urgency }}</span>
+                    {{ end }}
                   </div>
                 </div>
                 <div>
                   <div class="cell-label">Status</div>
                   <div class="cell-value">
+                    {{ $status := .Data.Status }} {{ if eq $status "New" }}
+                    <span class="badge-green">{{ .Data.Status }}</span>
+                    {{ else if eq $status "Pending" }}
+                    <span class="badge-yellow">{{ .Data.Status }}</span>
+                    {{ else if eq $status "On Progress" }}
                     <span class="badge-blue">{{ .Data.Status }}</span>
+                    {{ else if eq $status "Cancelled" }}
+                    <span class="badge-red">{{ .Data.Status }}</span>
+                    {{ else if eq $status "Closed" }}
+                    <span class="badge-gray">{{ .Data.Status }}</span>
+                    {{ end }}
                   </div>
                 </div>
               </div>
@@ -470,9 +569,9 @@
             {{ end }}
           </div>
         </div>
-        <!-- Product table -->
-        <div class="product-table-wrapper">
-          <table class="product-table">
+        <!-- progress table -->
+        <div class="progress-table-wrapper">
+          <table class="progress-table">
             <thead>
               <tr>
                 <th style="width: 100px">Date</th>
@@ -484,17 +583,22 @@
               </tr>
             </thead>
             <tbody>
-              {{ range .Data.Products }}
+              {{ range .Data.Progress }}
               <tr>
                 <td>{{ .Date }}</td>
                 <td>{{ .Progress }}</td>
                 <td style="text-align: center">{{ .EstimationDate }}</td>
                 <td style="text-align: center">
-                  {{ if or (eq .Status "In Progress") (eq .Status "On Progress")
-                  }}
-                  <span class="badge-blue">{{ .Status }}</span>
-                  {{ else }}
+                  {{ $status := .Status }} {{ if eq $status "New" }}
                   <span class="badge-green">{{ .Status }}</span>
+                  {{ else if eq $status "Pending" }}
+                  <span class="badge-yellow">{{ .Status }}</span>
+                  {{ else if eq $status "On Progress" }}
+                  <span class="badge-blue">{{ .Status }}</span>
+                  {{ else if eq $status "Cancelled" }}
+                  <span class="badge-red">{{ .Status }}</span>
+                  {{ else if eq $status "Closed" }}
+                  <span class="badge-gray">{{ .Status }}</span>
                   {{ end }}
                 </td>
               </tr>
@@ -542,15 +646,6 @@
         </div>
         {{ end }}
         <!-- End Signer -->
-        <div class="print-footer-wrapper">
-          <div class="print-info">
-            Printed: {{ .Data.PrintedBy }} on {{ .Data.PrintedAt }}
-          </div>
-          {{ if .Property.FooterNote }}
-          <hr class="print-footer-separator" />
-          <div class="print-footer-note">{{ .Property.FooterNote }}</div>
-          {{ end }}
-        </div>
       </main>
     </div>
   </body>

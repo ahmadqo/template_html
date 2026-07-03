@@ -17,6 +17,7 @@
         padding: 0;
         box-sizing: border-box;
       }
+
       @page {
         size: A4 portrait;
         margin: 0;
@@ -138,6 +139,18 @@
         color: #000000;
         font-weight: 400;
       }
+      .badge-blue {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 12px;
+        border: 1px solid #2b7efe;
+        border-radius: 50px;
+        background: #eff6ff;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #1547e6;
+        height: 20px;
+      }
       .badge-green {
         display: inline-flex;
         align-items: center;
@@ -148,6 +161,42 @@
         font-size: 12.5px;
         font-weight: 500;
         color: #008234;
+        height: 20px;
+      }
+      .badge-red {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 12px;
+        border: 1px solid #ff4d4f;
+        border-radius: 50px;
+        background: #fff1f0;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #dc2626;
+        height: 20px;
+      }
+      .badge-gray {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 12px;
+        border: 1px solid #44444c;
+        border-radius: 50px;
+        background: #d8d8da;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #44444c;
+        height: 20px;
+      }
+      .badge-yellow {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 12px;
+        border: 1px solid #f6a400;
+        border-radius: 50px;
+        background: #fff7e6;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #b7791f;
         height: 20px;
       }
       .sep-dot {
@@ -202,13 +251,11 @@
         color: #b45309;
       }
       .print-footer-wrapper {
-        order: 9999;
         margin-top: auto;
         padding-top: 24px;
-        padding-left: 30px;
-        padding-right: 30px;
         display: flex;
         flex-direction: column;
+        gap: 8px;
         width: 100%;
         page-break-inside: avoid;
       }
@@ -217,7 +264,6 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        margin-bottom: 4px;
       }
       .print-info {
         font-size: 12px;
@@ -228,9 +274,7 @@
       .print-page-number {
         font-size: 12px;
         color: #8a8a91;
-      }
-      .print-page-number::after {
-        content: "1 of 1";
+        font-weight: 500;
       }
       .print-footer-separator {
         border: none;
@@ -242,48 +286,61 @@
         color: #111827;
         text-align: justify;
         line-height: 1.4;
-        margin-top: 4px;
       }
-      .card-total {
-        background: #fff6eb;
-        border: 1px solid #ffecd7;
-        border-radius: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0px 20px;
-        margin-top: 11px;
-        height: 63px;
-      }
-      @media print {
-        @page {
-          size: A4 portrait;
-          margin: 0 0 25mm 0;
 
-          @bottom-center {
-            content: element(footer);
-            width: 100%;
-          }
-        }
+      .progress-table-wrapper {
+        border: 1px solid #f3e5ff;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 10px;
+        background: #ffffff;
+      }
+      .progress-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Roboto", sans-serif;
+        color: #111111;
+      }
+      .progress-table th {
+        background-color: #faf5ff;
+        color: #111111;
+        font-weight: 600;
+        text-align: left;
+        padding: 9px 11px;
+        font-size: 12px;
+      }
+      .progress-table td {
+        padding: 9px 11px;
+        border-bottom: 1px solid #ececec;
+        font-size: 12px;
+        color: #111111;
+      }
+      .progress-table tr:last-child td {
+        border-bottom: none;
+      }
+      .progress-table .text-right {
+        text-align: right;
+      }
+      .progress-table tr.total-row td {
+        background-color: #faf5ff;
+        font-weight: 600;
+        border-top: 1px solid #f3e5ff;
+        color: #111111;
+      }
+
+      @media print {
         body {
           margin: 0;
         }
         .page {
-          width: 100%;
-          min-height: auto;
-          height: auto;
+          width: 210mm;
+          height: 297mm;
           margin: 0;
-          overflow: visible;
-        }
-        .print-footer-wrapper {
-          position: running(footer);
-          margin: 0;
-          width: 100%;
-        }
-        .print-page-number::after {
-          content: counter(page) " of " counter(pages);
+          page-break-after: always;
+          overflow: hidden;
         }
       }
+
       /* Dynamic Signer Styling */
       .signer-container {
         display: flex;
@@ -342,23 +399,9 @@
         min-height: 14px;
       }
     </style>
-    <!-- Paged.js polyfill for printable document pagination -->
-    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
   </head>
   <body>
     <div class="page">
-      <div class="print-footer-wrapper">
-        <div class="print-footer-info-row">
-          <div class="print-info">
-            Printed: {{ .Data.PrintedBy }} on {{ .Data.PrintedAt }}
-          </div>
-          <div class="print-page-number">Page&nbsp;</div>
-        </div>
-        {{ if .Property.FooterNote }}
-        <hr class="print-footer-separator" />
-        <div class="print-footer-note">{{ .Property.FooterNote }}</div>
-        {{ end }}
-      </div>
       <!--HEADER-->
       <header class="header">
         <div class="header-left">
@@ -396,22 +439,74 @@
         <div class="card">
           <div class="row-2col">
             <div class="cell">
-              <div class="cell-label">Guest Name</div>
-              <div class="cell-value">{{ .Data.GuestName }}</div>
+              <div class="cell-label">Source</div>
+              <div class="cell-value">{{ .Data.Source }}</div>
             </div>
             <div class="cell">
-              <div class="cell-label">Room</div>
-              <div class="cell-value">
-                <span class="badge-green">{{ .Data.RoomNumber }}</span>
-              </div>
+              <div class="cell-label">Source Name</div>
+              <div class="cell-value">{{ .Data.SourceName }}</div>
             </div>
           </div>
           <div class="row-2col">
             <div class="cell">
-              <div class="cell-label">Payment Type &amp; Method</div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  gap: 10px;
+                "
+              >
+                <div>
+                  <div class="cell-label">Urgency</div>
+                  <div class="cell-value">
+                    {{ $urgency := .Data.Urgency }} {{ if eq $urgency "Low" }}
+                    <span class="badge-green">{{ .Data.Urgency }}</span>
+                    {{ else if eq $urgency "Medium" }}
+                    <span class="badge-yellow">{{ .Data.Urgency }}</span>
+                    {{ else if eq $urgency "High" }}
+                    <span class="badge-red">{{ .Data.Urgency }}</span>
+                    {{ end }}
+                  </div>
+                </div>
+                <div>
+                  <div class="cell-label">Status</div>
+                  <div class="cell-value">
+                    {{ $status := .Data.Status }} {{ if eq $status "New" }}
+                    <span class="badge-green">{{ .Data.Status }}</span>
+                    {{ else if eq $status "Pending" }}
+                    <span class="badge-yellow">{{ .Data.Status }}</span>
+                    {{ else if eq $status "On Progress" }}
+                    <span class="badge-blue">{{ .Data.Status }}</span>
+                    {{ else if eq $status "Cancelled" }}
+                    <span class="badge-red">{{ .Data.Status }}</span>
+                    {{ else if eq $status "Closed" }}
+                    <span class="badge-gray">{{ .Data.Status }}</span>
+                    {{ end }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cell">
+              <div class="cell-label">Location</div>
+              <div class="cell-value">{{ .Data.Location }}</div>
+            </div>
+          </div>
+          <div class="row-2col">
+            <div class="cell">
+              <div class="cell-label">Object</div>
+              <div class="cell-value">{{ .Data.Object }}</div>
+            </div>
+            <div class="cell">
+              <div class="cell-label">PIC</div>
+              <div class="cell-value">{{ .Data.PIC }}</div>
+            </div>
+          </div>
+          <div class="row-2col">
+            <div class="cell">
+              <div class="cell-label">Room</div>
               <div class="cell-value">
-                {{ .Data.PaymentType }}<span class="sep-dot">•</span>{{
-                .Data.PaymentMethod }}
+                {{ .Data.RoomName }} - {{ .Data.GuestName }}
               </div>
             </div>
             <div class="cell">
@@ -421,9 +516,7 @@
           </div>
           <div class="row-desc">
             <div class="desc-content">
-              <div class="desc-label">Description</div>
-              <div class="desc-value">{{ .Data.Description }}</div>
-              <div class="desc-label mt">Note</div>
+              <div class="desc-label">Note</div>
               <div class="desc-value">{{ .Data.Note }}</div>
             </div>
             {{ if .Data.QRCode }}
@@ -440,13 +533,42 @@
             {{ end }}
           </div>
         </div>
-        <div class="card-total">
-          <div style="font-size: 14px; font-weight: 500; color: #996122">
-            Payment Amount
-          </div>
-          <div style="font-size: 14px; font-weight: 600; color: #996122">
-            {{ .Data.Amount }}
-          </div>
+        <!-- progress table -->
+        <div class="progress-table-wrapper">
+          <table class="progress-table">
+            <thead>
+              <tr>
+                <th style="width: 100px">Date</th>
+                <th>Progress</th>
+                <th style="width: 150px; text-align: center">
+                  Estimation Date
+                </th>
+                <th style="width: 130px; text-align: center">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range .Data.Progress }}
+              <tr>
+                <td>{{ .Date }}</td>
+                <td>{{ .Progress }}</td>
+                <td style="text-align: center">{{ .EstimationDate }}</td>
+                <td style="text-align: center">
+                  {{ $status := .Status }} {{ if eq $status "New" }}
+                  <span class="badge-green">{{ .Status }}</span>
+                  {{ else if eq $status "Pending" }}
+                  <span class="badge-yellow">{{ .Status }}</span>
+                  {{ else if eq $status "On Progress" }}
+                  <span class="badge-blue">{{ .Status }}</span>
+                  {{ else if eq $status "Cancelled" }}
+                  <span class="badge-red">{{ .Status }}</span>
+                  {{ else if eq $status "Closed" }}
+                  <span class="badge-gray">{{ .Status }}</span>
+                  {{ end }}
+                </td>
+              </tr>
+              {{ end }}
+            </tbody>
+          </table>
         </div>
         <!-- Signer -->
         {{ if .Signature }}
@@ -475,15 +597,31 @@
               />
               {{ end }}
             </div>
-            <div class="signer-name">{{ if .SignerName }}{{ .SignerName }}{{ else }}&nbsp;{{ end }}</div>
-            <div class="signer-position">{{ if .SignerPosition }}{{ .SignerPosition }}{{ else }}&nbsp;{{ end }}</div>
+            <div class="signer-name">
+              {{ if .SignerName }}{{ .SignerName }}{{ else }}&nbsp;{{ end }}
+            </div>
+            <div class="signer-position">
+              {{ if .SignerPosition }}{{ .SignerPosition }}{{ else }}&nbsp;{{
+              end }}
+            </div>
             {{ end }}
           </div>
           {{ end }}
         </div>
         {{ end }}
         <!-- End Signer -->
-        
+        <div class="print-footer-wrapper">
+          <div class="print-footer-info-row">
+            <div class="print-info">
+              Printed: {{ .Data.PrintedBy }} on {{ .Data.PrintedAt }}
+            </div>
+            <div class="print-page-number">Page 1 of 1</div>
+          </div>
+          {{ if .Property.FooterNote }}
+          <hr class="print-footer-separator" />
+          <div class="print-footer-note">{{ .Property.FooterNote }}</div>
+          {{ end }}
+        </div>
       </main>
     </div>
   </body>
