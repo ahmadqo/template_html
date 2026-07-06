@@ -421,8 +421,9 @@
             <div class="cell">
               <div class="cell-label">Payment Type &amp; Method</div>
               <div class="cell-value">
-                {{ .Data.PaymentType }}<span class="sep-dot">•</span>{{
-                .Data.PaymentMethod }}
+                {{ .Data.PaymentType }} {{ if .Data.PaymentMethod }}
+                <span class="sep-dot">•</span>
+                {{ .Data.PaymentMethod }} {{ end }}
               </div>
             </div>
           </div>

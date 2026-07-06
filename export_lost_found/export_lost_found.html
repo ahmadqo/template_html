@@ -481,6 +481,7 @@
             {{ end }}
           </div>
         </div>
+        {{ if .Data.ClaimedAt }}
         <div class="card-claimed">
           <div class="claimed-left">
             <div class="claimed-col">
@@ -499,6 +500,7 @@
             </div>
           </div>
         </div>
+        {{ end }}
         <!-- Signer -->
         {{ if .Signature }}
         <div class="signer-container">
