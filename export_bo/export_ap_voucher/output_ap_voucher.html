@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Account Receivable Invoice</title>
+    <title>Account Payable Voucher</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -49,7 +49,7 @@
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        padding: 6px 30px 6px 30px;
+        padding: 12px 30px 12px 30px;
       }
       .header-left {
         display: flex;
@@ -59,7 +59,7 @@
       .company-info {
         display: flex;
         flex-direction: column;
-        gap: 3px;
+        gap: 5px;
         padding-top: 2px;
       }
       .company-name {
@@ -77,7 +77,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        gap: 4px;
+        gap: 7px;
       }
       .doc-title {
         font-size: 16px;
@@ -307,7 +307,7 @@
         font-size: 12px;
         font-weight: 600;
         color: #000000;
-        text-align: left;
+        text-align: right;
       }
       .balance-value {
         font-size: 12px;
@@ -315,17 +315,11 @@
         color: #000000;
         text-align: right;
       }
-      @media screen {
-         
-        .pagedjs_page:not(.pagedjs_first_page) .pagedjs_margin-top {
-          display: none !important;
-        }
-      }
 
       @media print {
         @page {
           size: A4 portrait;
-          margin: 26mm 0 25mm 0;
+          margin: 35mm 0 25mm 0;
 
           @top-center {
             content: element(header);
@@ -349,7 +343,43 @@
         }
         .header {
           position: running(header);
-          text-align: left;
+          margin: 0;
+          width: 100%;
+          display: block;
+          clear: both;
+        }
+        .header-left {
+          float: left;
+          display: block;
+        }
+        .header-left > div {
+          display: inline-block;
+          vertical-align: top;
+        }
+        .header-left > div:first-child {
+          margin-right: 10px;
+        }
+        .company-info {
+          display: block;
+        }
+        .company-info > div {
+          margin-top: 5px;
+        }
+        .header-right {
+          float: right;
+          display: block;
+          text-align: right;
+        }
+        .header-right > div {
+          margin-bottom: 7px;
+        }
+        .header-right > div:last-child {
+          margin-bottom: 0;
+        }
+        .doc-id-badge {
+          display: inline-block;
+          line-height: 18px;
+          text-align: center;
         }
         .body {
           display: block;
@@ -432,9 +462,6 @@
         white-space: nowrap;
         min-height: 14px;
       }
-      .pagedjs_page .pagedjs_margin-top-center > .pagedjs_margin-content > * {
-        display: flex !important;
-      }
     </style>
     
     <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
@@ -444,7 +471,7 @@
       <div class="print-footer-wrapper">
         <div class="print-footer-info-row">
           <div class="print-info">
-            Printed: Superadmin on 07 Jul 2026 17:03:40 WIB
+            Printed: Superadmin on 07 Jul 2026 15:12:30 WIB
           </div>
           <div class="print-page-number">Page&nbsp;</div>
         </div>
@@ -457,11 +484,11 @@
       <header class="header">
         <div class="header-left">
           
-          <div style="width: 42px">
+          <div style="width: 51px">
             <img
               src="https://i.ibb.co.com/ZzT4SJn5/logo-bigdeals.png"
               alt="Logo"
-              style="width: 100%; height: auto; border-radius: 6px"
+              style="width: 100%; height: 100; border-radius: 6px"
             />
           </div>
           
@@ -481,8 +508,8 @@
           </div>
         </div>
         <div class="header-right">
-          <div class="doc-title">Account Receivable Invoice</div>
-          <div class="doc-id-badge">AR.SCH2602.00001</div>
+          <div class="doc-title">Account Payable Voucher</div>
+          <div class="doc-id-badge">AP.SCH2602.00001</div>
         </div>
       </header>
       
@@ -511,14 +538,10 @@
                 <div class="info-card-label">Date</div>
                 <div class="info-card-value">Apr 24, 2026</div>
               </div>
-              <div class="info-card-col-red-border">
-                <div class="info-card-label">Due Date</div>
-                <div class="info-card-value">Apr 30, 2026</div>
+              <div class="info-card-col">
+                <div class="info-card-label">Note</div>
+                <div class="info-card-value">Lorem ipsum is simply dummy text</div>
               </div>
-            </div>
-            <div class="info-card-col">
-              <div class="info-card-label">Note</div>
-              <div class="info-card-value">Lorem ipsum is simply dummy text</div>
             </div>
           </div>
         </div>
@@ -529,40 +552,37 @@
           <table class="table-purple">
             <thead>
               <tr>
-                <th>Date</th>
-                <th>AR No</th>
-                <th>Guest Name</th>
-                <th>CI/CO</th>
-                <th>Room</th>
-                <th>Folio No</th>
-                <th class="text-right">AR Amount</th>
+                <th style="width: 150px">Date</th>
+                <th style="width: 150px">Receiving No</th>
+                <th style="width: 150px" class="text-right">AP Amount</th>
+                <th>Note</th>
               </tr>
             </thead>
             <tbody>
               
               <tr>
                 <td>24 Apr 2026</td>
-                <td>AR.SCH2602.00001</td>
-                <td>Ananda Romania</td>
-                <td>28 Feb-01 Mar 2026</td>
-                <td>101</td>
-                <td>FL.240000123</td>
+                <td>AP.SCH2602.00001</td>
                 <td class="text-right">2,000</td>
+                <td>Lorem Ipsum sit amet</td>
               </tr>
               
               <tr>
                 <td>24 Apr 2026</td>
-                <td>AR.SCH2602.00001</td>
-                <td>Ananda Romania</td>
-                <td>28 Feb-01 Mar 2026</td>
-                <td>101</td>
-                <td>FL.240000123</td>
+                <td>AP.SCH2602.00001</td>
                 <td class="text-right">2,000</td>
+                <td>Lorem Ipsum sit amet</td>
+              </tr>
+              
+              <tr>
+                <td>24 Apr 2026</td>
+                <td>AP.SCH2602.00001</td>
+                <td class="text-right">2,000</td>
+                <td>Lorem Ipsum sit amet</td>
               </tr>
               
               <tr class="total-row">
-                <td colspan="5"></td>
-                <td>Total AR</td>
+                <td colspan="3" class="text-right">Total AP</td>
                 <td class="text-right">2,000</td>
               </tr>
             </tbody>
@@ -576,34 +596,36 @@
           <table class="table-orange">
             <thead>
               <tr>
-                <th style="width: 25%">Payment Date</th>
-                <th style="width: 25%">Transaction No</th>
-                <th style="width: 25%"></th>
-                <th style="width: 25%" class="text-right">Amount</th>
+                <th style="width: 150px">Payment Date</th>
+                <th>Transaction No</th>
+                <th class="text-right" style="width: 200px">Amount</th>
               </tr>
             </thead>
             <tbody>
               
               <tr>
-                <td style="width: 25%">15 Jun 2026</td>
-                <td style="width: 25%">PR.SCH2604.00008</td>
-                <td style="width: 25%"></td>
-                <td style="width: 25%" class="text-right">1,000</td>
+                <td>15 Jun 2026</td>
+                <td>PR.SCH2604.00008</td>
+                <td class="text-right">1,000</td>
               </tr>
               
               <tr>
-                <td style="width: 25%">15 Apr 2026</td>
-                <td style="width: 25%">AC.SCH2602.00001</td>
-                <td style="width: 25%"></td>
-                <td style="width: 25%" class="text-right">1,000</td>
+                <td>15 Apr 2026</td>
+                <td>AC.SCH2602.00001</td>
+                <td class="text-right">1,000</td>
               </tr>
               
               <tr class="total-row">
-                <td style="width: 25%"></td>
-                <td style="width: 25%"></td>
-                <td style="width: 25%">Total Payment</td>
-                <td style="width: 25%" class="text-right">
-                  2,000
+                <td colspan="2"></td>
+                <td
+                  style="
+                    width: 300px;
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <div class="total-label">Total Payment</div>
+                  <div class="total-value">2,000</div>
                 </td>
               </tr>
             </tbody>
@@ -615,11 +637,17 @@
         <div class="balance-card">
           <table>
             <tr>
-              <td style="width: 25%"></td>
-              <td style="width: 25%"></td>
-              <td style="width: 25%" class="balance-label">Balance</td>
-              <td style="width: 25%" class="balance-value">
-                0
+              <td style="width: 150px"></td>
+              <td style="width: 100%"></td>
+              <td
+                style="
+                  width: 300px;
+                  display: flex;
+                  justify-content: space-between;
+                "
+              >
+                <div class="balance-label">Balance</div>
+                <div class="balance-value">0</div>
               </td>
             </tr>
           </table>

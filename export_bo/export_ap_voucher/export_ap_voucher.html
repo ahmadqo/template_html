@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ .Data.DocumentTitle }}</title>
+    <!-- Google Fonts Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+      body {
+        font-family:
+          "Roboto",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background-color: #ffffff;
+        color: #000000;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+      }
+      .header {
+        width: 100%;
+        background: #ffffff;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 12px 30px 12px 30px;
+      }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .company-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding-top: 2px;
+      }
+      .company-name {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #000000;
+      }
+      .company-sub {
+        font-size: 11.5px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 1.3;
+      }
+      .header-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 7px;
+      }
+      .doc-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #000000;
+        line-height: 1.2;
+      }
+      .doc-id-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 14px;
+        border: 1px solid #00bd7d;
+        border-radius: 50px;
+        background: #dbfce7;
+        font-size: 12px;
+        font-weight: 500;
+        color: #008234;
+        letter-spacing: 0.01em;
+        height: 20px;
+      }
+      .body {
+        background: #ffffff;
+        padding: 8px 30px 12px 30px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .qr-wrap {
+        flex-shrink: 0;
+        width: 72px;
+        height: 72px;
+        align-self: center;
+      }
+
+      .print-footer-wrapper {
+        order: 9999;
+        margin-top: auto;
+        padding-top: 24px;
+        padding-left: 30px;
+        padding-right: 30px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        page-break-inside: avoid;
+      }
+      .print-footer-info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 4px;
+      }
+      .print-info {
+        font-size: 12px;
+        color: #8a8a91;
+        font-weight: 500;
+        text-align: left;
+      }
+      .print-page-number {
+        font-size: 12px;
+        color: #8a8a91;
+      }
+      .print-page-number::after {
+        content: "1 of 1";
+      }
+      .print-footer-separator {
+        border: none;
+        border-top: 1px solid #d7dedd;
+        margin: 0;
+      }
+      .print-footer-note {
+        font-size: 10px;
+        color: #000000;
+        text-align: justify;
+        line-height: 1.4;
+        margin-top: 4px;
+      }
+      .row-header-cards {
+        display: grid;
+        grid-template-columns: 0.7fr 1fr;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .info-card {
+        border: 0.8px solid #d7dedd;
+        border-radius: 12px;
+        background: #ffffff;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+      .info-card-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: #000000;
+        margin-bottom: 2px;
+        line-height: 21px;
+      }
+      .info-card-text {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 21px;
+      }
+      .info-card-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 10px;
+      }
+      .info-card-col {
+        display: flex;
+        flex-direction: column;
+      }
+      .info-card-col-red-border {
+        display: flex;
+        flex-direction: column;
+        border-left: 2px solid #ef4444;
+        padding-left: 5px;
+      }
+      .info-card-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #66666e;
+        margin-bottom: 5px;
+      }
+      .info-card-value {
+        font-size: 12px;
+        font-weight: 500;
+        color: #000000;
+      }
+      .table-purple-wrapper {
+        border: 1px solid #f3e5ff;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 10px;
+        background: #ffffff;
+      }
+      .table-purple {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Roboto", sans-serif;
+        color: #000000;
+      }
+      .table-purple th {
+        background-color: #faf5ff;
+        color: #000000;
+        font-weight: 600;
+        text-align: left;
+        padding: 10px;
+        font-size: 12px;
+      }
+      .table-purple td {
+        padding: 8.5px 10px;
+        border-bottom: 1px solid #ececec;
+        font-size: 12px;
+        color: #000000;
+      }
+      .table-purple tr:last-child td {
+        border-bottom: none;
+      }
+      .table-purple tr.total-row td {
+        background-color: #faf5ff;
+        font-weight: 500;
+        border-top: 1px solid #f3e8ff;
+        color: #000000;
+        font-size: 12px;
+        padding: 10px;
+      }
+
+      .table-orange-wrapper {
+        border: 1px solid #ffedd5;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 5px;
+        background: #ffffff;
+      }
+      .table-orange {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Roboto", sans-serif;
+        color: #000000;
+      }
+      .table-orange th {
+        background-color: #fff6eb;
+        color: #000000;
+        font-weight: 600;
+        text-align: left;
+        padding: 10px;
+        font-size: 12px;
+      }
+      .table-orange td {
+        padding: 8.5px 10px;
+        font-size: 12px;
+        color: #000000;
+      }
+      .table-orange tr:last-child td {
+        border-bottom: none;
+      }
+      .table-orange tr.total-row td {
+        background-color: #fff6eb;
+        font-weight: 500;
+        border-top: 1px solid #ffedd5;
+        color: #000000;
+        font-size: 12px;
+      }
+      .text-right {
+        text-align: right !important;
+      }
+
+      .balance-card {
+        background: #f8f8f780;
+        border: 1px solid #d7dedd;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        height: 32px;
+      }
+      .balance-card table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .balance-card table tr td {
+        padding: 0 10px;
+      }
+      .balance-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #000000;
+        text-align: right;
+      }
+      .balance-value {
+        font-size: 12px;
+        font-weight: 600;
+        color: #000000;
+        text-align: right;
+      }
+
+      @media print {
+        @page {
+          size: A4 portrait;
+          margin: 0 0 25mm 0;
+
+          @bottom-center {
+            content: element(footer);
+            width: 100%;
+          }
+        }
+        body {
+          margin: 0;
+        }
+        .page {
+          width: 100%;
+          min-height: auto;
+          height: auto;
+          margin: 0;
+          overflow: visible;
+          display: block;
+        }
+        .body {
+          display: block;
+        }
+        .table-purple-wrapper,
+        .table-orange-wrapper {
+          overflow: visible;
+        }
+        thead {
+          display: table-header-group;
+        }
+        tr {
+          page-break-inside: avoid;
+          break-inside: avoid;
+        }
+        .print-footer-wrapper {
+          position: running(footer);
+          margin: 0;
+          width: 100%;
+        }
+        .print-page-number::after {
+          content: counter(page) " of " counter(pages);
+        }
+      }
+
+      /* Dynamic Signer Styling */
+      .signer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        margin-top: 30px;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .signer-col {
+        width: calc(16.66% - 10px);
+        min-width: 75px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 85px;
+        text-align: center;
+      }
+      .signer-by {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        margin-bottom: 5px;
+      }
+      .signer-line {
+        width: 100%;
+        border-bottom: 0.5px solid #b0b0b5;
+        margin-top: auto;
+        margin-bottom: 5px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .signer-qr {
+        width: 72px;
+        height: 72px;
+        margin-top: auto;
+        margin-bottom: 5px;
+      }
+      .signer-name {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        white-space: nowrap;
+        min-height: 14px;
+      }
+      .signer-position {
+        font-size: 12px;
+        font-weight: 300;
+        color: #000000;
+        white-space: nowrap;
+        min-height: 14px;
+      }
+    </style>
+    <!-- Paged.js polyfill for printable document pagination -->
+    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <div class="print-footer-wrapper">
+        <div class="print-footer-info-row">
+          <div class="print-info">
+            Printed: {{ .Data.PrintedBy }} on {{ .Data.PrintedAt }}
+          </div>
+          <div class="print-page-number">Page&nbsp;</div>
+        </div>
+        {{ if .Property.FooterNote }}
+        <hr class="print-footer-separator" />
+        <div class="print-footer-note">{{ .Property.FooterNote }}</div>
+        {{ end }}
+      </div>
+      <!--HEADER-->
+      <header class="header">
+        <div class="header-left">
+          {{ if .Property.LogoURL }}
+          <div style="width: 51px">
+            <img
+              src="{{ .Property.LogoURL }}"
+              alt="Logo"
+              style="width: 100%; height: 100; border-radius: 6px"
+            />
+          </div>
+          {{ end }}
+          <div class="company-info">
+            <div class="company-name">{{ .Property.Name }}</div>
+            <div>
+              <div class="company-sub" style="font-weight: 500">
+                {{ .Property.Address }}
+              </div>
+              <div class="company-sub">
+                {{ .Property.Email }} &nbsp;•&nbsp; {{ .Property.Phone }}
+              </div>
+              {{ if .Property.HeaderNote }}
+              <div class="company-sub">{{ .Property.HeaderNote }}</div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="doc-title">{{ .Data.DocumentTitle }}</div>
+          <div class="doc-id-badge">{{ .Data.TransNo }}</div>
+        </div>
+      </header>
+      <!--BODY-->
+      <main class="body">
+        <!-- Header Cards (Flex/Grid) -->
+        <div class="row-header-cards">
+          <!-- Left Info Card (Supplier Info) -->
+          <div class="info-card">
+            <div class="info-card-title">{{ .Data.SupplierName }}</div>
+            <div class="info-card-text">{{ .Data.SupplierAddress }}</div>
+            <div class="info-card-text">
+              {{if .Data.SupplierEmail}}
+              <span style="text-decoration: underline"
+                >{{ .Data.SupplierEmail }}</span
+              >
+              {{end}} {{if and .Data.SupplierPhone .Data.SupplierEmail}}
+              &nbsp;•&nbsp; {{end}} {{if .Data.SupplierPhone}}
+              <span>{{ .Data.SupplierPhone }}</span>
+              {{end}}
+            </div>
+          </div>
+          <!-- Right Info Card (Dates & Notes) -->
+          <div class="info-card">
+            <div class="info-card-row">
+              <div class="info-card-col">
+                <div class="info-card-label">Date</div>
+                <div class="info-card-value">{{ .Data.InvoiceDate }}</div>
+              </div>
+              <div class="info-card-col">
+                <div class="info-card-label">Note</div>
+                <div class="info-card-value">{{ .Data.Note }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AP Details Table (Purple Theme) -->
+        {{ if .Data.APItems }}
+        <div class="table-purple-wrapper">
+          <table class="table-purple">
+            <thead>
+              <tr>
+                <th style="width: 150px">Date</th>
+                <th style="width: 150px">Receiving No</th>
+                <th style="width: 150px" class="text-right">AP Amount</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range .Data.APItems }}
+              <tr>
+                <td>{{ .Date }}</td>
+                <td>{{ .ReceivingNo }}</td>
+                <td class="text-right">{{ .APAmount }}</td>
+                <td>{{ .Note }}</td>
+              </tr>
+              {{ end }}
+              <tr class="total-row">
+                <td colspan="3" class="text-right">Total AP</td>
+                <td class="text-right">{{ .Data.TotalAP }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        {{ end }}
+
+        <!-- Payment Details Table (Orange Theme) -->
+        {{ if .Data.Payments }}
+        <div class="table-orange-wrapper">
+          <table class="table-orange">
+            <thead>
+              <tr>
+                <th style="width: 150px">Payment Date</th>
+                <th>Transaction No</th>
+                <th class="text-right" style="width: 200px">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range .Data.Payments }}
+              <tr>
+                <td>{{ .PaymentDate }}</td>
+                <td>{{ .TransactionNo }}</td>
+                <td class="text-right">{{ .Amount }}</td>
+              </tr>
+              {{ end }}
+              <tr class="total-row">
+                <td colspan="2"></td>
+                <td
+                  style="
+                    width: 300px;
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <div class="total-label">Total Payment</div>
+                  <div class="total-value">{{ .Data.TotalPayment }}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        {{ end }}
+
+        <!-- Balance Card -->
+        <div class="balance-card">
+          <table>
+            <tr>
+              <td style="width: 150px"></td>
+              <td style="width: 100%"></td>
+              <td
+                style="
+                  width: 300px;
+                  display: flex;
+                  justify-content: space-between;
+                "
+              >
+                <div class="balance-label">Balance</div>
+                <div class="balance-value">{{ .Data.Balance }}</div>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: start">
+          <!-- Signer -->
+          {{ if .Signature }}
+          <div class="signer-container">
+            {{ range .Signature }}
+            <div class="signer-col">
+              {{ if .SignerQR }}
+              <div class="signer-qr" style="margin: auto 0">
+                <img
+                  {{
+                  qrCodeAttr
+                  .SignerQR
+                  }}
+                  alt="Digital Signature QR"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+              {{ else }}
+              <div class="signer-by">{{ .SignerAddInfo }}</div>
+              <div class="signer-line">
+                {{ if .SignerImage }}
+                <img
+                  src="{{ .SignerImage }}"
+                  alt="Signature"
+                  style="max-height: 48px; max-width: 100%; object-fit: contain"
+                />
+                {{ end }}
+              </div>
+              <div class="signer-name">
+                {{ if .SignerName }}{{ .SignerName }}{{ else }}&nbsp;{{ end }}
+              </div>
+              <div class="signer-position">
+                {{ if .SignerPosition }}{{ .SignerPosition }}{{ else }}&nbsp;{{
+                end }}
+              </div>
+              {{ end }}
+            </div>
+            {{ end }}
+          </div>
+          {{ end }}
+          <!-- End Signer -->
+          {{ if .Data.QRCode }}
+          <div class="qr-wrap">
+            <img
+              {{
+              qrCodeAttr
+              .Data.QRCode
+              }}
+              alt="QR Code"
+              style="width: 100%; height: 100%; object-fit: contain"
+            />
+          </div>
+          {{ end }}
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
