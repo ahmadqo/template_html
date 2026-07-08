@@ -115,9 +115,6 @@
       .font-bold {
         font-weight: 700;
       }
-      .mb-2 {
-        margin-bottom: 8px;
-      }
       .text-normal {
         font-size: 12px;
         font-weight: 400;
@@ -242,10 +239,13 @@
         white-space: nowrap;
       }
       .col-room {
-        width: 12%;
+        width: 10%;
+      }
+      .col-guest {
+        width: 15%;
       }
       .col-desc {
-        width: 41%;
+        width: 28%;
       }
       .col-qty {
         width: 5%;
@@ -469,16 +469,13 @@
           <!-- Guest Details -->
           <div class="info-box info-box-left">
             <div class="value-text" style="font-size: 11px; margin-bottom: 4px">
-              {{ .Data.GuestName }}
-            </div>
-            <div class="text-black mb-2 text-normal">
-              {{ .Data.ReservationType }}
+              {{ .Data.CompanyName }}
             </div>
             <div
               class="text-black text-normal"
               style="line-height: 1.5; max-width: 90%"
             >
-              {{ .Data.GuestAddress }}
+              {{ .Data.CompanyAddress }}
             </div>
           </div>
 
@@ -514,6 +511,7 @@
             <tr>
               <th class="col-date">Date</th>
               <th class="col-room">Room</th>
+              <th class="col-guest">Guest Name</th>
               <th class="col-desc">Description</th>
               <th class="col-qty">Qty</th>
               <th class="col-charges">Charges</th>
@@ -525,6 +523,7 @@
             <tr>
               <td class="col-date">{{ .Date }}</td>
               <td>{{ .Room }}</td>
+              <td>{{ .GuestName }}</td>
               <td>{{ .Description }}</td>
               <td style="text-align: center">{{ .Qty }}</td>
               <td class="text-right">{{ .Charges }}</td>
@@ -532,7 +531,7 @@
             </tr>
             {{ end }}
             <tr>
-              <td colspan="2" class="total-row"></td>
+              <td colspan="3" class="total-row"></td>
               <td class="total-row font-bold">Total</td>
               <td class="total-row"></td>
               <td class="total-row text-right font-bold">
@@ -550,11 +549,12 @@
           <tbody>
             <tr>
               <td style="width: 14%; border: none"></td>
-              <td style="width: 12%; border: none"></td>
+              <td style="width: 10%; border: none"></td>
+              <td style="width: 15%; border: none"></td>
               <td
                 class="font-bold"
                 style="
-                  width: 41%;
+                  width: 28%;
                   border: none;
                   text-align: left;
                   color: #374151;
@@ -583,8 +583,8 @@
         <!-- FOOTER -->
         <div class="footer-section">
           <div class="footer-notes">
-            {{ if .TemplateField.GuestFolio }} {{ .TemplateField.GuestFolio }}
-            {{ end }}
+            {{ if .TemplateField.CompanyFolio }} {{ .TemplateField.CompanyFolio
+            }} {{ end }}
           </div>
           <div class="signature-area">
             <div class="signature-box">
@@ -593,7 +593,7 @@
             </div>
             <div class="signature-box">
               <div class="signature-line"></div>
-              <span class="signature-label">{{ .Data.GuestName }}</span>
+              <span class="signature-label">{{ .Data.CompanyName }}</span>
             </div>
             {{ if .Data.QRCode }}
             <div class="qr-wrap">
