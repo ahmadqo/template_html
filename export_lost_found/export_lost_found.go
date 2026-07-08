@@ -40,12 +40,12 @@ type LostFoundContentData struct {
 	GuestName     string
 	FoundLocation string
 	Note          string
-	QRCode         string
-	ClaimedBy      string
-	ClaimedAt      string
-	ClaimNote      string
-	PrintedBy      string
-	PrintedAt      string
+	QRCode        string
+	ClaimedBy     string
+	ClaimedAt     string
+	ClaimNote     string
+	PrintedBy     string
+	PrintedAt     string
 }
 
 type LostFoundReportData struct {
@@ -62,7 +62,7 @@ func main() {
 	data := LostFoundReportData{
 		Property: PropertyData{
 			Name:       "Property Developer Inc.",
-			LogoURL:    "https://i.ibb.co.com/ZzT4SJn5/logo-bigdeals.png",
+			LogoURL:    "https://asset.dsisistem.top/image_testing/002aceacbc204645b91ec518a24bd392.webp",
 			Address:    "Jl. Kaliurang Km. 12 Dekat UII, Sleman, Yogyakarta",
 			Email:      "support@propertydeveloper.com",
 			Phone:      "08123456789",

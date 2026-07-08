@@ -41,10 +41,10 @@ type NonStayChargeContentData struct {
 	User          string
 	Description   string
 	Note          string
-	QRCode         string // Isi dengan base64 string QR code murni
-	Amount         string // Nilai amount beserta format mata uangnya
-	PrintedBy      string
-	PrintedAt      string
+	QRCode        string // Isi dengan base64 string QR code murni
+	Amount        string // Nilai amount beserta format mata uangnya
+	PrintedBy     string
+	PrintedAt     string
 }
 
 type NonStayChargeReportData struct {
@@ -61,7 +61,7 @@ func main() {
 	data := NonStayChargeReportData{
 		Property: PropertyData{
 			Name:       "Property Developer Inc.",
-			LogoURL:    "https://i.ibb.co.com/ZzT4SJn5/logo-bigdeals.png",
+			LogoURL:    "https://asset.dsisistem.top/image_testing/002aceacbc204645b91ec518a24bd392.webp",
 			Address:    "Jl. Kaliurang Km. 12 Dekat UII, Sleman, Yogyakarta",
 			Email:      "support@propertydeveloper.com",
 			Phone:      "08123456789",
