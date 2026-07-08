@@ -41,25 +41,25 @@ type PropertyData struct {
 
 // GuestFolioContentData mendefinisikan konten utama dokumen Guest Folio
 type GuestFolioContentData struct {
-	DocumentTitle   string
-	TransNo         string
-	QRCode          string
-	GuestName       string
-	ReservationType string
-	GuestAddress    string
-	RoomName        string
-	RoomType        string
-	ArrivalDate     string
-	DepartureDate   string
-	TotalNights     int
-	VoucherNumber   string
-	Transactions    []TransactionItem
-	TotalCharges    string
-	TotalPayment    string
-	Balance         string
-	PrintedBy       string
-	PrintedAt       string
-	PropertyNote    string
+	DocumentTitle string
+	TransNo       string
+	QRCode        string
+	GuestName     string
+	CompanyName   string
+	GuestAddress  string
+	RoomName      string
+	RoomType      string
+	ArrivalDate   string
+	DepartureDate string
+	TotalNights   int
+	VoucherNumber string
+	Transactions  []TransactionItem
+	TotalCharges  string
+	TotalPayment  string
+	Balance       string
+	PrintedBy     string
+	PrintedAt     string
+	PropertyNote  string
 }
 
 // GuestFolioReportData mendefinisikan struct utama untuk report Guest Folio
@@ -129,25 +129,25 @@ func main() {
 			FooterNote: "Catatan: Dokumen ini diterbitkan secara elektronik dan sah tanpa tanda tangan basah. Pembayaran yang sudah dilakukan tidak dapat dibatalkan atau dikembalikan dengan alasan apapun.",
 		},
 		Data: GuestFolioContentData{
-			DocumentTitle:   "Guest Folio",
-			TransNo:         "FL.240000123",
-			GuestName:       "Ananda Romania",
-			ReservationType: "Personal Reservation",
-			GuestAddress:    "Jl. Kenanga Raya No. 88 Kel. Sukagalih, Kec. Sukajadi, Bandung, Jawa Barat",
-			RoomName:        "101",
-			RoomType:        "Deluxe King Room",
-			ArrivalDate:     "24 Apr 2026",
-			DepartureDate:   "26 Apr 2026",
-			TotalNights:     2,
-			VoucherNumber:   "VC-998877",
-			Transactions:    transactions,
-			TotalCharges:    "2,800",
-			TotalPayment:    "2,800",
-			Balance:         "Rp 0",
-			QRCode:          rawBase64,
-			PrintedBy:       "Superadmin Desk",
-			PrintedAt:       time.Now().Format("02 Jan 2006 15:04:05 MST"),
-			PropertyNote:    "Catatan: Harap periksa kembali barang bawaan Anda sebelum melakukan check-out. Kehilangan barang di luar tanggung jawab hotel.",
+			DocumentTitle: "Guest Folio",
+			TransNo:       "FL.240000123",
+			GuestName:     "Ananda Romania",
+			CompanyName:   "PT Maju mundur",
+			GuestAddress:  "Jl. Kenanga Raya No. 88 Kel. Sukagalih, Kec. Sukajadi, Bandung, Jawa Barat",
+			RoomName:      "101",
+			RoomType:      "Deluxe King Room",
+			ArrivalDate:   "24 Apr 2026",
+			DepartureDate: "26 Apr 2026",
+			TotalNights:   2,
+			VoucherNumber: "VC-998877",
+			Transactions:  transactions,
+			TotalCharges:  "2,800",
+			TotalPayment:  "2,800",
+			Balance:       "Rp 0",
+			QRCode:        rawBase64,
+			PrintedBy:     "Superadmin Desk",
+			PrintedAt:     time.Now().Format("02 Jan 2006 15:04:05 MST"),
+			PropertyNote:  "Catatan: Harap periksa kembali barang bawaan Anda sebelum melakukan check-out. Kehilangan barang di luar tanggung jawab hotel.",
 		},
 		Signature: []SignerData{}, // Kosong karena tidak ada di report ini
 		TemplateField: map[string]template.HTML{
