@@ -156,7 +156,7 @@ func main() {
 		},
 		Signature: []SignerData{}, // Kosong karena tidak ada di report ini
 		TemplateField: map[string]template.HTML{
-			"CompanyFolio": template.HTML(`<p class="font-bold" style="margin: 0 0 4px 0">
+			"folio_footer": template.HTML(`<p class="font-bold" style="margin: 0 0 4px 0">
                 Please Come back soon...
                 </p>
                 <p style="margin: 0 0 2px 0">

@@ -151,7 +151,7 @@ func main() {
 		},
 		Signature: []SignerData{}, // Kosong karena tidak ada di report ini
 		TemplateField: map[string]template.HTML{
-			"GuestFolio": template.HTML(`<p class="font-bold" style="margin: 0 0 4px 0">
+			"folio_footer": template.HTML(`<p class="font-bold" style="margin: 0 0 4px 0">
                 Please Come back soon...
                 </p>
                 <p style="margin: 0 0 2px 0">
@@ -162,6 +162,10 @@ func main() {
                 Thank you for choosing to stay with us and we wish you a pleasant
                 onward journey.
                 </p>`),
+			"rc_police": template.HTML(`<p class="font-bold" style="margin: 0 0 4px 0">
+                Please Come back soon...
+                </p>
+               `),
 		},
 	}
 
