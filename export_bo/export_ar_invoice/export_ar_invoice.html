@@ -530,11 +530,10 @@
             <thead>
               <tr>
                 <th>Date</th>
-                <th>AR No</th>
                 <th>Guest Name</th>
                 <th>CI/CO</th>
                 <th>Room</th>
-                <th>Folio No</th>
+                <th>Trans No</th>
                 <th class="text-right">AR Amount</th>
               </tr>
             </thead>
@@ -542,16 +541,15 @@
               {{ range .Data.ARItems }}
               <tr>
                 <td>{{ .Date }}</td>
-                <td>{{ .ARNo }}</td>
                 <td>{{ .GuestName }}</td>
                 <td>{{ .CICO }}</td>
                 <td>{{ .Room }}</td>
-                <td>{{ .FolioNo }}</td>
+                <td>{{ .TransNo }}</td>
                 <td class="text-right">{{ .ARAmount }}</td>
               </tr>
               {{ end }}
               <tr class="total-row">
-                <td colspan="5"></td>
+                <td colspan="4"></td>
                 <td>Total AR</td>
                 <td class="text-right">{{ .Data.TotalAR }}</td>
               </tr>
@@ -566,25 +564,25 @@
           <table class="table-orange">
             <thead>
               <tr>
-                <th style="width: 25%">Payment Date</th>
+                <th style="width: 15%">Payment Date</th>
                 <th style="width: 25%">Transaction No</th>
-                <th style="width: 25%"></th>
+                <th style="width: 35%"></th>
                 <th style="width: 25%" class="text-right">Amount</th>
               </tr>
             </thead>
             <tbody>
               {{ range .Data.Payments }}
               <tr>
-                <td style="width: 25%">{{ .PaymentDate }}</td>
+                <td style="width: 15%">{{ .PaymentDate }}</td>
                 <td style="width: 25%">{{ .TransactionNo }}</td>
-                <td style="width: 25%"></td>
+                <td style="width: 35%"></td>
                 <td style="width: 25%" class="text-right">{{ .Amount }}</td>
               </tr>
               {{ end }}
               <tr class="total-row">
+                <td style="width: 15%"></td>
                 <td style="width: 25%"></td>
-                <td style="width: 25%"></td>
-                <td style="width: 25%">Total Payment</td>
+                <td style="width: 35%">Total Payment</td>
                 <td style="width: 25%" class="text-right">
                   {{ .Data.TotalPayment }}
                 </td>
@@ -598,9 +596,9 @@
         <div class="balance-card">
           <table>
             <tr>
+              <td style="width: 15%"></td>
               <td style="width: 25%"></td>
-              <td style="width: 25%"></td>
-              <td style="width: 25%" class="balance-label">Balance</td>
+              <td style="width: 35%" class="balance-label">Balance</td>
               <td style="width: 25%" class="balance-value">
                 {{ .Data.Balance }}
               </td>

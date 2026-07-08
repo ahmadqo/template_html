@@ -49,7 +49,7 @@
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        padding: 12px 30px 12px 30px;
+        padding: 6px 30px 6px 30px;
       }
       .header-left {
         display: flex;
@@ -59,7 +59,7 @@
       .company-info {
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 3px;
         padding-top: 2px;
       }
       .company-name {
@@ -77,7 +77,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        gap: 7px;
+        gap: 4px;
       }
       .doc-title {
         font-size: 16px;
@@ -307,7 +307,7 @@
         font-size: 12px;
         font-weight: 600;
         color: #000000;
-        text-align: right;
+        text-align: left;
       }
       .balance-value {
         font-size: 12px;
@@ -315,11 +315,17 @@
         color: #000000;
         text-align: right;
       }
+      @media screen {
+         
+        .pagedjs_page:not(.pagedjs_first_page) .pagedjs_margin-top {
+          display: none !important;
+        }
+      }
 
       @media print {
         @page {
           size: A4 portrait;
-          margin: 35mm 0 25mm 0;
+          margin: 26mm 0 25mm 0;
 
           @top-center {
             content: element(header);
@@ -343,43 +349,7 @@
         }
         .header {
           position: running(header);
-          margin: 0;
-          width: 100%;
-          display: block;
-          clear: both;
-        }
-        .header-left {
-          float: left;
-          display: block;
-        }
-        .header-left > div {
-          display: inline-block;
-          vertical-align: top;
-        }
-        .header-left > div:first-child {
-          margin-right: 10px;
-        }
-        .company-info {
-          display: block;
-        }
-        .company-info > div {
-          margin-top: 5px;
-        }
-        .header-right {
-          float: right;
-          display: block;
-          text-align: right;
-        }
-        .header-right > div {
-          margin-bottom: 7px;
-        }
-        .header-right > div:last-child {
-          margin-bottom: 0;
-        }
-        .doc-id-badge {
-          display: inline-block;
-          line-height: 18px;
-          text-align: center;
+          text-align: left;
         }
         .body {
           display: block;
@@ -462,6 +432,9 @@
         white-space: nowrap;
         min-height: 14px;
       }
+      .pagedjs_page .pagedjs_margin-top-center > .pagedjs_margin-content > * {
+        display: flex !important;
+      }
     </style>
     
     <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
@@ -471,7 +444,7 @@
       <div class="print-footer-wrapper">
         <div class="print-footer-info-row">
           <div class="print-info">
-            Printed: Superadmin on 07 Jul 2026 15:12:30 WIB
+            Printed: Superadmin on 08 Jul 2026 10:35:23 WIB
           </div>
           <div class="print-page-number">Page&nbsp;</div>
         </div>
@@ -484,11 +457,11 @@
       <header class="header">
         <div class="header-left">
           
-          <div style="width: 51px">
+          <div style="width: 42px">
             <img
               src="https://i.ibb.co.com/ZzT4SJn5/logo-bigdeals.png"
               alt="Logo"
-              style="width: 100%; height: 100; border-radius: 6px"
+              style="width: 100%; height: auto; border-radius: 6px"
             />
           </div>
           
@@ -552,38 +525,42 @@
           <table class="table-purple">
             <thead>
               <tr>
-                <th style="width: 150px">Date</th>
-                <th style="width: 150px">Receiving No</th>
-                <th style="width: 150px" class="text-right">AP Amount</th>
-                <th>Note</th>
+                <th style="width: 15%">Date</th>
+                <th style="width: 25%">Receiving No</th>
+                <th style="width: 25%" class="text-right">AP Amount</th>
+                <th style="width: 30%">Note</th>
               </tr>
             </thead>
             <tbody>
               
               <tr>
-                <td>24 Apr 2026</td>
-                <td>AP.SCH2602.00001</td>
-                <td class="text-right">2,000</td>
-                <td>Lorem Ipsum sit amet</td>
+                <td style="width: 15%">24 Apr 2026</td>
+                <td style="width: 25%">AP.SCH2602.00001</td>
+                <td style="width: 25%" class="text-right">2,000</td>
+                <td style="width: 30%">Lorem Ipsum sit amet</td>
               </tr>
               
               <tr>
-                <td>24 Apr 2026</td>
-                <td>AP.SCH2602.00001</td>
-                <td class="text-right">2,000</td>
-                <td>Lorem Ipsum sit amet</td>
+                <td style="width: 15%">24 Apr 2026</td>
+                <td style="width: 25%">AP.SCH2602.00001</td>
+                <td style="width: 25%" class="text-right">2,000</td>
+                <td style="width: 30%">Lorem Ipsum sit amet</td>
               </tr>
               
               <tr>
-                <td>24 Apr 2026</td>
-                <td>AP.SCH2602.00001</td>
-                <td class="text-right">2,000</td>
-                <td>Lorem Ipsum sit amet</td>
+                <td style="width: 15%">24 Apr 2026</td>
+                <td style="width: 25%">AP.SCH2602.00001</td>
+                <td style="width: 25%" class="text-right">2,000</td>
+                <td style="width: 30%">Lorem Ipsum sit amet</td>
               </tr>
               
               <tr class="total-row">
-                <td colspan="3" class="text-right">Total AP</td>
-                <td class="text-right">2,000</td>
+                <td style="width: 15%"></td>
+                <td style="width: 25%"></td>
+                <td style="width: 25%" class="text-right">Total AP</td>
+                <td style="width: 30%" class="text-right">
+                  2,000
+                </td>
               </tr>
             </tbody>
           </table>
@@ -596,36 +573,36 @@
           <table class="table-orange">
             <thead>
               <tr>
-                <th style="width: 150px">Payment Date</th>
-                <th>Transaction No</th>
-                <th class="text-right" style="width: 200px">Amount</th>
+                <th style="width: 15%">Payment Date</th>
+                <th style="width: 25%">Transaction No</th>
+                <th style="width: 35%"></th>
+                <th style="width: 25%" class="text-right" style="width: 200px">
+                  Amount
+                </th>
               </tr>
             </thead>
             <tbody>
               
               <tr>
-                <td>15 Jun 2026</td>
-                <td>PR.SCH2604.00008</td>
-                <td class="text-right">1,000</td>
+                <td style="width: 15%">15 Jun 2026</td>
+                <td style="width: 25%">PR.SCH2604.00008</td>
+                <td style="width: 35%"></td>
+                <td style="width: 25%" class="text-right">1,000</td>
               </tr>
               
               <tr>
-                <td>15 Apr 2026</td>
-                <td>AC.SCH2602.00001</td>
-                <td class="text-right">1,000</td>
+                <td style="width: 15%">15 Apr 2026</td>
+                <td style="width: 25%">AC.SCH2602.00001</td>
+                <td style="width: 35%"></td>
+                <td style="width: 25%" class="text-right">1,000</td>
               </tr>
               
               <tr class="total-row">
-                <td colspan="2"></td>
-                <td
-                  style="
-                    width: 300px;
-                    display: flex;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="total-label">Total Payment</div>
-                  <div class="total-value">2,000</div>
+                <td style="width: 15%"></td>
+                <td style="width: 25%"></td>
+                <td style="width: 35%">Total Payment</td>
+                <td style="width: 25%" class="text-right">
+                  2,000
                 </td>
               </tr>
             </tbody>
@@ -637,17 +614,11 @@
         <div class="balance-card">
           <table>
             <tr>
-              <td style="width: 150px"></td>
-              <td style="width: 100%"></td>
-              <td
-                style="
-                  width: 300px;
-                  display: flex;
-                  justify-content: space-between;
-                "
-              >
-                <div class="balance-label">Balance</div>
-                <div class="balance-value">0</div>
+              <td style="width: 15%"></td>
+              <td style="width: 25%"></td>
+              <td style="width: 35%" class="balance-label">Balance</td>
+              <td style="width: 25%" class="balance-value">
+                0
               </td>
             </tr>
           </table>

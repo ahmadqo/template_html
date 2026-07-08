@@ -21,11 +21,10 @@ type SignerData struct {
 // ARInvoiceItem mendefinisikan struct untuk setiap item AR di tabel
 type ARInvoiceItem struct {
 	Date      string
-	ARNo      string
 	GuestName string
 	CICO      string
 	Room      string
-	FolioNo   string
+	TransNo   string
 	ARAmount  string
 }
 
@@ -94,20 +93,18 @@ func main() {
 	arItems := []ARInvoiceItem{
 		{
 			Date:      "24 Apr 2026",
-			ARNo:      "AR.SCH2602.00001",
 			GuestName: "Ananda Romania",
 			CICO:      "28 Feb-01 Mar 2026",
 			Room:      "101",
-			FolioNo:   "FL.240000123",
+			TransNo:   "FL.240000123",
 			ARAmount:  "2,000",
 		},
 		{
 			Date:      "24 Apr 2026",
-			ARNo:      "AR.SCH2602.00001",
 			GuestName: "Ananda Romania",
 			CICO:      "28 Feb-01 Mar 2026",
 			Room:      "101",
-			FolioNo:   "FL.240000123",
+			TransNo:   "FL.240000123",
 			ARAmount:  "2,000",
 		},
 	}
