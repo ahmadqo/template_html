@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Banquet Proforma Invoice</title>
+    <title>Reservation Proforma Invoice</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -185,12 +185,6 @@
         display: flex;
         flex-direction: column;
       }
-      .info-card-col-red-border {
-        display: flex;
-        flex-direction: column;
-        border-left: 2px solid #ef4444;
-        padding-left: 5px;
-      }
       .info-card-label {
         font-size: 12px;
         font-weight: 600;
@@ -201,15 +195,6 @@
         font-size: 12px;
         font-weight: 500;
         color: #000000;
-      }
-      .date-pill {
-        display: inline-block;
-        padding: 6px 9px;
-        border: 1px solid #d7dedd;
-        border-radius: 50px;
-        font-size: 12px;
-        font-weight: 500;
-        color: #44444c;
       }
       .table-purple-wrapper {
         border: 1px solid #f3e5ff;
@@ -466,6 +451,36 @@
       .template-field p {
         margin-bottom: 6px;
       }
+      .badge-stay {
+        display: inline-flex;
+        align-items: center;
+      }
+      .badge-stay-date {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        padding: 0px 9px;
+        font-size: 12px;
+        color: #44444c;
+        font-weight: 500;
+        white-space: nowrap;
+        border-width: 1px 0px 1px 1px;
+        border-style: solid;
+        border-color: #b0b0b5;
+        border-radius: 12px 0px 0px 12px;
+      }
+      .badge-stay-duration {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        padding: 0px 10px;
+        background-color: #000000;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 0px 20px 20px 0px;
+        white-space: nowrap;
+      }
     </style>
     
     <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
@@ -475,7 +490,7 @@
       <div class="print-footer-wrapper">
         <div class="print-footer-info-row">
           <div class="print-info">
-            Printed: Superadmin on 09 Jul 2026 11:54:38 WIB
+            Printed: Superadmin on 09 Jul 2026 12:05:54 WIB
           </div>
           <div class="print-page-number">Page&nbsp;</div>
         </div>
@@ -512,7 +527,7 @@
           </div>
         </div>
         <div class="header-right">
-          <div class="doc-title">Banquet Proforma Invoice</div>
+          <div class="doc-title">Reservation Proforma Invoice</div>
           <div class="doc-id-badge">BP.SCH2604.00007</div>
         </div>
       </header>
@@ -536,26 +551,29 @@
           <div class="info-card">
             <div class="info-card-row">
               <div class="info-card-col">
-                <div class="info-card-label">Proforma Invoice</div>
+                <div class="info-card-label">Reservation Date</div>
                 <div class="info-card-value">Feb 13, 2026</div>
               </div>
-              <div class="info-card-col-red-border">
-                <div class="info-card-label">Due Date</div>
-                <div class="info-card-value">Feb 20, 2026</div>
+              <div class="info-card-col">
+                <div class="info-card-label">Arrival - Departure</div>
+                <div class="badge-stay">
+                  <div class="badge-stay-date">
+                    15 Feb - 17 Feb 2026
+                  </div>
+                  <div class="badge-stay-duration">
+                    2 Nights
+                  </div>
+                </div>
               </div>
             </div>
             <div class="info-card-row" style="margin-bottom: 0">
               <div class="info-card-col">
-                <div class="info-card-label">Expected / Guaranteed Pax</div>
-                <div class="info-card-value">
-                  500 / 400
-                </div>
+                <div class="info-card-label">Phone</div>
+                <div class="info-card-value">0812345678909</div>
               </div>
               <div class="info-card-col">
-                <div class="info-card-label">Start Date - End Date</div>
-                <div>
-                  <span class="date-pill">15 Feb - 17 Feb 2026</span>
-                </div>
+                <div class="info-card-label">Email</div>
+                <div class="info-card-value">berdikari@gmail.com</div>
               </div>
             </div>
           </div>
@@ -617,10 +635,11 @@
                           height="100"
                           preserveAspectRatio="none"
                           xlink:href="data:image/png;base64,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"
-                        />
+                          />
+                        </pattern>
+                        <span style="margin-left: -3px">3</span>
                       </defs>
                     </svg>
-                    <span style="margin-left: -3px">3</span>
                   </div>
                   
                 </td>
@@ -669,10 +688,11 @@
                           height="100"
                           preserveAspectRatio="none"
                           xlink:href="data:image/png;base64,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"
-                        />
+                          />
+                        </pattern>
+                        <span style="margin-left: -3px">3</span>
                       </defs>
                     </svg>
-                    <span style="margin-left: -3px">3</span>
                   </div>
                   
                 </td>
@@ -721,10 +741,11 @@
                           height="100"
                           preserveAspectRatio="none"
                           xlink:href="data:image/png;base64,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"
-                        />
+                          />
+                        </pattern>
+                        <span style="margin-left: -3px">3</span>
                       </defs>
                     </svg>
-                    <span style="margin-left: -3px">3</span>
                   </div>
                   
                 </td>
@@ -732,6 +753,34 @@
                 <td class="text-center">2</td>
                 <td class="text-right">100,000</td>
                 <td class="text-right">200,000</td>
+              </tr>
+               
+              <tr class="category-header-row">
+                <td
+                  colspan="7"
+                  style="
+                    background-color: #faf5ff;
+                    font-weight: 600;
+                    padding: 8px 10px;
+                    border-bottom: 1px solid #f3e5ff;
+                  "
+                >
+                  Additional
+                </td>
+              </tr>
+              
+              <tr>
+                <td>13-14 Feb 2026</td>
+                <td class="text-center">1</td>
+                <td style="display: flex; align-items: center">
+                  <span>1</span>
+                  <span>DLX</span>
+                  
+                </td>
+                <td>Extra Bed</td>
+                <td class="text-center">1</td>
+                <td class="text-right">300,000</td>
+                <td class="text-right">600,000</td>
               </tr>
                
               <tr class="total-row">
@@ -799,7 +848,7 @@
         </div>
 
         
-        <div class="template-field"><p><strong>Terms and Conditions :</strong></p><ul><li><p>Rates are inclusive of 21% government tax and service charge.</p></li><li><p>Rates include breakfast for 2 persons at the restaurant (for Room Breakfast package).</p></li><li><p>Extra bed includes breakfast for 1 person at the restaurant.</p></li><li><p>Check-in time is after 2:00 PM and check-out time is before 12:00 PM.</p></li><li><p>Cancellation is allowed no later than 1 week before the check-in date.</p></li><li><p>For cancellations made 3 days before check-in, 50% of the total invoice will be charged.</p></li><li><p>For cancellations made 1 day before check-in, 100% of the total invoice will be charged.</p></li><li><p>A 50% deposit of the estimated budget must be received at least 3 days before check-in, and the remaining 50% must be paid before the check-out date.</p></li></ul><p><strong>Note :</strong></p><p>Deposit payment of 50% is required to guarantee the reservation. Kindly complete the payment before the due date stated on this proforma invoice.</p></div>
+        <div class="template-field"><p><strong>Terms and Conditions :</strong></p><ul><li><p>Rates are inclusive of 21% government tax and service charge.</p></li><li><p>Rates include breakfast for 2 persons at the restaurant (for Room Breakfast package).</p></li><li><p>Extra bed includes breakfast for 1 person at the restaurant.</p></li><li><p>Check-in time is after 2:00 PM and check-out time is before 12:00 PM.</p></li><li><p>Cancellation is allowed no later than 1 week before the check-in date.</p></li><li><p>For cancellations made 3 days before check-in, 50% of the total invoice will be charged.</p></li><li><p>For cancellations made 1 day before check-in, 100% of the total invoice will be charged.</p></li><li><p>A 50% deposit of the estimated budget must be received at least 3 days before check-in, and the remaining 50% must be paid before the check-out date.</p></li></ul></div>
         
 
         <div style="display: flex; gap: 12px; align-items: start">

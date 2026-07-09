@@ -185,12 +185,6 @@
         display: flex;
         flex-direction: column;
       }
-      .info-card-col-red-border {
-        display: flex;
-        flex-direction: column;
-        border-left: 2px solid #ef4444;
-        padding-left: 5px;
-      }
       .info-card-label {
         font-size: 12px;
         font-weight: 600;
@@ -201,15 +195,6 @@
         font-size: 12px;
         font-weight: 500;
         color: #000000;
-      }
-      .date-pill {
-        display: inline-block;
-        padding: 6px 9px;
-        border: 1px solid #d7dedd;
-        border-radius: 50px;
-        font-size: 12px;
-        font-weight: 500;
-        color: #44444c;
       }
       .table-purple-wrapper {
         border: 1px solid #f3e5ff;
@@ -466,6 +451,36 @@
       .template-field p {
         margin-bottom: 6px;
       }
+      .badge-stay {
+        display: inline-flex;
+        align-items: center;
+      }
+      .badge-stay-date {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        padding: 0px 9px;
+        font-size: 12px;
+        color: #44444c;
+        font-weight: 500;
+        white-space: nowrap;
+        border-width: 1px 0px 1px 1px;
+        border-style: solid;
+        border-color: #b0b0b5;
+        border-radius: 12px 0px 0px 12px;
+      }
+      .badge-stay-duration {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        padding: 0px 10px;
+        background-color: #000000;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 0px 20px 20px 0px;
+        white-space: nowrap;
+      }
     </style>
     <!-- Paged.js polyfill for printable document pagination -->
     <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
@@ -536,26 +551,29 @@
           <div class="info-card">
             <div class="info-card-row">
               <div class="info-card-col">
-                <div class="info-card-label">Proforma Invoice</div>
-                <div class="info-card-value">{{ .Data.InvoiceDate }}</div>
+                <div class="info-card-label">Reservation Date</div>
+                <div class="info-card-value">{{ .Data.ReservationDate }}</div>
               </div>
-              <div class="info-card-col-red-border">
-                <div class="info-card-label">Due Date</div>
-                <div class="info-card-value">{{ .Data.DueDate }}</div>
+              <div class="info-card-col">
+                <div class="info-card-label">Arrival - Departure</div>
+                <div class="badge-stay">
+                  <div class="badge-stay-date">
+                    {{ .Data.ArrivalDeparture }}
+                  </div>
+                  <div class="badge-stay-duration">
+                    {{ .Data.TotalRoomNight }}
+                  </div>
+                </div>
               </div>
             </div>
             <div class="info-card-row" style="margin-bottom: 0">
               <div class="info-card-col">
-                <div class="info-card-label">Expected / Guaranteed Pax</div>
-                <div class="info-card-value">
-                  {{ .Data.ExpectedPax }} / {{ .Data.GuaranteedPax }}
-                </div>
+                <div class="info-card-label">Phone</div>
+                <div class="info-card-value">{{ .Data.Phone }}</div>
               </div>
               <div class="info-card-col">
-                <div class="info-card-label">Start Date - End Date</div>
-                <div>
-                  <span class="date-pill">{{ .Data.StartEndDate }}</span>
-                </div>
+                <div class="info-card-label">Email</div>
+                <div class="info-card-value">{{ .Data.Email }}</div>
               </div>
             </div>
           </div>
@@ -617,10 +635,11 @@
                           height="100"
                           preserveAspectRatio="none"
                           xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGF0lEQVR4nO2dWYgcRRiAK4knHhjj8aBmX4K781ftrijRGMSIByoS0OgK6oOaeGHMQ4zHrum/SsFb9EHxwRhvlIAXEiUoKIKiKBjwihqjD4JKTNRIYD2y//5S466ZbKZ6drIzXTVd9UE/Tc901f9NVXXX1UJ0IoanK+QLQNMzoGmTRNoOmoYl0pcS6UkwfI49x3cyo0Aani+RPpd6lPMO0PSxRJ7rO72lBjRfC5r+aSRj50F/VTK+2He6SwloHpBINHkZYwcSVQyf6Tv9pUIN8ZGgaVvTMsarL6TNvYM803c+SgNoenRPZdSUlNt956MUgOF9QNNvLRDyoxA8zXd+Op6K4VOnLGPs6M2413d+Oh6peUmrhEjDi3znp+MBzStaJURlvNh3fjoelfHilpUQ5IW+89Px9Bie1zIhGVd856fjGRjgGRLp16kLoY2+81IaAOnOqQoBzbf6zkdpAMOHSqSf91gG0nddhvfznY9SoZAXANKO5hty2p56fdtEBfncaoAn325sBcOntys9CSFEb8bdEmldAxGjEulVMDw7Ba0gZMb9UtM9oOktQPqqOmiF9DZoxh7DKolIJBIeBqYqyCfZEb9WHHY83v5mEtkEvYaPHmsbNrSsy6TOcwlouq//Nj4qyXFwwjW8t9R0R3OTGKZ4IP0Jmu5aYHivJKa2VAzyTIn0YWEidhfzXqrKxugZ5FlS03pvMvT/zy7ru2/mg6IvKYC01r+M0fGSsi7qcXfQfLV3CXrXAzRfLmIEDB/YmnGO0RYLoV+inMMFyDc2qNM3ti/w9EV+1cW3iJiwt5mg6QfnvxRpTUvH0if+vuGLAOlltxD6Nqq2BAyfklNlbDvW8GHtFCKRL6ze3SH9kSMtnm57iXR3zr/zXntOu4XYa4CmB3LS8ZCIBUD61BWI3oy7CxNiGHJK6mciBuYt5/2dywqQvhk/rwghFtuv5UgL2TtBUXaU4b6camJV4UI0PeEsJYZPFGXHrmhyBgD5hqKFSOSbon5IlMiZKwAK+SwPQhbmCBkSZUdqetAVgErGsmghdvzdfR49LMqO1PSYKwDHDfHhhbchhme7Swg9J8qO1PS8KwB9K/iAwktItfvfWUJeFGVHIr3mCsDAAM8oWsicZbyvs4QgrRVlBzS9HpKQATu73l1C3hBlBzS9FFKVBXYYIOYqyzaUrgD0DPKsooXYjsycKutZUXZA0+POQK3kY4oWUlnJXZPpOSgtgHS/s4QYPt7Dg+HcRj3P0a6qVcjnBfakvlyUHdB8mTtYvKT4zkX3RAvQfIkoOxXkM3IClXkQglGPGirDPe5g0VPFV1n0dKPBslJjn4xB00j9KoLe9zAe8oEjLSN24xsRA6Dp+7pBQNrsoYRscQjZJGIBkN50Bavf8CFFCalO8s6dVhoJUtMjrkAo5JOLElLdUDPmsZBxQPNSVyBA89LipgG50yGRrxexkPfPBKTVzQqxO84B0u9NC0Fa7TzH8HwRC7ZX13WnJTWtb04Ijdrz5xg+uOkqy7Euxaattuc5Cqpry+vX3X/bW+N2C7G3tPZaDiEbRGzkDeUqwz3tFlLdEcL5Ob0gYiN3OULGlXYLsddwfW47QEVs2Nke9Xb3AU1f26UA7W9DeJqdurrb9ZF2RLtHCmR8hV2aXBPcn+xU08IadbtfSs0+XPYNC1HMVmy0UQBkfKnd272rZpOxIoRY7DXttW0abFp8xSF4VEFCEklIZ6JSCQkLlYSEhUpCwkIlIWGhkpCwUElIWKgkJCxUEhIWKgkJC5WEhIVKQsJCJSFhoZKQsFBJSFioJCQsVBISFioJCQuVhISFSkLCQiUhYaGSkLBQSUhYqCQkLFQSEhYqCQkLlYSEhUpCwkIlIWEBmq9sZva7faHXpGe/G17kO38dR8Xw+ZNbWkBbql8wPN21iLOOkNN856/j6DN8hHvp9C5L4F4Z/w5oemcS5w9Ht+S5VUikVQ2CO2LflbvzfD67+i71/BJV/m372rzBwLsuGQr5uonfAeRBlxS7Z3A0Wy618x25oHmZRPrkvwWitNVWU7UlYyK2jagG3265oWlYIn0kM76qdqPmUPkXmyCHI+5Aq3IAAAAASUVORK5CYII="
-                        />
+                          />
+                        </pattern>
+                        <span style="margin-left: -3px">{{ .TotalGuest }}</span>
                       </defs>
                     </svg>
-                    <span style="margin-left: -3px">{{ .TotalGuest }}</span>
                   </div>
                   {{end}}
                 </td>
@@ -647,7 +666,50 @@
               <tr>
                 <td>{{ .Date }}</td>
                 <td class="text-center">{{ .Night }}</td>
-                <td>{{ .Room }}</td>
+                <td style="display: flex; align-items: center">
+                  <span>{{ .TotalRoom }}</span>
+                  <span>{{ .RoomName }}</span>
+                  {{if .TotalGuest}}
+                  <div style="margin-left: 5px">
+                    <svg
+                      width="12"
+                      height="13"
+                      viewBox="0 0 12 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <rect
+                        width="12"
+                        height="13"
+                        fill="url(#pattern0_17943_141492)"
+                      />
+                      <defs>
+                        <pattern
+                          id="pattern0_17943_141492"
+                          patternContentUnits="objectBoundingBox"
+                          width="1"
+                          height="1"
+                        >
+                          <use
+                            xlink:href="#image0_17943_141492"
+                            transform="matrix(0.0108333 0 0 0.01 -0.0416667 0)"
+                          />
+                        </pattern>
+                        <image
+                          id="image0_17943_141492"
+                          width="100"
+                          height="100"
+                          preserveAspectRatio="none"
+                          xlink:href="data:image/png;base64,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"
+                          />
+                        </pattern>
+                        <span style="margin-left: -3px">{{ .TotalGuest }}</span>
+                      </defs>
+                    </svg>
+                  </div>
+                  {{end}}
+                </td>
                 <td>{{ .Description }}</td>
                 <td class="text-center">{{ .Qty }}</td>
                 <td class="text-right">{{ .Price }}</td>
@@ -711,8 +773,8 @@
           </table>
         </div>
 
-        {{ if .TemplateField.beo_proforma_term }}
-        <div class="template-field">{{ .TemplateField.beo_proforma_term }}</div>
+        {{ if .TemplateField.proforma_term }}
+        <div class="template-field">{{ .TemplateField.proforma_term }}</div>
         {{ end }}
 
         <div style="display: flex; gap: 12px; align-items: start">
