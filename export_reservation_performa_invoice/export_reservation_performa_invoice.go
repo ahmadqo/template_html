@@ -84,6 +84,7 @@ type ReservationContentData struct {
 	PrintedBy string
 	PrintedAt string
 	QRCode    string // Isi dengan base64 string QR code murni
+	GuestIcon template.URL
 }
 
 // ARInvoiceReportData mendefinisikan struct utama untuk laporan AR Invoice
@@ -164,6 +165,8 @@ func main() {
 	}
 
 	// 3. Definisikan struct data
+	rawGuestIcon := "data:image/png;base64,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"
+
 	data := ARInvoiceReportData{
 		Property: PropertyData{
 			Name:       "Property Developer Inc.",
@@ -197,6 +200,7 @@ func main() {
 			PrintedBy:        "Superadmin",
 			PrintedAt:        time.Now().Format("02 Jan 2006 15:04:05 MST"),
 			QRCode:           rawBase64,
+			GuestIcon:        template.URL(rawGuestIcon),
 		},
 		Signature: []SignerData{
 			{SignerAddInfo: "", SignerName: "User", SignerPosition: ""},
