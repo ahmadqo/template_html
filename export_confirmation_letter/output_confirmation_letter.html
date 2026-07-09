@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Banquet Proforma Invoice</title>
+    <title>Confirmation Letter</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -185,12 +185,6 @@
         display: flex;
         flex-direction: column;
       }
-      .info-card-col-red-border {
-        display: flex;
-        flex-direction: column;
-        border-left: 2px solid #ef4444;
-        padding-left: 5px;
-      }
       .info-card-label {
         font-size: 12px;
         font-weight: 600;
@@ -201,15 +195,6 @@
         font-size: 12px;
         font-weight: 500;
         color: #000000;
-      }
-      .date-pill {
-        display: inline-block;
-        padding: 6px 9px;
-        border: 1px solid #d7dedd;
-        border-radius: 50px;
-        font-size: 12px;
-        font-weight: 500;
-        color: #44444c;
       }
       .table-purple-wrapper {
         border: 1px solid #f3e5ff;
@@ -466,6 +451,36 @@
       .template-field p {
         margin-bottom: 6px;
       }
+      .badge-stay {
+        display: inline-flex;
+        align-items: center;
+      }
+      .badge-stay-date {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        padding: 0px 9px;
+        font-size: 12px;
+        color: #44444c;
+        font-weight: 500;
+        white-space: nowrap;
+        border-width: 1px 0px 1px 1px;
+        border-style: solid;
+        border-color: #b0b0b5;
+        border-radius: 12px 0px 0px 12px;
+      }
+      .badge-stay-duration {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        padding: 0px 10px;
+        background-color: #000000;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 0px 20px 20px 0px;
+        white-space: nowrap;
+      }
     </style>
     
     <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
@@ -475,7 +490,7 @@
       <div class="print-footer-wrapper">
         <div class="print-footer-info-row">
           <div class="print-info">
-            Printed: Superadmin on 09 Jul 2026 14:35:01 WIB
+            Printed: Superadmin on 09 Jul 2026 14:43:33 WIB
           </div>
           <div class="print-page-number">Page&nbsp;</div>
         </div>
@@ -512,7 +527,7 @@
           </div>
         </div>
         <div class="header-right">
-          <div class="doc-title">Banquet Proforma Invoice</div>
+          <div class="doc-title">Confirmation Letter</div>
           <div class="doc-id-badge">BP.SCH2604.00007</div>
         </div>
       </header>
@@ -536,29 +551,44 @@
           <div class="info-card">
             <div class="info-card-row">
               <div class="info-card-col">
-                <div class="info-card-label">Proforma Invoice</div>
+                <div class="info-card-label">Reservation Date</div>
                 <div class="info-card-value">Feb 13, 2026</div>
               </div>
-              <div class="info-card-col-red-border">
-                <div class="info-card-label">Due Date</div>
-                <div class="info-card-value">Feb 20, 2026</div>
+              <div class="info-card-col">
+                <div class="info-card-label">Flight Information</div>
+                <div>
+                  <div class="info-card-value">
+                    Airport Pickup
+                  </div>
+                  <div style="font-size: 10px; color: #44444c">
+                    May 01, 2026
+                  </div>
+                </div>
               </div>
             </div>
             <div class="info-card-row" style="margin-bottom: 0">
               <div class="info-card-col">
-                <div class="info-card-label">Expected / Guaranteed Pax</div>
-                <div class="info-card-value">
-                  500 / 400
-                </div>
-              </div>
-              <div class="info-card-col">
-                <div class="info-card-label">Start Date - End Date</div>
-                <div>
-                  <span class="date-pill">15 Feb - 17 Feb 2026</span>
+                <div class="info-card-label">Arrival - Departure</div>
+                <div class="badge-stay">
+                  <div class="badge-stay-date">
+                    15 Feb - 17 Feb 2026
+                  </div>
+                  <div class="badge-stay-duration">
+                    2 Nights
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="info-card" style="margin-bottom: 10px; line-height: 21px">
+          <p style="font-size: 12px; font-weight: 400">
+            Greeting from Sky Inn Express
+          </p>
+          <p style="font-size: 12px; font-weight: 500">
+            Dear Valued Guest, Thank you for choosing Sky Inn Express. We truly appreciate your trust and support.
+          </p>
         </div>
 
         
@@ -680,6 +710,34 @@
                 <td class="text-right">200,000</td>
               </tr>
                
+              <tr class="category-header-row">
+                <td
+                  colspan="7"
+                  style="
+                    background-color: #faf5ff;
+                    font-weight: 600;
+                    padding: 8px 10px;
+                    border-bottom: 1px solid #f3e5ff;
+                  "
+                >
+                  Additional
+                </td>
+              </tr>
+              
+              <tr>
+                <td>13-14 Feb 2026</td>
+                <td class="text-center">1</td>
+                <td style="display: flex; align-items: center">
+                  <span>1</span>
+                  <span>DLX</span>
+                  
+                </td>
+                <td>Extra Bed</td>
+                <td class="text-center">1</td>
+                <td class="text-right">300,000</td>
+                <td class="text-right">600,000</td>
+              </tr>
+               
               <tr class="total-row">
                 <td colspan="5"></td>
                 <td>Total</td>
@@ -745,7 +803,7 @@
         </div>
 
         
-        <div class="template-field"><p><strong>Terms and Conditions :</strong></p><ul><li><p>Rates are inclusive of 21% government tax and service charge.</p></li><li><p>Rates include breakfast for 2 persons at the restaurant (for Room Breakfast package).</p></li><li><p>Extra bed includes breakfast for 1 person at the restaurant.</p></li><li><p>Check-in time is after 2:00 PM and check-out time is before 12:00 PM.</p></li><li><p>Cancellation is allowed no later than 1 week before the check-in date.</p></li><li><p>For cancellations made 3 days before check-in, 50% of the total invoice will be charged.</p></li><li><p>For cancellations made 1 day before check-in, 100% of the total invoice will be charged.</p></li><li><p>A 50% deposit of the estimated budget must be received at least 3 days before check-in, and the remaining 50% must be paid before the check-out date.</p></li></ul><p><strong>Note :</strong></p><p>Deposit payment of 50% is required to guarantee the reservation. Kindly complete the payment before the due date stated on this proforma invoice.</p></div>
+        <div class="template-field"><p><strong>Terms and Conditions :</strong></p><ul><li><p>Rates are inclusive of 21% government tax and service charge.</p></li><li><p>Rates include breakfast for 2 persons at the restaurant (for Room Breakfast package).</p></li><li><p>Extra bed includes breakfast for 1 person at the restaurant.</p></li><li><p>Check-in time is after 2:00 PM and check-out time is before 12:00 PM.</p></li><li><p>Cancellation is allowed no later than 1 week before the check-in date.</p></li><li><p>For cancellations made 3 days before check-in, 50% of the total invoice will be charged.</p></li><li><p>For cancellations made 1 day before check-in, 100% of the total invoice will be charged.</p></li><li><p>A 50% deposit of the estimated budget must be received at least 3 days before check-in, and the remaining 50% must be paid before the check-out date.</p></li></ul></div>
         
 
         <div style="display: flex; gap: 12px; align-items: start">

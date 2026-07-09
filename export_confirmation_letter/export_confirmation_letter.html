@@ -555,6 +555,19 @@
                 <div class="info-card-value">{{ .Data.ReservationDate }}</div>
               </div>
               <div class="info-card-col">
+                <div class="info-card-label">Flight Information</div>
+                <div>
+                  <div class="info-card-value">
+                    {{ .Data.FlightInformation }}
+                  </div>
+                  <div style="font-size: 10px; color: #44444c">
+                    {{.Data.FlightInformationDate}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="info-card-row" style="margin-bottom: 0">
+              <div class="info-card-col">
                 <div class="info-card-label">Arrival - Departure</div>
                 <div class="badge-stay">
                   <div class="badge-stay-date">
@@ -566,17 +579,16 @@
                 </div>
               </div>
             </div>
-            <div class="info-card-row" style="margin-bottom: 0">
-              <div class="info-card-col">
-                <div class="info-card-label">Phone</div>
-                <div class="info-card-value">{{ .Data.Phone }}</div>
-              </div>
-              <div class="info-card-col">
-                <div class="info-card-label">Email</div>
-                <div class="info-card-value">{{ .Data.Email }}</div>
-              </div>
-            </div>
           </div>
+        </div>
+
+        <div class="info-card" style="margin-bottom: 10px; line-height: 21px">
+          <p style="font-size: 12px; font-weight: 400">
+            {{ .Data.GreetingHeader }}
+          </p>
+          <p style="font-size: 12px; font-weight: 500">
+            {{ .Data.GreetingBody }}
+          </p>
         </div>
 
         <!-- AR Details Table (Purple Theme) -->
@@ -735,8 +747,8 @@
           </table>
         </div>
 
-        {{ if .TemplateField.proforma_term }}
-        <div class="template-field">{{ .TemplateField.proforma_term }}</div>
+        {{ if .TemplateField.conf_letter_term }}
+        <div class="template-field">{{ .TemplateField.conf_letter_term }}</div>
         {{ end }}
 
         <div style="display: flex; gap: 12px; align-items: start">
