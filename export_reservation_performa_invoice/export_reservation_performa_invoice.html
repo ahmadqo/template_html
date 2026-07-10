@@ -587,8 +587,8 @@
               <tr>
                 <th style="width: 18%">Date</th>
                 <th style="width: 8%" class="text-center">Night</th>
-                <th style="width: 15%">Room</th>
-                <th style="width: 29%">Description</th>
+                <th style="width: 19%">Room</th>
+                <th style="width: 25%">Description</th>
                 <th style="width: 15%" class="text-right">Price</th>
                 <th style="width: 15%" class="text-right">Amount</th>
               </tr>
@@ -599,7 +599,7 @@
                 <td>{{ .Date }}</td>
                 <td class="text-center">{{ .Night }}</td>
                 <td style="display: flex; align-items: center">
-                  <span>{{ .TotalRoom }}</span>
+                  <span style="margin-right: 3px">{{ .TotalRoom }}</span>
                   <span>{{ .RoomName }}</span>
                   {{if .TotalGuest}}
                   <div
