@@ -600,10 +600,9 @@
                 <th style="width: 18%">Date</th>
                 <th style="width: 8%" class="text-center">Night</th>
                 <th style="width: 15%">Room</th>
-                <th style="width: 25%">Description</th>
-                <th style="width: 8%" class="text-center">Qty</th>
-                <th style="width: 13%" class="text-right">Price</th>
-                <th style="width: 13%" class="text-right">Amount</th>
+                <th style="width: 29%">Description</th>
+                <th style="width: 15%" class="text-right">Price</th>
+                <th style="width: 15%" class="text-right">Amount</th>
               </tr>
             </thead>
             <tbody>
@@ -637,7 +636,6 @@
                   {{end}}
                 </td>
                 <td>{{ .Description }}</td>
-                <td class="text-center">{{ .Qty }}</td>
                 <td class="text-right">{{ .Price }}</td>
                 <td class="text-right">{{ .Amount }}</td>
               </tr>
@@ -685,13 +683,12 @@
                   {{end}}
                 </td>
                 <td>{{ .Description }}</td>
-                <td class="text-center">{{ .Qty }}</td>
                 <td class="text-right">{{ .Price }}</td>
                 <td class="text-right">{{ .Amount }}</td>
               </tr>
               {{ end }} {{ end }}
               <tr class="total-row">
-                <td colspan="5"></td>
+                <td colspan="4"></td>
                 <td>Total</td>
                 <td class="text-right">{{ .Data.TotalBreakdown }}</td>
               </tr>

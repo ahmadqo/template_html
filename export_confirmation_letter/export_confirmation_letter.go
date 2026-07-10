@@ -26,7 +26,6 @@ type BreakDownItem struct {
 	TotalRoom   string
 	TotalGuest  string
 	Description string
-	Qty         int
 	Price       string
 	Amount      string
 }
@@ -110,7 +109,6 @@ func main() {
 			TotalRoom:   "1",
 			TotalGuest:  "3",
 			Description: "Dinner",
-			Qty:         2,
 			Price:       "100,000",
 			Amount:      "200,000",
 		},
@@ -121,7 +119,6 @@ func main() {
 			TotalRoom:   "1",
 			TotalGuest:  "3",
 			Description: "Breakfast",
-			Qty:         1,
 			Price:       "50,000",
 			Amount:      "100,000",
 		},
@@ -132,7 +129,6 @@ func main() {
 			TotalRoom:   "1",
 			TotalGuest:  "3",
 			Description: "Dinner",
-			Qty:         2,
 			Price:       "100,000",
 			Amount:      "200,000",
 		},
@@ -146,7 +142,6 @@ func main() {
 			TotalRoom: "1",
 			// TotalGuest:  "3",
 			Description: "Extra Bed",
-			Qty:         1,
 			Price:       "300,000",
 			Amount:      "600,000",
 		},
@@ -207,7 +202,7 @@ func main() {
 			GuestIcon:             template.URL(rawGuestIcon),
 		},
 		Signature: []SignerData{
-			{SignerAddInfo: "", SignerName: "User", SignerPosition: ""},
+			{SignerAddInfo: "Created By", SignerName: "Ahmad Qomaruddin", SignerPosition: ""},
 		},
 		TemplateField: map[string]template.HTML{
 			"conf_letter_term": template.HTML(`<p><strong>Terms and Conditions :</strong></p><ul><li><p>Rates are inclusive of 21% government tax and service charge.</p></li><li><p>Rates include breakfast for 2 persons at the restaurant (for Room Breakfast package).</p></li><li><p>Extra bed includes breakfast for 1 person at the restaurant.</p></li><li><p>Check-in time is after 2:00 PM and check-out time is before 12:00 PM.</p></li><li><p>Cancellation is allowed no later than 1 week before the check-in date.</p></li><li><p>For cancellations made 3 days before check-in, 50% of the total invoice will be charged.</p></li><li><p>For cancellations made 1 day before check-in, 100% of the total invoice will be charged.</p></li><li><p>A 50% deposit of the estimated budget must be received at least 3 days before check-in, and the remaining 50% must be paid before the check-out date.</p></li></ul>`),
