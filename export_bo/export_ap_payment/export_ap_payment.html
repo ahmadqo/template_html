@@ -157,18 +157,22 @@
         margin-top: 4px;
       }
       .row-header-cards {
-        display: grid;
-        grid-template-columns: 0.7fr 1fr;
-        gap: 10px;
         margin-bottom: 10px;
       }
       .info-card {
-        border: 1px solid #d7dedd;
-        border-radius: 10px;
+        border: 0.8px solid #d7dedd;
+        border-radius: 12px;
         background: #ffffff;
         padding: 10px;
         display: flex;
         flex-direction: column;
+      }
+      .info-card-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: #000000;
+        margin-bottom: 2px;
+        line-height: 21px;
       }
       .info-card-text {
         font-size: 12px;
@@ -181,13 +185,17 @@
         grid-template-columns: 1fr 1fr;
         margin-bottom: 10px;
       }
+      .info-card-row-last {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
       .info-card-col {
         display: flex;
         flex-direction: column;
       }
       .info-card-label {
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 500;
         color: #66666e;
         margin-bottom: 5px;
       }
@@ -214,14 +222,8 @@
         color: #000000;
         font-weight: 600;
         text-align: left;
-        padding: 10px;
+        padding: 7px 10px;
         font-size: 12px;
-      }
-      table th:first-child {
-        border-top-left-radius: 10px;
-      }
-      table th:last-child {
-        border-top-right-radius: 10px;
       }
       .table-purple td {
         padding: 7px 10px;
@@ -234,11 +236,17 @@
       }
       .table-purple tr.total-row td {
         background-color: #faf5ff;
-        font-weight: bold;
+        font-weight: 500;
+        border-top: 1px solid #f3e8ff;
         color: #000000;
         font-size: 12px;
         padding: 10px;
-        border-top: none;
+      }
+      table th:first-child {
+        border-top-left-radius: 10px;
+      }
+      table th:last-child {
+        border-top-right-radius: 10px;
       }
       table tr:last-child td:first-child {
         border-bottom-left-radius: 10px;
@@ -246,12 +254,11 @@
       table tr:last-child td:last-child {
         border-bottom-right-radius: 10px;
       }
-
       .table-orange-wrapper {
-        border: 1px solid #ffecd7;
+        border: 1px solid #ffedd5;
         border-radius: 10px;
         overflow: hidden;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         background: #ffffff;
       }
       .table-orange {
@@ -261,45 +268,39 @@
         color: #000000;
       }
       .table-orange th {
-        background-color: #fffaf5;
+        background-color: #fff6eb;
         color: #000000;
         font-weight: 600;
         text-align: left;
         padding: 10px;
         font-size: 12px;
-        border-bottom: 1px solid #ffecd7;
       }
       .table-orange td {
         padding: 7px 10px;
         font-size: 12px;
         color: #000000;
-        /* border-bottom: 1px solid #ececec; */
       }
       .table-orange tr:last-child td {
         border-bottom: none;
       }
       .table-orange tr.total-row td {
-        background-color: #fffaf5;
+        background-color: #fff6eb;
         font-weight: 500;
-        /* border-top: 1px solid #ececec; */
+        border-top: 1px solid #ffedd5;
         color: #000000;
         font-size: 12px;
-        padding: 10px;
       }
       .text-right {
         text-align: right !important;
       }
-      .text-center {
-        text-align: center !important;
-      }
 
       .balance-card {
-        background: #f8f8f7;
+        background: #f8f8f780;
         border: 1px solid #d7dedd;
         border-radius: 10px;
         display: flex;
         align-items: center;
-        height: 41px;
+        height: 32px;
       }
       .balance-card table {
         width: 100%;
@@ -384,10 +385,10 @@
       .signer-container {
         display: flex;
         flex-wrap: wrap;
-        justify-content: end;
+        justify-content: center;
         gap: 12px;
         width: 100%;
-        /* margin-top: 30px; */
+        margin-top: 30px;
         page-break-inside: avoid;
         break-inside: avoid;
       }
@@ -417,6 +418,12 @@
         justify-content: center;
         align-items: center;
       }
+      .signer-qr {
+        width: 72px;
+        height: 72px;
+        margin-top: auto;
+        margin-bottom: 5px;
+      }
       .signer-name {
         font-size: 12px;
         font-weight: 400;
@@ -433,53 +440,6 @@
       }
       .pagedjs_page .pagedjs_margin-top-center > .pagedjs_margin-content > * {
         display: flex !important;
-      }
-      .template-field {
-        flex: 1;
-        font-size: 12px;
-        margin-top: 10px;
-      }
-      .template-field ul,
-      .template-field ol {
-        padding-left: 20px;
-        margin: 8px 0;
-        list-style-position: outside;
-      }
-      .template-field li {
-        margin-bottom: 4px;
-      }
-      .template-field p {
-        margin-bottom: 6px;
-      }
-      .badge-stay {
-        display: inline-flex;
-        align-items: center;
-      }
-      .badge-stay-date {
-        height: 26px;
-        display: flex;
-        align-items: center;
-        padding: 0px 9px;
-        font-size: 12px;
-        color: #44444c;
-        font-weight: 500;
-        white-space: nowrap;
-        border-width: 1px 0px 1px 1px;
-        border-style: solid;
-        border-color: #b0b0b5;
-        border-radius: 12px 0px 0px 12px;
-      }
-      .badge-stay-duration {
-        height: 26px;
-        display: flex;
-        align-items: center;
-        padding: 0px 10px;
-        background-color: #000000;
-        color: #ffffff;
-        font-size: 12px;
-        font-weight: 500;
-        border-radius: 0px 20px 20px 0px;
-        white-space: nowrap;
       }
     </style>
     <!-- Paged.js polyfill for printable document pagination -->
@@ -535,217 +495,86 @@
       <main class="body">
         <!-- Header Cards (Flex/Grid) -->
         <div class="row-header-cards">
-          <!-- Left Info Card (Client Info) -->
-          <div class="info-card" style="line-height: 21px">
-            <div style="font-size: 14px; font-weight: 500; color: #000000">
-              {{ .Data.EventName }}
-            </div>
-            <div style="font-size: 12px; font-weight: 400; color: #000000">
-              {{ .Data.ClientName }}
-            </div>
-            <div class="info-card-text" style="color: #000000">
-              {{ .Data.ClientAddress }}
-            </div>
-          </div>
-          <!-- Right Info Card (Dates & Notes) -->
           <div class="info-card">
             <div class="info-card-row">
               <div class="info-card-col">
-                <div class="info-card-label">Reservation Date</div>
-                <div class="info-card-value">{{ .Data.ReservationDate }}</div>
+                <div class="info-card-label">Date</div>
+                <div class="info-card-value">{{ .Data.TransDate }}</div>
               </div>
               <div class="info-card-col">
-                <div class="info-card-label">Flight Information</div>
-                <div>
-                  <div class="info-card-value">
-                    {{ .Data.FlightInformation }}
-                  </div>
-                  <div style="font-size: 10px; color: #44444c">
-                    {{.Data.FlightInformationDate}}
-                  </div>
+                <div class="info-card-label">Branch</div>
+                <div class="info-card-value">{{ .Data.BrandName }}</div>
+              </div>
+            </div>
+            <div class="info-card-row">
+              <div class="info-card-col">
+                <div class="info-card-label">Supplier</div>
+                <div class="info-card-value">{{ .Data.Supplier }}</div>
+              </div>
+              <div class="info-card-col">
+                <div class="info-card-label">Adjustment</div>
+                <div class="info-card-value">{{ .Data.Adjustment }}</div>
+              </div>
+            </div>
+            <div class="info-card-row">
+              <div class="info-card-col">
+                <div class="info-card-label">Payment Account</div>
+                <div class="info-card-value">{{ .Data.PaymentAccount }}</div>
+              </div>
+              <div class="info-card-col">
+                <div class="info-card-label">Adjustment Amount</div>
+                <div class="info-card-value">
+                  {{ .Data.AdjustmentAmount }} {{if
+                  .Data.AdjustmentAmountPercent}} &nbsp;•&nbsp; {{
+                  .Data.AdjustmentAmountPercent}} {{end}}
                 </div>
               </div>
             </div>
-            <div class="info-card-row" style="margin-bottom: 0">
+            <div class="info-card-row-last">
               <div class="info-card-col">
-                <div class="info-card-label">Arrival - Departure</div>
-                <div class="badge-stay">
-                  <div class="badge-stay-date">
-                    {{ .Data.ArrivalDeparture }}
-                  </div>
-                  <div class="badge-stay-duration">
-                    {{ .Data.TotalRoomNight }}
-                  </div>
+                <div class="info-card-label">Payment Amount</div>
+                <div class="info-card-value">
+                  {{ .Data.PaymentAmount }} {{if .Data.PaymentAmountPercent}}
+                  &nbsp;•&nbsp; {{ .Data.PaymentAmountPercent }} {{end}}
                 </div>
+              </div>
+              <div class="info-card-col">
+                <div class="info-card-label">Note</div>
+                <div class="info-card-value">{{ .Data.Note }}</div>
               </div>
             </div>
           </div>
         </div>
 
-        {{ if .TemplateField.conf_letter_greet }}
-
-        <div class="info-card" style="margin-bottom: 10px; line-height: 21px">
-          <div class="template-field">
-            {{ .TemplateField.conf_letter_greet }}
-          </div>
-        </div>
-        {{ end }}
-
-        <!-- AR Details Table (Purple Theme) -->
-        {{ if .Data.BreakDownItems }}
+        <!-- AP Details Table (Purple Theme) -->
+        {{ if .Data.APPaymentItems }}
         <div class="table-purple-wrapper">
           <table class="table-purple">
             <thead>
               <tr>
-                <th style="width: 18%">Date</th>
-                <th style="width: 8%" class="text-center">Night</th>
-                <th style="width: 19%">Room</th>
-                <th style="width: 25%">Description</th>
-                <th style="width: 15%" class="text-right">Price</th>
-                <th style="width: 15%" class="text-right">Amount</th>
+                <th>Date</th>
+                <th>Receiving No</th>
+                <th class="text-right">AP Amount</th>
+                <th class="text-right">Payment Amount</th>
               </tr>
             </thead>
             <tbody>
-              {{ range .Data.BreakDownItems }}
+              {{ range .Data.APPaymentItems }}
               <tr>
-                <td>{{ .Date }}</td>
-                <td class="text-center">{{ .Night }}</td>
-                <td style="display: flex; align-items: center">
-                  <span style="margin-right: 3px">{{ .TotalRoom }}</span>
-                  <span>{{ .RoomName }}</span>
-                  {{if .TotalGuest}}
-                  <div
-                    style="
-                      margin-left: 5px;
-                      display: inline-flex;
-                      align-items: center;
-                    "
-                  >
-                    <img
-                      src="{{ $.Data.GuestIcon }}"
-                      alt="Guest Icon"
-                      style="
-                        width: 12px;
-                        height: 13px;
-                        object-fit: contain;
-                        vertical-align: middle;
-                      "
-                    />
-                    <span>{{ .TotalGuest }}</span>
-                  </div>
-                  {{end}}
-                </td>
-                <td>{{ .Description }}</td>
-                <td class="text-right">{{ .Price }}</td>
-                <td class="text-right">{{ .Amount }}</td>
-              </tr>
-              {{ end }} {{ if .Data.AdditionalItems }}
-              <tr class="category-header-row">
-                <td
-                  colspan="7"
-                  style="
-                    background-color: #faf5ff;
-                    font-weight: 600;
-                    padding: 8px 10px;
-                    border-bottom: 1px solid #f3e5ff;
-                  "
-                >
-                  Additional
-                </td>
-              </tr>
-              {{ range .Data.AdditionalItems }}
-              <tr>
-                <td>{{ .Date }}</td>
-                <td class="text-center">{{ .Night }}</td>
-                <td style="display: flex; align-items: center">
-                  <span style="margin-right: 3px">{{ .TotalRoom }}</span>
-                  <span>{{ .RoomName }}</span>
-                  {{if .TotalGuest}}
-                  <div
-                    style="
-                      margin-left: 5px;
-                      display: inline-flex;
-                      align-items: center;
-                    "
-                  >
-                    <img
-                      src="{{ $.Data.GuestIcon }}"
-                      alt="Guest Icon"
-                      style="
-                        width: 12px;
-                        height: 13px;
-                        object-fit: contain;
-                        vertical-align: middle;
-                      "
-                    />
-                    <span>{{ .TotalGuest }}</span>
-                  </div>
-                  {{end}}
-                </td>
-                <td>{{ .Description }}</td>
-                <td class="text-right">{{ .Price }}</td>
-                <td class="text-right">{{ .Amount }}</td>
-              </tr>
-              {{ end }} {{ end }}
-              <tr class="total-row">
-                <td colspan="4"></td>
-                <td>Total</td>
-                <td class="text-right">{{ .Data.TotalBreakdown }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        {{ end }}
-
-        <!-- Payment Details Table (Orange Theme) -->
-        {{ if .Data.Payments }}
-        <div class="table-orange-wrapper">
-          <table class="table-orange">
-            <thead>
-              <tr>
-                <th style="width: 20%">Date</th>
-                <th style="width: 50%">Deposit</th>
-                <th style="width: 15%"></th>
-                <th style="width: 15%" class="text-right">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{ range .Data.Payments }}
-              <tr>
-                <td>{{ .PaymentDate }}</td>
-                <td>{{ .Description }}</td>
-                <td></td>
-                <td class="text-right">{{ .Amount }}</td>
+                <td>{{ .RCVDate }}</td>
+                <td>{{ .RcvNo }}</td>
+                <td class="text-right">{{ .RcvAmount }}</td>
+                <td class="text-right">{{ .PaymentAmount }}</td>
               </tr>
               {{ end }}
               <tr class="total-row">
-                <td></td>
-                <td></td>
-                <td>Total</td>
+                <td colspan="2"></td>
+                <td class="text-right">Total Payment</td>
                 <td class="text-right">{{ .Data.TotalPayment }}</td>
               </tr>
             </tbody>
           </table>
         </div>
-        {{ end }}
-
-        <!-- Balance Card -->
-        <div class="balance-card">
-          <table>
-            <tr>
-              <td style="width: 70%"></td>
-              <td style="width: 15%">
-                <div class="balance-label">Balance</div>
-              </td>
-              <td style="width: 15%">
-                <div class="balance-value">{{ .Data.Balance }}</div>
-              </td>
-            </tr>
-          </table>
-        </div>
-
-        {{ if .TemplateField.conf_letter_term }}
-        <div class="template-field">{{ .TemplateField.conf_letter_term }}</div>
         {{ end }}
 
         <div style="display: flex; gap: 12px; align-items: start">
@@ -754,6 +583,18 @@
           <div class="signer-container">
             {{ range .Signature }}
             <div class="signer-col">
+              {{ if .SignerQR }}
+              <div class="signer-qr" style="margin: auto 0">
+                <img
+                  {{
+                  qrCodeAttr
+                  .SignerQR
+                  }}
+                  alt="Digital Signature QR"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+              {{ else }}
               <div class="signer-by">{{ .SignerAddInfo }}</div>
               <div class="signer-line">
                 {{ if .SignerImage }}
@@ -771,6 +612,7 @@
                 {{ if .SignerPosition }}{{ .SignerPosition }}{{ else }}&nbsp;{{
                 end }}
               </div>
+              {{ end }}
             </div>
             {{ end }}
           </div>

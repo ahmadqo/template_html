@@ -216,64 +216,51 @@
       }
 
       /* ==========================================================================
-           Templates Grid
+           Templates Table
            ========================================================================== */
-      .templates-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      @media (min-width: 768px) {
-        .templates-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (min-width: 1024px) {
-        .templates-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      }
-
-      /* Template Card */
-      .card {
+      .table-container {
+        width: 100%;
+        overflow-x: auto;
         background: var(--bg-card);
         border: 1px solid var(--border-color);
         border-radius: 16px;
-        padding: 24px;
-        display: flex;
-        flex-direction: column;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: var(--shadow-card);
-        position: relative;
-        overflow: hidden;
+        margin-bottom: 30px;
       }
 
-      .card:hover {
-        background: var(--bg-card-hover);
-        border-color: var(--border-hover);
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-card-hover);
+      .template-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        min-width: 750px;
       }
 
-      .card-header {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        margin-bottom: 16px;
+      .template-table th,
+      .template-table td {
+        padding: 16px 20px;
+        vertical-align: middle;
+        border-bottom: 1px solid rgba(126, 34, 206, 0.04);
       }
 
-      .card-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        background: rgba(126, 34, 206, 0.04);
-        border: 1px solid rgba(126, 34, 206, 0.08);
+      .template-table th {
+        background: rgba(126, 34, 206, 0.02);
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid rgba(126, 34, 206, 0.08);
+      }
+
+      .template-table tbody tr {
+        transition: background-color 0.2s ease;
+      }
+
+      .template-table tbody tr:hover {
+        background-color: rgba(126, 34, 206, 0.02);
+      }
+
+      .template-table tbody tr:last-child td {
+        border-bottom: none;
       }
 
       .card-badge {
@@ -281,6 +268,7 @@
         font-weight: 600;
         padding: 4px 10px;
         border-radius: 20px;
+        display: inline-block;
       }
 
       .badge-email {
@@ -295,148 +283,69 @@
         border: 1px solid rgba(225, 29, 72, 0.12);
       }
 
-      .card-body {
-        flex: 1;
-        margin-bottom: 24px;
-      }
-
-      .card-body h3 {
-        font-size: 18px;
+      .template-title {
+        font-size: 15px;
         font-weight: 600;
-        margin-bottom: 6px;
         color: var(--text-primary);
       }
 
-      .card-filename {
+      .template-filename {
         font-family: var(--font-mono);
-        font-size: 12px;
+        font-size: 13px;
         color: var(--text-muted);
-        margin-bottom: 12px;
-        word-break: break-all;
       }
 
-      .card-desc {
-        font-size: 14px;
-        color: var(--text-secondary);
-        line-height: 1.5;
-        margin-bottom: 16px;
-      }
-
-      /* Variables Used Badge list */
-      .variables-list {
+      /* Table Actions buttons */
+      .table-actions {
         display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
+        gap: 8px;
+        align-items: center;
       }
 
-      .var-tag {
-        font-family: var(--font-mono);
-        font-size: 10px;
-        color: var(--accent-purple);
-        background: rgba(126, 34, 206, 0.05);
-        border: 1px solid rgba(126, 34, 206, 0.1);
-        padding: 2px 6px;
-        border-radius: 4px;
-      }
-
-      /* Card Button Action */
-      .card-btn {
+      .table-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 100%;
         background: rgba(126, 34, 206, 0.04);
         border: 1px solid rgba(126, 34, 206, 0.1);
-        border-radius: 10px;
+        border-radius: 8px;
         color: var(--accent-purple);
-        padding: 10px 16px;
-        font-size: 13px;
+        padding: 8px 12px;
+        font-size: 12px;
         font-weight: 600;
         text-decoration: none;
         cursor: pointer;
         transition: all 0.2s;
-        gap: 6px;
-      }
-
-      .card-btn:hover {
-        background: var(--accent-gradient);
-        border-color: transparent;
-        color: #ffffff;
-        box-shadow: 0 4px 15px rgba(126, 34, 206, 0.25);
-        transform: translateY(-1px);
-      }
-
-      /* Multi-button Action Container */
-      .card-actions {
-        display: flex;
-        gap: 8px;
-        width: 100%;
-        margin-top: auto;
-      }
-
-      .card-actions .card-btn {
-        flex: 1;
-        margin-top: 0;
-      }
-
-      .card-btn-primary {
-        background: var(--accent-gradient);
-        color: #ffffff;
-        border-color: transparent;
-      }
-
-      .card-btn-primary:hover {
-        background: var(--accent-gradient-hover);
-        box-shadow: 0 4px 15px rgba(126, 34, 206, 0.35);
-      }
-
-      /* Multi-option BEO Actions */
-      .card-actions-options {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        width: 100%;
-        margin-top: auto;
-        border-top: 1px solid #f3f0ff;
-        padding-top: 12px;
-      }
-      .option-row {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        padding: 6px 0;
-      }
-      .option-name {
-        font-size: 11.5px;
-        font-weight: 600;
-        color: #4b5563;
-        flex: 1 1 140px;
-      }
-      .option-buttons {
-        display: flex;
-        gap: 6px;
-        flex: 999 1 160px;
-      }
-      .option-buttons .card-btn {
-        flex: 1;
-        text-align: center;
-        padding: 5px 8px;
-        font-size: 11px;
-        margin-top: 0;
         white-space: nowrap;
       }
 
-      /* Grid Empty State */
+      .table-btn:hover {
+        background: var(--accent-gradient);
+        border-color: transparent;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(126, 34, 206, 0.2);
+      }
+
+      .table-btn-primary {
+        background: var(--accent-gradient);
+        color: #ffffff;
+        border-color: transparent;
+      }
+
+      .table-btn-primary:hover {
+        background: var(--accent-gradient-hover);
+        box-shadow: 0 4px 12px rgba(126, 34, 206, 0.3);
+      }
+
+      /* Empty State */
       .no-results {
-        grid-column: 1 / -1;
         text-align: center;
         padding: 60px 20px;
         color: var(--text-muted);
         background: rgba(126, 34, 206, 0.01);
         border: 1px dashed rgba(126, 34, 206, 0.1);
         border-radius: 16px;
+        margin-bottom: 30px;
       }
 
       .no-results svg {
@@ -444,51 +353,6 @@
         height: 48px;
         fill: var(--text-muted);
         margin-bottom: 12px;
-      }
-
-      /* Add Custom Mock Card Guide */
-      .card-add {
-        background: rgba(126, 34, 206, 0.01);
-        border: 2px dashed rgba(126, 34, 206, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        cursor: default;
-      }
-
-      .card-add:hover {
-        background: rgba(126, 34, 206, 0.02);
-        border-color: var(--border-hover);
-        transform: none;
-        box-shadow: none;
-      }
-
-      .add-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-      }
-
-      .add-icon {
-        font-size: 32px;
-        color: var(--text-muted);
-        margin-bottom: 12px;
-      }
-
-      .add-content h4 {
-        font-size: 15px;
-        font-weight: 600;
-        color: var(--text-secondary);
-        margin-bottom: 6px;
-      }
-
-      .add-content p {
-        font-size: 12px;
-        color: var(--text-muted);
-        max-width: 220px;
-        line-height: 1.4;
       }
     </style>
   </head>
@@ -516,7 +380,7 @@
         <div class="filter-tabs">
           <button class="filter-btn active" data-filter="all">Semua</button>
           <button class="filter-btn" data-filter="email">Email</button>
-          <button class="filter-btn" data-filter="pdf">PDF Printout</button>
+          <button class="filter-btn" data-filter="pdf">PDF</button>
         </div>
 
         <!-- Search Field -->
@@ -535,627 +399,21 @@
       </div>
 
       <!-- Catalog Templates Grid -->
-      <div class="templates-grid" id="templates-grid">
-        <!-- Template 1: Email Verification -->
-        <div
-          class="card"
-          data-type="email"
-          data-name="email verification verifikasi akun baru"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-email">Email</span>
-          </div>
-          <div class="card-body">
-            <h3>Verifikasi Akun Baru</h3>
-            <div class="card-filename">email_verification_template.html</div>
-          </div>
-          <a
-            href="email_verification_template.html"
-            target="_blank"
-            class="card-btn"
-          >
-            Buka Template
-          </a>
-        </div>
-
-        <!-- Template 2: Email Invite Verification -->
-        <div
-          class="card"
-          data-type="email"
-          data-name="email invite verification verifikasi undangan properti baru"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-email">Email</span>
-          </div>
-          <div class="card-body">
-            <h3>Verifikasi Undangan Akun</h3>
-            <div class="card-filename">
-              email_invite_verification_template.html
-            </div>
-          </div>
-          <a
-            href="email_invite_verification_template.html"
-            target="_blank"
-            class="card-btn"
-          >
-            Buka Template
-          </a>
-        </div>
-
-        <!-- Template 3: Email OTP Login -->
-        <div class="card" data-type="email" data-name="otp login masuk token">
-          <div class="card-header">
-            <span class="card-badge badge-email">Email</span>
-          </div>
-          <div class="card-body">
-            <h3>OTP Login</h3>
-            <div class="card-filename">email_otp_login_template.html</div>
-          </div>
-          <a
-            href="email_otp_login_template.html"
-            target="_blank"
-            class="card-btn"
-          >
-            Buka Template
-          </a>
-        </div>
-
-        <!-- Template 4: Email Forget Password -->
-        <div
-          class="card"
-          data-type="email"
-          data-name="forget password reset kata sandi lupa"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-email">Email</span>
-          </div>
-          <div class="card-body">
-            <h3>Lupa Kata Sandi</h3>
-            <div class="card-filename">email_forget_password_template.html</div>
-          </div>
-          <a
-            href="email_forget_password_template.html"
-            target="_blank"
-            class="card-btn"
-          >
-            Buka Template
-          </a>
-        </div>
-        <!-- Template 6: Export Folio Payment -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export folio payment printout cetak hasil bayar laporan tamu"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF Printout</span>
-          </div>
-          <div class="card-body">
-            <h3>Folio Payment</h3>
-            <div class="card-filename">export_folio_payment.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_folio_payment/export_folio_payment.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_folio_payment/output_folio_payment.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 7: Export Non-Stay Charge -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export non stay charge printout cetak biaya tambahan luar inap"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF Printout</span>
-          </div>
-          <div class="card-body">
-            <h3>Non-Stay Charge</h3>
-            <div class="card-filename">export_non_stay_charge.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_non_stay_charge/export_non_stay_charge.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_non_stay_charge/output_non_stay_charge.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 8: Export Deposit Reservation -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export deposit reservation printout cetak uang muka bukti reservasi"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF Printout</span>
-          </div>
-          <div class="card-body">
-            <h3>Deposit Reservation</h3>
-            <div class="card-filename">export_deposit_reservation.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_deposit_reservation/export_deposit_reservation.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_deposit_reservation/output_deposit_reservation.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 9: Export Charges -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export charges printout cetak rincian biaya transaksi produk layan tambahan inap"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF Printout</span>
-          </div>
-          <div class="card-body">
-            <h3>Charges</h3>
-            <div class="card-filename">export_charges.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_charges/export_charges.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_charges/output_charges.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 10: Export Lost & Found Claim -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export lost found claim printout cetak barang hilang temu ambil"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF Printout</span>
-          </div>
-          <div class="card-body">
-            <h3>Lost & Found Claim</h3>
-            <div class="card-filename">export_lost&found.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_lost_found/export_lost_found.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_lost_found/output_lost_found.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 11: Export Work Order -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export work order printout cetak maintenance pemeliharaan perbaikan"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF Printout</span>
-          </div>
-          <div class="card-body">
-            <h3>Work Order</h3>
-            <div class="card-filename">export_workorder.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_workorder/export_workorder.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_workorder/output_workorder.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 12: Export Flag -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export flag printout cetak penanda bermasalah pelanggaran catatan tamu guesthouse"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF Printout</span>
-          </div>
-          <div class="card-body">
-            <h3>Flag</h3>
-            <div class="card-filename">export_flag.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_flag/export_flag.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_flag/output_flag.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 13: Export Banquet Event Order (BEO) -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export banquet event order beo printout cetak acara pesta hotel"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF Printout</span>
-          </div>
-          <div class="card-body">
-            <h3>Banquet Event Order (BEO)</h3>
-            <div class="card-filename">export_beo.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_beo_v1/export_beo.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_beo_v1/output_beo.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 14: Export AR Invoice -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export invoice hotel printout cetak invoice hotel"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF AR Invoice</span>
-          </div>
-          <div class="card-body">
-            <h3>Export AR Invoice</h3>
-            <div class="card-filename">export_ar_invoice.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_bo/export_ar_invoice/export_ar_invoice.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_bo/export_ar_invoice/output_ar_invoice.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 14: Export AR Payment -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export payment hotel printout cetak payment hotel"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF AR Payment</span>
-          </div>
-          <div class="card-body">
-            <h3>Export AR Payment</h3>
-            <div class="card-filename">export_ar_payment.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_bo/export_ar_payment/export_ar_payment.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_bo/export_ar_payment/output_ar_payment.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 15: Export AP Voucher -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export ap voucher printout cetak voucher ap hotel"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF AP Voucher</span>
-          </div>
-          <div class="card-body">
-            <h3>Export AP Voucher</h3>
-            <div class="card-filename">export_ap_voucher.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_bo/export_ap_voucher/export_ap_voucher.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_bo/export_ap_voucher/output_ap_voucher.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 16: Export Guest Folio -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export guest folio printout cetak folio guest"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF Guest Folio</span>
-          </div>
-          <div class="card-body">
-            <h3>Export Guest Folio</h3>
-            <div class="card-filename">export_guest_folio.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_guest_folio/export_guest_folio.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_guest_folio/output_guest_folio.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 17: Export Company Folio -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export company folio printout cetak folio company"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF Company Folio</span>
-          </div>
-          <div class="card-body">
-            <h3>Export Company Folio</h3>
-            <div class="card-filename">export_company_folio.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_company_folio/export_company_folio.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_company_folio/output_company_folio.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 18: Export Banquet Performa Invoice -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export banquet performa invoice printout cetak performa invoice banquet"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf"
-              >PDF Banquet Performa Invoice</span
-            >
-          </div>
-          <div class="card-body">
-            <h3>Export Banquet Performa Invoice</h3>
-            <div class="card-filename">
-              export_banquet_performa_invoice.html
-            </div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_banquet_performa_invoice/export_banquet_performa_invoice.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_banquet_performa_invoice/output_banquet_performa_invoice.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 19: Export Reservation Performa Invoice -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export reservation performa invoice printout cetak performa invoice reservation"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf"
-              >PDF Reservation Performa Invoice</span
-            >
-          </div>
-          <div class="card-body">
-            <h3>Export Reservation Performa Invoice</h3>
-            <div class="card-filename">
-              export_reservation_performa_invoice.html
-            </div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_reservation_performa_invoice/export_reservation_performa_invoice.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_reservation_performa_invoice/output_reservation_performa_invoice.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
-
-        <!-- Template 20: Export Confirmation Letter -->
-        <div
-          class="card"
-          data-type="pdf"
-          data-name="export confirmation letter printout cetak surat konfirmasi"
-        >
-          <div class="card-header">
-            <span class="card-badge badge-pdf">PDF Confirmation Letter</span>
-          </div>
-          <div class="card-body">
-            <h3>Export Confirmation Letter</h3>
-            <div class="card-filename">export_confirmation_letter.html</div>
-          </div>
-          <div class="card-actions">
-            <a
-              href="export_confirmation_letter/export_confirmation_letter.html"
-              target="_blank"
-              class="card-btn"
-              title="Lihat kode template Go HTML"
-            >
-              Buka Template
-            </a>
-            <a
-              href="export_confirmation_letter/output_confirmation_letter.html"
-              target="_blank"
-              class="card-btn card-btn-primary card-btn-output"
-              title="Lihat hasil cetak PDF simulasi"
-            >
-              Hasil Cetak
-            </a>
-          </div>
-        </div>
+      <!-- Catalog Templates Table Container -->
+      <div class="table-container">
+        <table class="template-table">
+          <thead>
+            <tr>
+              <th style="width: 15%">Tipe</th>
+              <th style="width: 35%">Nama Template</th>
+              <th style="width: 30%">Nama File</th>
+              <th style="width: 20%">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="templates-body">
+            <!-- Data baris akan di-render secara dinamis menggunakan JavaScript -->
+          </tbody>
+        </table>
       </div>
 
       <!-- Empty Results Alert -->
@@ -1174,52 +432,353 @@
       document.addEventListener("DOMContentLoaded", () => {
         const filterButtons = document.querySelectorAll(".filter-btn");
         const searchInput = document.getElementById("search-input");
-        const cards = document.querySelectorAll(
-          ".templates-grid .card:not(#card-add-guide)",
-        );
         const noResults = document.getElementById("no-results");
-        const cardAddGuide = document.getElementById("card-add-guide");
+        const templatesBody = document.getElementById("templates-body");
+
+        // Database template sebagai array objek
+        const templates = [
+          // EMAIL
+          {
+            id: 3,
+            type: "email",
+            badgeLabel: "Email",
+            name: "OTP Login",
+            searchName: "otp login masuk token",
+            filename: "email_otp_login_template.html",
+            viewUrl: "email_otp_login_template.html",
+          },
+          {
+            id: 4,
+            type: "email",
+            badgeLabel: "Email",
+            name: "Lupa Kata Sandi",
+            searchName: "forget password reset kata sandi lupa",
+            filename: "email_forget_password_template.html",
+            viewUrl: "email_forget_password_template.html",
+          },
+          {
+            id: 1,
+            type: "email",
+            badgeLabel: "Email",
+            name: "Verifikasi Akun Baru",
+            searchName: "email verification verifikasi akun baru",
+            filename: "email_verification_template.html",
+            viewUrl: "email_verification_template.html",
+          },
+          {
+            id: 2,
+            type: "email",
+            badgeLabel: "Email",
+            name: "Verifikasi Undangan Akun",
+            searchName:
+              "email invite verification verifikasi undangan properti baru",
+            filename: "email_invite_verification_template.html",
+            viewUrl: "email_invite_verification_template.html",
+          },
+          // PDF FO
+          {
+            id: 13,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Banquet Event Order (BEO)",
+            searchName:
+              "export banquet event order beo printout cetak acara pesta hotel",
+            filename: "export_beo.html",
+            viewUrl: "export_beo_v1/export_beo.html",
+            outputUrl: "export_beo_v1/output_beo.html",
+          },
+          {
+            id: 19,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Banquet Performa Invoice",
+            searchName:
+              "export banquet performa invoice printout cetak performa invoice banquet",
+            filename: "export_banquet_performa_invoice.html",
+            viewUrl:
+              "export_banquet_performa_invoice/export_banquet_performa_invoice.html",
+            outputUrl:
+              "export_banquet_performa_invoice/output_banquet_performa_invoice.html",
+          },
+          {
+            id: 9,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Charges",
+            searchName:
+              "export charges printout cetak rincian biaya transaksi produk layan tambahan inap",
+            filename: "export_charges.html",
+            viewUrl: "export_charges/export_charges.html",
+            outputUrl: "export_charges/output_charges.html",
+          },
+          {
+            id: 18,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Company Folio",
+            searchName: "export company folio printout cetak folio company",
+            filename: "export_company_folio.html",
+            viewUrl: "export_company_folio/export_company_folio.html",
+            outputUrl: "export_company_folio/output_company_folio.html",
+          },
+          {
+            id: 21,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Confirmation Letter",
+            searchName:
+              "export confirmation letter printout cetak surat konfirmasi",
+            filename: "export_confirmation_letter.html",
+            viewUrl:
+              "export_confirmation_letter/export_confirmation_letter.html",
+            outputUrl:
+              "export_confirmation_letter/output_confirmation_letter.html",
+          },
+          {
+            id: 8,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Deposit Reservation",
+            searchName:
+              "export deposit reservation printout cetak uang muka bukti reservasi",
+            filename: "export_deposit_reservation.html",
+            viewUrl:
+              "export_deposit_reservation/export_deposit_reservation.html",
+            outputUrl:
+              "export_deposit_reservation/output_deposit_reservation.html",
+          },
+          {
+            id: 12,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Flag",
+            searchName:
+              "export flag printout cetak penanda bermasalah pelanggaran catatan tamu guesthouse",
+            filename: "export_flag.html",
+            viewUrl: "export_flag/export_flag.html",
+            outputUrl: "export_flag/output_flag.html",
+          },
+          {
+            id: 6,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Folio Payment",
+            searchName:
+              "export folio payment printout cetak hasil bayar laporan tamu",
+            filename: "export_folio_payment.html",
+            viewUrl: "export_folio_payment/export_folio_payment.html",
+            outputUrl: "export_folio_payment/output_folio_payment.html",
+          },
+          {
+            id: 17,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Guest Folio",
+            searchName: "export guest folio printout cetak folio guest",
+            filename: "export_guest_folio.html",
+            viewUrl: "export_guest_folio/export_guest_folio.html",
+            outputUrl: "export_guest_folio/output_guest_folio.html",
+          },
+          {
+            id: 10,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Lost & Found Claim",
+            searchName:
+              "export lost found claim printout cetak barang hilang temu ambil",
+            filename: "export_lost&found.html",
+            viewUrl: "export_lost_found/export_lost_found.html",
+            outputUrl: "export_lost_found/output_lost_found.html",
+          },
+          {
+            id: 7,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Non-Stay Charge",
+            searchName:
+              "export non stay charge printout cetak biaya tambahan luar inap",
+            filename: "export_non_stay_charge.html",
+            viewUrl: "export_non_stay_charge/export_non_stay_charge.html",
+            outputUrl: "export_non_stay_charge/output_non_stay_charge.html",
+          },
+          {
+            id: 20,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Reservation Performa Invoice",
+            searchName:
+              "export reservation performa invoice printout cetak performa invoice reservation",
+            filename: "export_reservation_performa_invoice.html",
+            viewUrl:
+              "export_reservation_performa_invoice/export_reservation_performa_invoice.html",
+            outputUrl:
+              "export_reservation_performa_invoice/output_reservation_performa_invoice.html",
+          },
+
+          {
+            id: 11,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "Work Order",
+            searchName:
+              "export work order printout cetak maintenance pemeliharaan perbaikan",
+            filename: "export_workorder.html",
+            viewUrl: "export_workorder/export_workorder.html",
+            outputUrl: "export_workorder/output_workorder.html",
+          },
+          // PDF BACKOFFICE
+          {
+            id: 14,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "AR Invoice",
+            searchName: "export invoice hotel printout cetak invoice hotel",
+            filename: "export_ar_invoice.html",
+            viewUrl: "export_bo/export_ar_invoice/export_ar_invoice.html",
+            outputUrl: "export_bo/export_ar_invoice/output_ar_invoice.html",
+          },
+          {
+            id: 15,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "AR Payment",
+            searchName: "export payment hotel printout cetak payment hotel",
+            filename: "export_ar_payment.html",
+            viewUrl: "export_bo/export_ar_payment/export_ar_payment.html",
+            outputUrl: "export_bo/export_ar_payment/output_ar_payment.html",
+          },
+          {
+            id: 16,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "AP Voucher",
+            searchName: "export ap voucher printout cetak voucher ap hotel",
+            filename: "export_ap_voucher.html",
+            viewUrl: "export_bo/export_ap_voucher/export_ap_voucher.html",
+            outputUrl: "export_bo/export_ap_voucher/output_ap_voucher.html",
+          },
+          {
+            id: 22,
+            type: "pdf",
+            badgeLabel: "PDF",
+            name: "AP Payment",
+            searchName: "export ap payment printout cetak payment ap hotel",
+            filename: "export_ap_payment.html",
+            viewUrl: "export_bo/export_ap_payment/export_ap_payment.html",
+            outputUrl: "export_bo/export_ap_payment/output_ap_payment.html",
+          },
+        ];
 
         let currentFilter = "all";
         let searchQuery = "";
 
-        function updateCardsVisibility() {
-          let visibleCount = 0;
+        // Fungsi untuk merender list tabel secara dinamis
+        function renderTemplates(data) {
+          templatesBody.innerHTML = "";
 
-          cards.forEach((card) => {
-            const cardType = card.getAttribute("data-type");
-            const cardSearchText =
-              card.getAttribute("data-name").toLowerCase() +
-              " " +
-              card.querySelector("h3").textContent.toLowerCase() +
-              " " +
-              card.querySelector(".card-filename").textContent.toLowerCase();
+          if (data.length === 0) {
+            noResults.style.display = "block";
+            return;
+          }
+          noResults.style.display = "none";
 
-            const matchesFilter =
-              currentFilter === "all" || cardType === currentFilter;
-            const matchesSearch = cardSearchText.includes(searchQuery);
+          data.forEach((template) => {
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-type", template.type);
+            tr.setAttribute("data-name", template.searchName);
 
-            if (matchesFilter && matchesSearch) {
-              card.style.display = "flex";
-              visibleCount++;
-            } else {
-              card.style.display = "none";
+            // 1. Cell Tipe
+            const tdType = document.createElement("td");
+            const badgeClass =
+              template.type === "email" ? "badge-email" : "badge-pdf";
+            tdType.innerHTML = `<span class="card-badge ${badgeClass}">${template.badgeLabel}</span>`;
+            tr.appendChild(tdType);
+
+            // 2. Cell Nama Template
+            const tdName = document.createElement("td");
+            tdName.innerHTML = `<span class="template-title">${template.name}</span>`;
+            tr.appendChild(tdName);
+
+            // 3. Cell Nama File
+            const tdFilename = document.createElement("td");
+            tdFilename.innerHTML = `<span class="template-filename">${template.filename}</span>`;
+            tr.appendChild(tdFilename);
+
+            // 4. Cell Aksi
+            const tdAction = document.createElement("td");
+            const actionDiv = document.createElement("div");
+            actionDiv.className = "table-actions";
+
+            // Tombol Buka Template
+            const btnView = document.createElement("a");
+            btnView.href = template.viewUrl;
+            btnView.target = "_blank";
+            btnView.className = "table-btn";
+            btnView.textContent = "Buka Template";
+            if (template.type === "pdf") {
+              btnView.title = "Lihat kode template Go HTML";
             }
+            actionDiv.appendChild(btnView);
+
+            // Tombol Hasil Cetak (jika ada output)
+            if (template.outputUrl) {
+              const btnOutput = document.createElement("a");
+              btnOutput.href = template.outputUrl;
+              btnOutput.target = "_blank";
+              btnOutput.className =
+                "table-btn table-btn-primary table-btn-output";
+              btnOutput.textContent = "Hasil Cetak";
+              btnOutput.title = "Lihat hasil cetak PDF simulasi";
+
+              // Logika Auto-Print saat tombol Hasil Cetak diklik
+              btnOutput.addEventListener("click", (e) => {
+                e.preventDefault();
+                const win = window.open(template.outputUrl, "_blank");
+                if (win) {
+                  const timer = setInterval(() => {
+                    try {
+                      if (win.document.readyState === "complete") {
+                        clearInterval(timer);
+                        win.print();
+                      }
+                    } catch (err) {
+                      clearInterval(timer);
+                      console.warn(
+                        "Auto-print preview is disabled on direct file:// protocol due to browser security restrictions.",
+                      );
+                    }
+                  }, 100);
+                }
+              });
+
+              actionDiv.appendChild(btnOutput);
+            }
+
+            tdAction.appendChild(actionDiv);
+            tr.appendChild(tdAction);
+            templatesBody.appendChild(tr);
+          });
+        }
+
+        // Fungsi penyaringan gabungan untuk filter & search
+        function updateFilteredTemplates() {
+          const filtered = templates.filter((template) => {
+            const matchesFilter =
+              currentFilter === "all" || template.type === currentFilter;
+
+            const searchString = (
+              template.name +
+              " " +
+              template.filename +
+              " " +
+              template.searchName
+            ).toLowerCase();
+            const matchesSearch = searchString.includes(searchQuery);
+
+            return matchesFilter && matchesSearch;
           });
 
-          // Show/hide 'Add Card' guide depending on filter
-          if (currentFilter === "all" && searchQuery === "") {
-            cardAddGuide.style.display = "flex";
-          } else {
-            cardAddGuide.style.display = "none";
-          }
-
-          // Show empty state if no templates found
-          if (visibleCount === 0) {
-            noResults.style.display = "block";
-          } else {
-            noResults.style.display = "none";
-          }
+          renderTemplates(filtered);
         }
 
         // Tabs click handler
@@ -1228,47 +787,18 @@
             filterButtons.forEach((b) => b.classList.remove("active"));
             e.target.classList.add("active");
             currentFilter = e.target.getAttribute("data-filter");
-            updateCardsVisibility();
+            updateFilteredTemplates();
           });
         });
 
         // Search input handler
         searchInput.addEventListener("input", (e) => {
           searchQuery = e.target.value.toLowerCase().trim();
-          updateCardsVisibility();
+          updateFilteredTemplates();
         });
 
-        // Intercept clicks on PDF template links to trigger print preview from dashboard
-        const pdfLinks = document.querySelectorAll(
-          '.card[data-type="pdf"] .card-btn-output',
-        );
-        pdfLinks.forEach((link) => {
-          link.addEventListener("click", (e) => {
-            e.preventDefault();
-            const url = link.getAttribute("href");
-            if (!url) return;
-
-            // Open window
-            const win = window.open(url, "_blank");
-            if (win) {
-              const timer = setInterval(() => {
-                try {
-                  if (win.document.readyState === "complete") {
-                    clearInterval(timer);
-                    // Trigger print in the child window
-                    win.print();
-                  }
-                } catch (err) {
-                  // Catch cross-origin security block (e.g. if loaded via file:// protocol directly)
-                  clearInterval(timer);
-                  console.warn(
-                    "Auto-print preview is disabled on direct file:// protocol due to browser security restrictions. Please serve this project via HTTP/local server to enable auto-print preview.",
-                  );
-                }
-              }, 100);
-            }
-          });
-        });
+        // Render pertama kali saat load
+        updateFilteredTemplates();
       });
     </script>
   </body>

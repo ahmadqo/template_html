@@ -185,6 +185,10 @@
         grid-template-columns: 1fr 1fr;
         margin-bottom: 10px;
       }
+      .info-card-row-last {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
       .info-card-col {
         display: flex;
         flex-direction: column;
@@ -218,11 +222,11 @@
         color: #000000;
         font-weight: 600;
         text-align: left;
-        padding: 10px;
+        padding: 7px 10px;
         font-size: 12px;
       }
       .table-purple td {
-        padding: 8.5px 10px;
+        padding: 7px 10px;
         border-bottom: 1px solid #ececec;
         font-size: 12px;
         color: #000000;
@@ -238,7 +242,18 @@
         font-size: 12px;
         padding: 10px;
       }
-
+      table th:first-child {
+        border-top-left-radius: 10px;
+      }
+      table th:last-child {
+        border-top-right-radius: 10px;
+      }
+      table tr:last-child td:first-child {
+        border-bottom-left-radius: 10px;
+      }
+      table tr:last-child td:last-child {
+        border-bottom-right-radius: 10px;
+      }
       .table-orange-wrapper {
         border: 1px solid #ffedd5;
         border-radius: 10px;
@@ -261,7 +276,7 @@
         font-size: 12px;
       }
       .table-orange td {
-        padding: 8.5px 10px;
+        padding: 7px 10px;
         font-size: 12px;
         color: #000000;
       }
@@ -504,24 +519,23 @@
             <div class="info-card-row">
               <div class="info-card-col">
                 <div class="info-card-label">Payment Account</div>
-                <div class="info-card-value">
-                  {{ .Data.AccountNo }}&nbsp;•&nbsp; {{ .Data.AccountName}}
-                </div>
+                <div class="info-card-value">{{ .Data.PaymentAccount }}</div>
               </div>
               <div class="info-card-col">
                 <div class="info-card-label">Adjustment Amount</div>
                 <div class="info-card-value">
-                  {{ .Data.AdjustmentAmount }} &nbsp;•&nbsp; {{
-                  .Data.AdjustmentAmountPercent}}
+                  {{ .Data.AdjustmentAmount }} {{if
+                  .Data.AdjustmentAmountPercent}} &nbsp;•&nbsp; {{
+                  .Data.AdjustmentAmountPercent}} {{end}}
                 </div>
               </div>
             </div>
-            <div class="info-card-row">
+            <div class="info-card-row-last">
               <div class="info-card-col">
                 <div class="info-card-label">Payment Amount</div>
                 <div class="info-card-value">
-                  {{ .Data.PaymentAmount }} &nbsp;•&nbsp; {{
-                  .Data.PaymentAmountPercent }}
+                  {{ .Data.PaymentAmount }} {{if .Data.PaymentAmountPercent}}
+                  &nbsp;•&nbsp; {{ .Data.PaymentAmountPercent }} {{end}}
                 </div>
               </div>
               <div class="info-card-col">
