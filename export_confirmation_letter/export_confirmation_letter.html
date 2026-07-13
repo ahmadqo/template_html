@@ -582,14 +582,14 @@
           </div>
         </div>
 
+        {{ if .TemplateField.conf_letter_greet }}
+
         <div class="info-card" style="margin-bottom: 10px; line-height: 21px">
-          <p style="font-size: 12px; font-weight: 400">
-            {{ .Data.GreetingHeader }}
-          </p>
-          <p style="font-size: 12px; font-weight: 500">
-            {{ .Data.GreetingBody }}
-          </p>
+          <div class="template-field">
+            {{ .TemplateField.conf_letter_greet }}
+          </div>
         </div>
+        {{ end }}
 
         <!-- AR Details Table (Purple Theme) -->
         {{ if .Data.BreakDownItems }}
