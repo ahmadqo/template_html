@@ -157,6 +157,9 @@
         margin-top: 4px;
       }
       .row-header-cards {
+        display: grid;
+        grid-template-columns: 0.7fr 1fr;
+        gap: 10px;
         margin-bottom: 10px;
       }
       .info-card {
@@ -167,13 +170,25 @@
         display: flex;
         flex-direction: column;
       }
-
+      .info-card-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: #000000;
+        margin-bottom: 2px;
+        line-height: 21px;
+      }
+      .info-card-text {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 21px;
+      }
       .info-card-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
         margin-bottom: 10px;
       }
-      .info-card-row-last {
+      .info-card-row-no-margin {
         display: grid;
         grid-template-columns: 1fr 1fr;
       }
@@ -181,9 +196,15 @@
         display: flex;
         flex-direction: column;
       }
+      .info-card-col-red-border {
+        display: flex;
+        flex-direction: column;
+        border-left: 2px solid #ef4444;
+        padding-left: 5px;
+      }
       .info-card-label {
         font-size: 12px;
-        font-weight: 500;
+        font-weight: 600;
         color: #66666e;
         margin-bottom: 5px;
       }
@@ -210,7 +231,7 @@
         color: #000000;
         font-weight: 600;
         text-align: left;
-        padding: 7px 10px;
+        padding: 10px;
         font-size: 12px;
       }
       .table-purple td {
@@ -230,6 +251,74 @@
         font-size: 12px;
         padding: 10px;
       }
+
+      .table-orange-wrapper {
+        border: 1px solid #ffedd5;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 5px;
+        background: #ffffff;
+      }
+      .table-orange {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Roboto", sans-serif;
+        color: #000000;
+      }
+      .table-orange th {
+        background-color: #fff6eb;
+        color: #000000;
+        font-weight: 600;
+        text-align: left;
+        padding: 10px;
+        font-size: 12px;
+      }
+      .table-orange td {
+        padding: 7px 10px;
+        font-size: 12px;
+        color: #000000;
+      }
+      .table-orange tr:last-child td {
+        border-bottom: none;
+      }
+      .table-orange tr.total-row td {
+        background-color: #fff6eb;
+        font-weight: 500;
+        border-top: 1px solid #ffedd5;
+        color: #000000;
+        font-size: 12px;
+      }
+      .text-right {
+        text-align: right !important;
+      }
+
+      .balance-card {
+        background: #f8f8f780;
+        border: 1px solid #d7dedd;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        height: 32px;
+      }
+      .balance-card table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .balance-card table tr td {
+        padding: 0 10px;
+      }
+      .balance-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #000000;
+        text-align: left;
+      }
+      .balance-value {
+        font-size: 12px;
+        font-weight: 600;
+        color: #000000;
+        text-align: right;
+      }
       table th:first-child {
         border-top-left-radius: 10px;
       }
@@ -242,12 +331,6 @@
       table tr:last-child td:last-child {
         border-bottom-right-radius: 10px;
       }
-
-      .text-right {
-        text-align: right !important;
-      }
-
-
       @media screen {
         /* Hide repeated header on screen preview for pages other than page 1 */
         .pagedjs_page:not(.pagedjs_first_page) .pagedjs_margin-top {
@@ -287,7 +370,8 @@
         .body {
           display: block;
         }
-        .table-purple-wrapper {
+        .table-purple-wrapper,
+        .table-orange-wrapper {
           overflow: visible;
         }
         thead {
@@ -421,48 +505,37 @@
       <main class="body">
         <!-- Header Cards (Flex/Grid) -->
         <div class="row-header-cards">
+          <!-- Left Info Card -->
+          <div class="info-card">
+            <div class="info-card-title">{{ .Data.CompanyName }}</div>
+            <div class="info-card-text">{{ .Data.CompanyAddress }}</div>
+            <div class="info-card-text">
+              {{if .Data.CompanyEmail}}
+              <span style="text-decoration: underline"
+                >{{ .Data.CompanyEmail }}</span
+              >
+              {{end}} {{if and .Data.CompanyPhone .Data.CompanyEmail}}
+              &nbsp;•&nbsp; {{end}} {{if .Data.CompanyPhone}}
+              <span>{{ .Data.CompanyPhone }}</span>
+              {{end}}
+            </div>
+          </div>
+          <!-- Right Info Card (Dates & Notes) -->
           <div class="info-card">
             <div class="info-card-row">
               <div class="info-card-col">
                 <div class="info-card-label">Date</div>
                 <div class="info-card-value">{{ .Data.TransDate }}</div>
               </div>
+              <div class="info-card-col-red-border">
+                <div class="info-card-label">Due Date</div>
+                <div class="info-card-value">{{ .Data.DueDate }}</div>
+              </div>
+            </div>
+            <div class="info-card-row-no-margin">
               <div class="info-card-col">
                 <div class="info-card-label">Branch</div>
-                <div class="info-card-value">{{ .Data.BrandName }}</div>
-              </div>
-            </div>
-            <div class="info-card-row">
-              <div class="info-card-col">
-                <div class="info-card-label">Company</div>
-                <div class="info-card-value">{{ .Data.ClientName }}</div>
-              </div>
-              <div class="info-card-col">
-                <div class="info-card-label">Adjustment</div>
-                <div class="info-card-value">{{ .Data.Adjustment }}</div>
-              </div>
-            </div>
-            <div class="info-card-row">
-              <div class="info-card-col">
-                <div class="info-card-label">Payment Account</div>
-                <div class="info-card-value">{{ .Data.PaymentAccount }}</div>
-              </div>
-              <div class="info-card-col">
-                <div class="info-card-label">Adjustment Amount</div>
-                <div class="info-card-value">
-                  {{ .Data.AdjustmentAmount }} {{if
-                  .Data.AdjustmentAmountPercent}} &nbsp;•&nbsp; {{
-                  .Data.AdjustmentAmountPercent}} {{end}}
-                </div>
-              </div>
-            </div>
-            <div class="info-card-row-last">
-              <div class="info-card-col">
-                <div class="info-card-label">Payment Amount</div>
-                <div class="info-card-value">
-                  {{ .Data.PaymentAmount }} {{if .Data.PaymentAmountPercent}}
-                  &nbsp;•&nbsp; {{ .Data.PaymentAmountPercent }} {{end}}
-                </div>
+                <div class="info-card-value">{{ .Data.Branch }}</div>
               </div>
               <div class="info-card-col">
                 <div class="info-card-label">Note</div>
@@ -473,35 +546,83 @@
         </div>
 
         <!-- AR Details Table (Purple Theme) -->
-        {{ if .Data.ARPaymentItems }}
+        {{ if .Data.ARItems }}
         <div class="table-purple-wrapper">
           <table class="table-purple">
             <thead>
               <tr>
-                <th>Date</th>
-                <th>AR No</th>
-                <th class="text-right">AR Amount</th>
-                <th class="text-right">Payment Amount</th>
+                <th>Adjustment</th>
+                <th class="text-right">Amount</th>
               </tr>
             </thead>
             <tbody>
-              {{ range .Data.ARPaymentItems }}
+              {{ range .Data.ARItems }}
               <tr>
-                <td>{{ .ARDate }}</td>
-                <td>{{ .ARNo }}</td>
-                <td class="text-right">{{ .ARAmount }}</td>
-                <td class="text-right">{{ .PaymentAmount }}</td>
+                <td>
+                  <div>{{ .MemoName }}</div>
+                  <div style="font-size: 10px; color: #44444c">
+                    {{ .Account }}
+                  </div>
+                </td>
+                <td class="text-right">{{ .Amount }}</td>
               </tr>
               {{ end }}
               <tr class="total-row">
-                <td colspan="2"></td>
-                <td class="text-right">Total Payment</td>
-                <td class="text-right">{{ .Data.TotalPayment }}</td>
+                <td class="text-right">Total Amount</td>
+                <td class="text-right">{{ .Data.TotalAR }}</td>
               </tr>
             </tbody>
           </table>
         </div>
         {{ end }}
+
+        <!-- Payment Details Table (Orange Theme) -->
+        {{ if .Data.Payments }}
+        <div class="table-orange-wrapper">
+          <table class="table-orange">
+            <thead>
+              <tr>
+                <th style="width: 15%">Payment Date</th>
+                <th style="width: 25%">Transaction No</th>
+                <th style="width: 35%"></th>
+                <th style="width: 25%" class="text-right">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range .Data.Payments }}
+              <tr>
+                <td style="width: 15%">{{ .PaymentDate }}</td>
+                <td style="width: 25%">{{ .TransactionNo }}</td>
+                <td style="width: 35%"></td>
+                <td style="width: 25%" class="text-right">{{ .Amount }}</td>
+              </tr>
+              {{ end }}
+              <tr class="total-row">
+                <td style="width: 15%"></td>
+                <td style="width: 25%"></td>
+                <td style="width: 35%">Total Payment</td>
+                <td style="width: 25%" class="text-right">
+                  {{ .Data.TotalPayment }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        {{ end }}
+
+        <!-- Balance Card -->
+        <div class="balance-card">
+          <table>
+            <tr>
+              <td style="width: 15%"></td>
+              <td style="width: 25%"></td>
+              <td style="width: 35%" class="balance-label">Balance</td>
+              <td style="width: 25%" class="balance-value">
+                {{ .Data.Balance }}
+              </td>
+            </tr>
+          </table>
+        </div>
 
         <div style="display: flex; gap: 12px; align-items: start">
           <!-- Signer -->

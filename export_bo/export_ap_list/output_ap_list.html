@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Account Receivable Payment</title>
+    <title>Account Payable Adjustment</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -157,6 +157,9 @@
         margin-top: 4px;
       }
       .row-header-cards {
+        display: grid;
+        grid-template-columns: 0.7fr 1fr;
+        gap: 10px;
         margin-bottom: 10px;
       }
       .info-card {
@@ -167,13 +170,25 @@
         display: flex;
         flex-direction: column;
       }
-
+      .info-card-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: #000000;
+        margin-bottom: 2px;
+        line-height: 21px;
+      }
+      .info-card-text {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 21px;
+      }
       .info-card-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
         margin-bottom: 10px;
       }
-      .info-card-row-last {
+      .info-card-row-no-margin {
         display: grid;
         grid-template-columns: 1fr 1fr;
       }
@@ -181,9 +196,15 @@
         display: flex;
         flex-direction: column;
       }
+      .info-card-col-red-border {
+        display: flex;
+        flex-direction: column;
+        border-left: 2px solid #ef4444;
+        padding-left: 5px;
+      }
       .info-card-label {
         font-size: 12px;
-        font-weight: 500;
+        font-weight: 600;
         color: #66666e;
         margin-bottom: 5px;
       }
@@ -210,7 +231,7 @@
         color: #000000;
         font-weight: 600;
         text-align: left;
-        padding: 7px 10px;
+        padding: 10px;
         font-size: 12px;
       }
       .table-purple td {
@@ -230,6 +251,74 @@
         font-size: 12px;
         padding: 10px;
       }
+
+      .table-orange-wrapper {
+        border: 1px solid #ffedd5;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 5px;
+        background: #ffffff;
+      }
+      .table-orange {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Roboto", sans-serif;
+        color: #000000;
+      }
+      .table-orange th {
+        background-color: #fff6eb;
+        color: #000000;
+        font-weight: 600;
+        text-align: left;
+        padding: 10px;
+        font-size: 12px;
+      }
+      .table-orange td {
+        padding: 7px 10px;
+        font-size: 12px;
+        color: #000000;
+      }
+      .table-orange tr:last-child td {
+        border-bottom: none;
+      }
+      .table-orange tr.total-row td {
+        background-color: #fff6eb;
+        font-weight: 500;
+        border-top: 1px solid #ffedd5;
+        color: #000000;
+        font-size: 12px;
+      }
+      .text-right {
+        text-align: right !important;
+      }
+
+      .balance-card {
+        background: #f8f8f780;
+        border: 1px solid #d7dedd;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        height: 32px;
+      }
+      .balance-card table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .balance-card table tr td {
+        padding: 0 10px;
+      }
+      .balance-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #000000;
+        text-align: left;
+      }
+      .balance-value {
+        font-size: 12px;
+        font-weight: 600;
+        color: #000000;
+        text-align: right;
+      }
       table th:first-child {
         border-top-left-radius: 10px;
       }
@@ -242,12 +331,6 @@
       table tr:last-child td:last-child {
         border-bottom-right-radius: 10px;
       }
-
-      .text-right {
-        text-align: right !important;
-      }
-
-
       @media screen {
          
         .pagedjs_page:not(.pagedjs_first_page) .pagedjs_margin-top {
@@ -287,7 +370,8 @@
         .body {
           display: block;
         }
-        .table-purple-wrapper {
+        .table-purple-wrapper,
+        .table-orange-wrapper {
           overflow: visible;
         }
         thead {
@@ -376,7 +460,7 @@
       <div class="print-footer-wrapper">
         <div class="print-footer-info-row">
           <div class="print-info">
-            Printed: Superadmin on 13 Jul 2026 23:53:07 WIB
+            Printed: Superadmin on 13 Jul 2026 23:52:23 WIB
           </div>
           <div class="print-page-number">Page&nbsp;</div>
         </div>
@@ -413,54 +497,45 @@
           </div>
         </div>
         <div class="header-right">
-          <div class="doc-title">Account Receivable Payment</div>
-          <div class="doc-id-badge">ARP.SCH2602.00001</div>
+          <div class="doc-title">Account Payable Adjustment</div>
+          <div class="doc-id-badge">AR.SCH2602.00001</div>
         </div>
       </header>
       
       <main class="body">
         
         <div class="row-header-cards">
+          
+          <div class="info-card">
+            <div class="info-card-title">CV Maju Bersama Abadi</div>
+            <div class="info-card-text">Jl. Kaliurang Km. 12 Dekat UII, Sleman, Yogyakarta</div>
+            <div class="info-card-text">
+              
+              <span style="text-decoration: underline"
+                >halhalobandung@gmail.com</span
+              >
+               
+              &nbsp;•&nbsp;  
+              <span>08123456789</span>
+              
+            </div>
+          </div>
+          
           <div class="info-card">
             <div class="info-card-row">
               <div class="info-card-col">
                 <div class="info-card-label">Date</div>
                 <div class="info-card-value">Apr 24, 2026</div>
               </div>
+              <div class="info-card-col-red-border">
+                <div class="info-card-label">Due Date</div>
+                <div class="info-card-value">Apr 30, 2026</div>
+              </div>
+            </div>
+            <div class="info-card-row-no-margin">
               <div class="info-card-col">
                 <div class="info-card-label">Branch</div>
-                <div class="info-card-value">Yogyakarta Branch</div>
-              </div>
-            </div>
-            <div class="info-card-row">
-              <div class="info-card-col">
-                <div class="info-card-label">Company</div>
-                <div class="info-card-value">AGODA</div>
-              </div>
-              <div class="info-card-col">
-                <div class="info-card-label">Adjustment</div>
-                <div class="info-card-value">Rounding</div>
-              </div>
-            </div>
-            <div class="info-card-row">
-              <div class="info-card-col">
-                <div class="info-card-label">Payment Account</div>
-                <div class="info-card-value">12121 - Bank Mandiri</div>
-              </div>
-              <div class="info-card-col">
-                <div class="info-card-label">Adjustment Amount</div>
-                <div class="info-card-value">
-                  1,000  &nbsp;•&nbsp; 0.05% 
-                </div>
-              </div>
-            </div>
-            <div class="info-card-row-last">
-              <div class="info-card-col">
-                <div class="info-card-label">Payment Amount</div>
-                <div class="info-card-value">
-                  2,000,000 
-                  &nbsp;•&nbsp; 100% 
-                </div>
+                <div class="info-card-value">Branch 1</div>
               </div>
               <div class="info-card-col">
                 <div class="info-card-label">Note</div>
@@ -476,37 +551,95 @@
           <table class="table-purple">
             <thead>
               <tr>
-                <th>Date</th>
-                <th>AR No</th>
-                <th class="text-right">AR Amount</th>
-                <th class="text-right">Payment Amount</th>
+                <th>Adjustment</th>
+                <th class="text-right">Amount</th>
               </tr>
             </thead>
             <tbody>
               
               <tr>
-                <td>24 Apr 2026</td>
-                <td>AR.SCH2602.00001</td>
-                <td class="text-right">2,000,000</td>
-                <td class="text-right">1,500,000</td>
+                <td>
+                  <div>Test AR</div>
+                  <div style="font-size: 10px; color: #44444c">
+                    1203.04 - Acc Depr FF&amp;E Furniture
+                  </div>
+                </td>
+                <td class="text-right">2,000</td>
               </tr>
               
               <tr>
-                <td>24 Apr 2026</td>
-                <td>AR.SCH2602.00002</td>
-                <td class="text-right">1,000,000</td>
-                <td class="text-right">500,000</td>
+                <td>
+                  <div>Test AR 2</div>
+                  <div style="font-size: 10px; color: #44444c">
+                    1203.04 - Acc Depr FF&amp;E Furniture
+                  </div>
+                </td>
+                <td class="text-right">2,000</td>
               </tr>
               
               <tr class="total-row">
-                <td colspan="2"></td>
-                <td class="text-right">Total Payment</td>
-                <td class="text-right">2,000,000</td>
+                <td class="text-right">Total Amount</td>
+                <td class="text-right">2,000</td>
               </tr>
             </tbody>
           </table>
         </div>
         
+
+        
+        
+        <div class="table-orange-wrapper">
+          <table class="table-orange">
+            <thead>
+              <tr>
+                <th style="width: 15%">Payment Date</th>
+                <th style="width: 25%">Transaction No</th>
+                <th style="width: 35%"></th>
+                <th style="width: 25%" class="text-right">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <tr>
+                <td style="width: 15%">15 Jun 2026</td>
+                <td style="width: 25%">PR.SCH2604.00008</td>
+                <td style="width: 35%"></td>
+                <td style="width: 25%" class="text-right">1,000</td>
+              </tr>
+              
+              <tr>
+                <td style="width: 15%">15 Apr 2026</td>
+                <td style="width: 25%">AC.SCH2602.00001</td>
+                <td style="width: 35%"></td>
+                <td style="width: 25%" class="text-right">1,000</td>
+              </tr>
+              
+              <tr class="total-row">
+                <td style="width: 15%"></td>
+                <td style="width: 25%"></td>
+                <td style="width: 35%">Total Payment</td>
+                <td style="width: 25%" class="text-right">
+                  2,000
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+
+        
+        <div class="balance-card">
+          <table>
+            <tr>
+              <td style="width: 15%"></td>
+              <td style="width: 25%"></td>
+              <td style="width: 35%" class="balance-label">Balance</td>
+              <td style="width: 25%" class="balance-value">
+                0
+              </td>
+            </tr>
+          </table>
+        </div>
 
         <div style="display: flex; gap: 12px; align-items: start">
           

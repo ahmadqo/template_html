@@ -167,19 +167,7 @@
         display: flex;
         flex-direction: column;
       }
-      .info-card-title {
-        font-size: 14px;
-        font-weight: 500;
-        color: #000000;
-        margin-bottom: 2px;
-        line-height: 21px;
-      }
-      .info-card-text {
-        font-size: 12px;
-        font-weight: 400;
-        color: #000000;
-        line-height: 21px;
-      }
+
       .info-card-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -254,73 +242,12 @@
       table tr:last-child td:last-child {
         border-bottom-right-radius: 10px;
       }
-      .table-orange-wrapper {
-        border: 1px solid #ffedd5;
-        border-radius: 10px;
-        overflow: hidden;
-        margin-bottom: 5px;
-        background: #ffffff;
-      }
-      .table-orange {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: "Roboto", sans-serif;
-        color: #000000;
-      }
-      .table-orange th {
-        background-color: #fff6eb;
-        color: #000000;
-        font-weight: 600;
-        text-align: left;
-        padding: 10px;
-        font-size: 12px;
-      }
-      .table-orange td {
-        padding: 7px 10px;
-        font-size: 12px;
-        color: #000000;
-      }
-      .table-orange tr:last-child td {
-        border-bottom: none;
-      }
-      .table-orange tr.total-row td {
-        background-color: #fff6eb;
-        font-weight: 500;
-        border-top: 1px solid #ffedd5;
-        color: #000000;
-        font-size: 12px;
-      }
+
       .text-right {
         text-align: right !important;
       }
 
-      .balance-card {
-        background: #f8f8f780;
-        border: 1px solid #d7dedd;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        height: 32px;
-      }
-      .balance-card table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-      .balance-card table tr td {
-        padding: 0 10px;
-      }
-      .balance-label {
-        font-size: 12px;
-        font-weight: 600;
-        color: #000000;
-        text-align: left;
-      }
-      .balance-value {
-        font-size: 12px;
-        font-weight: 600;
-        color: #000000;
-        text-align: right;
-      }
+
       @media screen {
         /* Hide repeated header on screen preview for pages other than page 1 */
         .pagedjs_page:not(.pagedjs_first_page) .pagedjs_margin-top {
@@ -360,8 +287,7 @@
         .body {
           display: block;
         }
-        .table-purple-wrapper,
-        .table-orange-wrapper {
+        .table-purple-wrapper {
           overflow: visible;
         }
         thead {
