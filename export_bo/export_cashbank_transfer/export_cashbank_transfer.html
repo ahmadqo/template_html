@@ -193,60 +193,6 @@
         font-weight: 500;
         color: #000000;
       }
-      .table-purple-wrapper {
-        border: 1px solid #f3e5ff;
-        border-radius: 10px;
-        overflow: hidden;
-        margin-bottom: 10px;
-        background: #ffffff;
-      }
-      .table-purple {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: "Roboto", sans-serif;
-        color: #000000;
-      }
-      .table-purple th {
-        background-color: #faf5ff;
-        color: #000000;
-        font-weight: 600;
-        text-align: left;
-        padding: 7px 10px;
-        font-size: 12px;
-      }
-      .table-purple td {
-        padding: 7px 10px;
-        border-bottom: 1px solid #ececec;
-        font-size: 12px;
-        color: #000000;
-      }
-      .table-purple tr:last-child td {
-        border-bottom: none;
-      }
-      .table-purple tr.total-row td {
-        background-color: #faf5ff;
-        font-weight: 500;
-        border-top: 1px solid #f3e8ff;
-        color: #000000;
-        font-size: 12px;
-        padding: 7px 10px;
-      }
-      table th:first-child {
-        border-top-left-radius: 10px;
-      }
-      table th:last-child {
-        border-top-right-radius: 10px;
-      }
-      table tr:last-child td:first-child {
-        border-bottom-left-radius: 10px;
-      }
-      table tr:last-child td:last-child {
-        border-bottom-right-radius: 10px;
-      }
-
-      .text-right {
-        text-align: right !important;
-      }
 
       @media screen {
         /* Hide repeated header on screen preview for pages other than page 1 */
@@ -287,16 +233,7 @@
         .body {
           display: block;
         }
-        .table-purple-wrapper {
-          overflow: visible;
-        }
-        thead {
-          display: table-header-group;
-        }
-        tr {
-          page-break-inside: avoid;
-          break-inside: avoid;
-        }
+
         .print-footer-wrapper {
           position: running(footer);
           margin: 0;
@@ -367,37 +304,6 @@
       .pagedjs_page .pagedjs_margin-top-center > .pagedjs_margin-content > * {
         display: flex !important;
       }
-      .ribbon-draft {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 70px;
-        height: 70px;
-        overflow: hidden;
-        pointer-events: none;
-      }
-      .ribbon-draft span {
-        position: absolute;
-        display: block;
-        width: 100px;
-        padding: 4px 0;
-        background-color: #8a8a91;
-        color: #ffffff;
-        font-size: 10px;
-        font-weight: 700;
-        text-align: center;
-        right: -24px;
-        top: 14px;
-        transform: rotate(45deg);
-      }
-      .ribbon-green span {
-        background-color: #dbfce7;
-        color: #00bd7d;
-      }
-      .ribbon-red span {
-        background-color: #ffe3e2;
-        color: #fb2c36;
-      }
     </style>
     <!-- Paged.js polyfill for printable document pagination -->
     <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
@@ -452,15 +358,20 @@
       <main class="body">
         <div class="row-header-cards">
           <div class="info-card">
-            {{ if eq .Data.Mode "I" }}
-            <div class="ribbon-draft ribbon-green"><span>Money In</span></div>
-            {{ else }}
-            <div class="ribbon-draft ribbon-red"><span>Money Out</span></div>
-            {{ end }}
             <div class="info-card-row">
               <div class="info-card-col">
                 <div class="info-card-label">Date</div>
                 <div class="info-card-value">{{ .Data.TransDate }}</div>
+              </div>
+              <div class="info-card-col">
+                <div class="info-card-label">Amount</div>
+                <div class="info-card-value">{{ .Data.Amount }}</div>
+              </div>
+            </div>
+            <div class="info-card-row">
+              <div class="info-card-col">
+                <div class="info-card-label">Source / Debit</div>
+                <div class="info-card-value">{{ .Data.SourceAccount }}</div>
               </div>
               <div class="info-card-col">
                 <div class="info-card-label">Person</div>
@@ -469,10 +380,7 @@
             </div>
             <div class="info-card-row-last">
               <div class="info-card-col">
-                <div class="info-card-label">
-                  Destination / {{ if eq .Data.Mode "I" }} Debit {{ else }}
-                  Credit {{ end }}
-                </div>
+                <div class="info-card-label">Destination / Credit</div>
                 <div class="info-card-value">
                   {{ .Data.DestinationAccount }}
                 </div>
@@ -484,34 +392,6 @@
             </div>
           </div>
         </div>
-
-        {{ if .Data.CashBankItem }}
-        <div class="table-purple-wrapper">
-          <table class="table-purple">
-            <thead>
-              <tr>
-                <th>Credit Account</th>
-                <th>Note</th>
-                <th class="text-right">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{ range .Data.CashBankItem }}
-              <tr>
-                <td>{{ .Account }}</td>
-                <td>{{ .Note }}</td>
-                <td class="text-right">{{ .Amount }}</td>
-              </tr>
-              {{ end }}
-              <tr class="total-row">
-                <td></td>
-                <td class="text-right">Total</td>
-                <td class="text-right">{{ .Data.Amount }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        {{ end }}
 
         <div style="display: flex; gap: 12px; align-items: start">
           <!-- Signer -->
