@@ -60,9 +60,11 @@ type ARListContentData struct {
 	Payments       []PaymentItem
 	TotalPayment   string
 	Balance        string
-	PrintedBy      string
-	PrintedAt      string
-	QRCode         string // Isi dengan base64 string QR code murni
+	Status         string // Status dokumen (OVER_DUE, PAID, UNPAID, dll)
+
+	PrintedBy string
+	PrintedAt string
+	QRCode    string // Isi dengan base64 string QR code murni
 }
 
 // ARListReportData mendefinisikan struct utama untuk laporan AR List
@@ -131,9 +133,11 @@ func main() {
 			Payments:       payments,
 			TotalPayment:   "2,000",
 			Balance:        "0",
-			PrintedBy:      "Superadmin",
-			PrintedAt:      time.Now().Format("02 Jan 2006 15:04:05 MST"),
-			QRCode:         rawBase64,
+			Status:         "PAID",
+
+			PrintedBy: "Superadmin",
+			PrintedAt: time.Now().Format("02 Jan 2006 15:04:05 MST"),
+			QRCode:    rawBase64,
 		},
 		Signature: []SignerData{
 			{SignerAddInfo: "Prepared by", SignerName: "User", SignerPosition: "Staff In Charge"},

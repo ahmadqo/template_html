@@ -163,6 +163,8 @@
         margin-bottom: 10px;
       }
       .info-card {
+        position: relative;
+        overflow: hidden;
         border: 0.8px solid #d7dedd;
         border-radius: 12px;
         background: #ffffff;
@@ -451,6 +453,41 @@
       .pagedjs_page .pagedjs_margin-top-center > .pagedjs_margin-content > * {
         display: flex !important;
       }
+      .ribbon-draft {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 70px;
+        height: 70px;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .ribbon-draft span {
+        position: absolute;
+        display: block;
+        width: 100px;
+        padding: 4px 0;
+        background-color: #8a8a91;
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 700;
+        text-align: center;
+        right: -24px;
+        top: 14px;
+        transform: rotate(45deg);
+      }
+      .ribbon-green span {
+        background-color: #dbfce7;
+        color: #00bd7d;
+      }
+      .ribbon-red span {
+        background-color: #ffe3e2;
+        color: #fb2c36;
+      }
+      .ribbon-yellow span {
+        background-color: #fef9c2;
+        color: #894b00;
+      }
     </style>
     <!-- Paged.js polyfill for printable document pagination -->
     <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
@@ -522,6 +559,13 @@
           </div>
           <!-- Right Info Card (Dates & Notes) -->
           <div class="info-card">
+            {{if .Data.Status}} {{ if eq .Data.Status "OVER_DUE" }}
+            <div class="ribbon-draft ribbon-red"><span>Overdue</span></div>
+            {{ else if eq .Data.Status "PAID" }}
+            <div class="ribbon-draft ribbon-green"><span>Paid</span></div>
+            {{ else }}
+            <div class="ribbon-draft ribbon-yellow"><span>Unpaid</span></div>
+            {{ end }} {{ end }}
             <div class="info-card-row">
               <div class="info-card-col">
                 <div class="info-card-label">Date</div>

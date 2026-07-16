@@ -70,6 +70,7 @@ type APInvoiceContentData struct {
 
 	// Balance Akhir
 	Balance string
+	Status  string // Status dokumen (OVER_DUE, PAID, UNPAID, dll)
 
 	PrintedBy string
 	PrintedAt string
@@ -149,9 +150,11 @@ func main() {
 			Payments:        payments,
 			TotalPayment:    "2,000",
 			Balance:         "0",
-			PrintedBy:       "Superadmin",
-			PrintedAt:       time.Now().Format("02 Jan 2006 15:04:05 MST"),
-			QRCode:          rawBase64,
+			Status:          "PAID",
+
+			PrintedBy: "Superadmin",
+			PrintedAt: time.Now().Format("02 Jan 2006 15:04:05 MST"),
+			QRCode:    rawBase64,
 		},
 		Signature: []SignerData{
 			{SignerAddInfo: "Prepared by", SignerName: "User", SignerPosition: "Staff In Charge"},
