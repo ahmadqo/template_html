@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ .Data.DocumentTitle }}</title>
+    <!-- Google Fonts Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+      body {
+        font-family:
+          "Roboto",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background-color: #ffffff;
+        color: #000000;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+      }
+      .header {
+        width: 100%;
+        background: #ffffff;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 6px 30px 6px 30px;
+      }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .company-info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        padding-top: 2px;
+      }
+      .company-name {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #000000;
+      }
+      .company-sub {
+        font-size: 11.5px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 1.3;
+      }
+      .header-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+      }
+      .doc-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #000000;
+        line-height: 1.2;
+      }
+      .doc-id-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0px 14px;
+        border: 1px solid #00bd7d;
+        border-radius: 50px;
+        background: #dbfce7;
+        font-size: 12px;
+        font-weight: 500;
+        color: #008234;
+        letter-spacing: 0.01em;
+        height: 20px;
+      }
+      .body {
+        background: #ffffff;
+        padding: 8px 30px 12px 30px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .qr-wrap {
+        flex-shrink: 0;
+        width: 72px;
+        height: 72px;
+        align-self: center;
+      }
+
+      .print-footer-wrapper {
+        order: 9999;
+        margin-top: auto;
+        padding-top: 24px;
+        padding-left: 30px;
+        padding-right: 30px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        page-break-inside: avoid;
+      }
+      .print-footer-info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 4px;
+      }
+      .print-info {
+        font-size: 12px;
+        color: #8a8a91;
+        font-weight: 500;
+        text-align: left;
+      }
+      .print-page-number {
+        font-size: 12px;
+        color: #8a8a91;
+      }
+      .print-page-number::after {
+        content: "1 of 1";
+      }
+      .print-footer-separator {
+        border: none;
+        border-top: 1px solid #d7dedd;
+        margin: 0;
+      }
+      .print-footer-note {
+        font-size: 10px;
+        color: #000000;
+        text-align: justify;
+        line-height: 1.4;
+        margin-top: 4px;
+      }
+      .row-header-cards {
+        display: grid;
+        grid-template-columns: 0.7fr 1fr;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .info-card {
+        position: relative;
+        overflow: hidden;
+        border: 0.8px solid #d7dedd;
+        border-radius: 12px;
+        background: #ffffff;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+      .info-card-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: #000000;
+        margin-bottom: 2px;
+        line-height: 21px;
+      }
+      .info-card-text {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 21px;
+      }
+      .info-card-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 10px;
+      }
+      .info-card-row-last {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      .info-card-col {
+        display: flex;
+        flex-direction: column;
+      }
+      .info-card-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #66666e;
+        margin-bottom: 5px;
+      }
+      .info-card-value {
+        font-size: 12px;
+        font-weight: 500;
+        color: #000000;
+      }
+      .table-purple-wrapper {
+        border: 1px solid #f3e5ff;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 10px;
+        background: #ffffff;
+      }
+      .table-purple {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Roboto", sans-serif;
+        color: #000000;
+      }
+      .table-purple th {
+        background-color: #faf5ff;
+        color: #000000;
+        font-weight: 600;
+        text-align: left;
+        padding: 7px 10px;
+        font-size: 12px;
+      }
+      .table-purple td {
+        padding: 7px 10px;
+        border-bottom: 1px solid #ececec;
+        font-size: 12px;
+        color: #000000;
+      }
+      .table-purple tr:last-child td {
+        border-bottom: none;
+      }
+      .table-purple tr.total-row td {
+        background-color: #faf5ff;
+        font-weight: 500;
+        border-top: 1px solid #f3e8ff;
+        color: #000000;
+        font-size: 12px;
+        padding: 7px 10px;
+      }
+
+      .text-right {
+        text-align: right !important;
+      }
+
+      .summary-card {
+        border: 1px solid #d7dedd;
+        border-radius: 12px;
+        background: #f8f8f780;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .summary-note {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .summary-note-label {
+        font-size: 12px;
+        font-weight: 500;
+        color: #8a8a91;
+      }
+      .summary-note-content {
+        font-size: 13px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 1.4;
+      }
+      .summary-breakdown {
+        width: 32%;
+      }
+      .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .summary-table td {
+        padding: 3px 0;
+        font-size: 12px;
+        color: #000000;
+        line-height: 1.4;
+      }
+      .summary-table td.summary-label {
+        text-align: left;
+      }
+      .summary-table td.summary-value {
+        text-align: right;
+      }
+      .summary-table td.bold {
+        font-weight: 700;
+      }
+      .summary-table tr.total-row td {
+        padding-top: 4px;
+      }
+      table th:first-child {
+        border-top-left-radius: 10px;
+      }
+      table th:last-child {
+        border-top-right-radius: 10px;
+      }
+      table tr:last-child td:first-child {
+        border-bottom-left-radius: 10px;
+      }
+      table tr:last-child td:last-child {
+        border-bottom-right-radius: 10px;
+      }
+      @media screen {
+        /* Hide repeated header on screen preview for pages other than page 1 */
+        .pagedjs_page:not(.pagedjs_first_page) .pagedjs_margin-top {
+          display: none !important;
+        }
+      }
+
+      @media print {
+        @page {
+          size: A4 portrait;
+          margin: 26mm 0 25mm 0;
+
+          @top-center {
+            content: element(header);
+            width: 100%;
+          }
+          @bottom-center {
+            content: element(footer);
+            width: 100%;
+          }
+        }
+        body {
+          margin: 0;
+        }
+        .page {
+          width: 100%;
+          min-height: auto;
+          height: auto;
+          margin: 0;
+          overflow: visible;
+          display: block;
+        }
+        .header {
+          position: running(header);
+          text-align: left;
+        }
+        .body {
+          display: block;
+        }
+        .table-purple-wrapper {
+          overflow: visible;
+        }
+        thead {
+          display: table-header-group;
+        }
+        tr {
+          page-break-inside: avoid;
+          break-inside: avoid;
+        }
+        .print-footer-wrapper {
+          position: running(footer);
+          margin: 0;
+          width: 100%;
+        }
+        .print-page-number::after {
+          content: counter(page) " of " counter(pages);
+        }
+      }
+
+      /* Dynamic Signer Styling */
+      .signer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        margin-top: 30px;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .signer-col {
+        width: calc(16.66% - 10px);
+        min-width: 75px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 85px;
+        text-align: center;
+      }
+      .signer-by {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        margin-bottom: 5px;
+      }
+      .signer-line {
+        width: 100%;
+        border-bottom: 0.5px solid #b0b0b5;
+        margin-top: auto;
+        margin-bottom: 5px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .signer-qr {
+        width: 72px;
+        height: 72px;
+        margin-top: auto;
+        margin-bottom: 5px;
+      }
+      .signer-name {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        white-space: nowrap;
+        min-height: 14px;
+      }
+      .signer-position {
+        font-size: 12px;
+        font-weight: 300;
+        color: #000000;
+        white-space: nowrap;
+        min-height: 14px;
+      }
+      .pagedjs_page .pagedjs_margin-top-center > .pagedjs_margin-content > * {
+        display: flex !important;
+      }
+      .ribbon-draft {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 70px;
+        height: 70px;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .ribbon-draft span {
+        position: absolute;
+        display: block;
+        width: 100px;
+        padding: 4px 0;
+        background-color: #8a8a91;
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 700;
+        text-align: center;
+        right: -24px;
+        top: 14px;
+        transform: rotate(45deg);
+      }
+      .ribbon-purple span {
+        background-color: #f3e5ff;
+        color: #380066;
+      }
+      .ribbon-green span {
+        background-color: #dbfce7;
+        color: #00bd7d;
+      }
+      .ribbon-gray span {
+        background-color: #d8d8da;
+        color: #111113;
+      }
+      .ribbon-red span {
+        background-color: #ffe3e2;
+        color: #fb2c36;
+      }
+    </style>
+    <!-- Paged.js polyfill for printable document pagination -->
+    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <div class="print-footer-wrapper">
+        <div class="print-footer-info-row">
+          <div class="print-info">
+            Printed: {{ .Data.PrintedBy }} on {{ .Data.PrintedAt }}
+          </div>
+          <div class="print-page-number">Page&nbsp;</div>
+        </div>
+        {{ if .Property.FooterNote }}
+        <hr class="print-footer-separator" />
+        <div class="print-footer-note">{{ .Property.FooterNote }}</div>
+        {{ end }}
+      </div>
+      <!--HEADER-->
+      <header class="header">
+        <div class="header-left">
+          {{ if .Property.LogoURL }}
+          <div style="width: 42px">
+            <img
+              src="{{ .Property.LogoURL }}"
+              alt="Logo"
+              style="width: 100%; height: auto; border-radius: 6px"
+            />
+          </div>
+          {{ end }}
+          <div class="company-info">
+            <div class="company-name">{{ .Property.Name }}</div>
+            <div>
+              <div class="company-sub" style="font-weight: 500">
+                {{ .Property.Address }}
+              </div>
+              <div class="company-sub">
+                {{ .Property.Email }} &nbsp;•&nbsp; {{ .Property.Phone }}
+              </div>
+              {{ if .Property.HeaderNote }}
+              <div class="company-sub">{{ .Property.HeaderNote }}</div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="doc-title">{{ .Data.DocumentTitle }}</div>
+          <div class="doc-id-badge">{{ .Data.TransNo }}</div>
+        </div>
+      </header>
+      <!--BODY-->
+      <main class="body">
+        <!-- Header Cards (Flex/Grid) -->
+        <div class="row-header-cards">
+          <!-- Left Info Card (Supplier Info) -->
+          <div class="info-card">
+            <div class="info-card-title">{{ .Data.Supplier }}</div>
+            <div class="info-card-text">{{ .Data.SupplierAddress }}</div>
+            <div class="info-card-text">
+              {{if .Data.SupplierCpInfo}}
+              <span>{{ .Data.SupplierCpInfo }}</span>
+              {{end}} {{if and .Data.SupplierCpInfo .Data.SupplierPhone}}
+              <span>&nbsp;•&nbsp;</span>
+              {{end}} {{if .Data.SupplierPhone}}
+              <span>{{ .Data.SupplierPhone }}</span>
+              {{end}}
+            </div>
+            <div class="info-card-text">{{ .Data.SupplierEmail }}</div>
+          </div>
+          <!-- Right Info Card (Dates & Notes) -->
+          <div class="info-card">
+            {{if .Data.Status}} {{ if eq .Data.Status "O" }}
+            <div class="ribbon-draft ribbon-purple">
+              <span>Open</span>
+            </div>
+            {{ else if eq .Data.Status "A" }}
+            <div class="ribbon-draft ribbon-green">
+              <span>Approved</span>
+            </div>
+            {{ else if eq .Data.Status "D" }}
+            <div class="ribbon-draft ribbon-gray">
+              <span>Deleted</span>
+            </div>
+            {{ else }}
+            <div class="ribbon-draft ribbon-red">
+              <span>Rejected</span>
+            </div>
+            {{ end }} {{ end }}
+            <div class="info-card-row">
+              <div class="info-card-col">
+                <div class="info-card-label">Date</div>
+                <div class="info-card-value">{{ .Data.TransDate }}</div>
+              </div>
+              <div class="info-card-col">
+                <div class="info-card-label">Reff</div>
+                <div class="info-card-value">{{ .Data.Reff }}</div>
+              </div>
+            </div>
+            <div class="info-card-row-last">
+              <div class="info-card-col">
+                <div class="info-card-label">Store</div>
+                <div class="info-card-value">{{ .Data.Store }}</div>
+              </div>
+              <div class="info-card-col">
+                <div class="info-card-label">Payment</div>
+                <div class="info-card-value">
+                  {{ .Data.Payment }}
+                  <span
+                    style="
+                      margin-left: 5px;
+                      height: 20px;
+                      padding: 0 5px;
+                      border: 1px solid #d8d8da;
+                      border-radius: 30px;
+                      color: #44444c;
+                      font-size: 10px;
+                    "
+                    >{{ .Data.Term }}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AP Details Table (Purple Theme) -->
+        {{ if .Data.PurchaseItems }}
+        <div class="table-purple-wrapper">
+          <table class="table-purple">
+            <thead>
+              <tr>
+                <th style="width: 50%">Inventory</th>
+                <th style="width: 10%" class="text-right">Qty</th>
+                <th style="width: 10%">Unit</th>
+                <th style="width: 15%" class="text-right">Price</th>
+                <th style="width: 15%" class="text-right">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range .Data.PurchaseItems }}
+              <tr>
+                <td style="width: 50%">{{ .Inv }}</td>
+                <td style="width: 10%" class="text-right">{{ .Qty }}</td>
+                <td style="width: 10%">{{ .Unit }}</td>
+                <td style="width: 15%" class="text-right">{{ .Price }}</td>
+                <td style="width: 15%" class="text-right">{{ .Amount }}</td>
+              </tr>
+              {{ end }}
+              <tr class="total-row">
+                <td style="width: 50%" class="text-right">Total</td>
+                <td style="width: 10%" class="text-right">
+                  {{ .Data.TotalQty }}
+                </td>
+                <td style="width: 10%" class="text-right"></td>
+                <td style="width: 15%" class="text-right">
+                  {{ .Data.TotalPrice }}
+                </td>
+                <td style="width: 15%" class="text-right">
+                  {{ .Data.TotalAmountItem }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        {{ end }}
+
+        <!-- Summary Card -->
+        <div class="summary-card">
+          <div class="summary-note">
+            <div class="summary-note-label">In Words</div>
+            <div class="summary-note-content">
+              {{ if .Data.InWords }}{{ .Data.InWords }}{{ else }}-{{ end }}
+            </div>
+            <div class="summary-note-label">Note</div>
+            <div class="summary-note-content">
+              {{ if .Data.Note }}{{ .Data.Note }}{{ else }}-{{ end }}
+            </div>
+          </div>
+          <div class="summary-breakdown">
+            <table class="summary-table">
+              <tr>
+                <td class="summary-label bold">Subtotal</td>
+                <td class="summary-value bold">
+                  {{ if .Data.SubTotal }}{{ .Data.SubTotal }}{{ else }}0.00{{
+                  end }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summary-label">Discount</td>
+                <td class="summary-value">
+                  {{ if .Data.Discount }}{{ .Data.Discount }}{{ else }}0.00{{
+                  end }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summary-label">Tax</td>
+                <td class="summary-value">
+                  {{ if .Data.Tax }}{{ .Data.Tax }}{{ else }}0.00{{ end }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summary-label">Additional</td>
+                <td class="summary-value">
+                  {{ if .Data.Additional }}{{ .Data.Additional }}{{ else
+                  }}0.00{{ end }}
+                </td>
+              </tr>
+              <tr class="total-row">
+                <td class="summary-label bold">Total</td>
+                <td class="summary-value bold">
+                  {{ if .Data.TotalAmount }}{{ .Data.TotalAmount }}{{ else
+                  }}0.00{{ end }}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: start">
+          <!-- Signer -->
+          {{ if .Signature }}
+          <div class="signer-container">
+            {{ range .Signature }}
+            <div class="signer-col">
+              {{ if .SignerQR }}
+              <div class="signer-qr" style="margin: auto 0">
+                <img
+                  {{
+                  qrCodeAttr
+                  .SignerQR
+                  }}
+                  alt="Digital Signature QR"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
+              {{ else }}
+              <div class="signer-by">{{ .SignerAddInfo }}</div>
+              <div class="signer-line">
+                {{ if .SignerImage }}
+                <img
+                  src="{{ .SignerImage }}"
+                  alt="Signature"
+                  style="max-height: 48px; max-width: 100%; object-fit: contain"
+                />
+                {{ end }}
+              </div>
+              <div class="signer-name">
+                {{ if .SignerName }}{{ .SignerName }}{{ else }}&nbsp;{{ end }}
+              </div>
+              <div class="signer-position">
+                {{ if .SignerPosition }}{{ .SignerPosition }}{{ else }}&nbsp;{{
+                end }}
+              </div>
+              {{ end }}
+            </div>
+            {{ end }}
+          </div>
+          {{ end }}
+          <!-- End Signer -->
+          {{ if .Data.QRCode }}
+          <div class="qr-wrap">
+            <img
+              {{
+              qrCodeAttr
+              .Data.QRCode
+              }}
+              alt="QR Code"
+              style="width: 100%; height: 100%; object-fit: contain"
+            />
+          </div>
+          {{ end }}
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
