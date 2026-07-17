@@ -158,7 +158,7 @@
       }
       .row-header-cards {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 0.7fr 1fr;
         gap: 10px;
         margin-bottom: 10px;
       }
@@ -172,20 +172,31 @@
         display: flex;
         flex-direction: column;
       }
+      .info-card-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: #000000;
+        margin-bottom: 2px;
+        line-height: 21px;
+      }
+      .info-card-text {
+        font-size: 12px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 21px;
+      }
       .info-card-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
         margin-bottom: 10px;
       }
+      .info-card-row-last {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
       .info-card-col {
         display: flex;
         flex-direction: column;
-      }
-      .info-card-col-red-border {
-        display: flex;
-        flex-direction: column;
-        border-left: 2px solid #ef4444;
-        padding-left: 5px;
       }
       .info-card-label {
         font-size: 12px;
@@ -237,72 +248,62 @@
         padding: 7px 10px;
       }
 
-      .table-orange-wrapper {
-        border: 1px solid #ffedd5;
-        border-radius: 10px;
-        overflow: hidden;
-        margin-bottom: 5px;
-        background: #ffffff;
-      }
-      .table-orange {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: "Roboto", sans-serif;
-        color: #000000;
-      }
-      .table-orange th {
-        background-color: #fff6eb;
-        color: #000000;
-        font-weight: 600;
-        text-align: left;
-        padding: 7px 10px;
-        font-size: 12px;
-      }
-      .table-orange td {
-        padding: 7px 10px;
-        font-size: 12px;
-        color: #000000;
-      }
-      .table-orange tr:last-child td {
-        border-bottom: none;
-      }
-      .table-orange tr.total-row td {
-        background-color: #fff6eb;
-        font-weight: 500;
-        border-top: 1px solid #ffedd5;
-        color: #000000;
-        font-size: 12px;
-      }
       .text-right {
         text-align: right !important;
       }
 
-      .balance-card {
-        background: #f8f8f780;
+      .summary-card {
         border: 1px solid #d7dedd;
-        border-radius: 10px;
+        border-radius: 12px;
+        background: #f8f8f780;
+        padding: 10px;
         display: flex;
-        align-items: center;
-        height: 32px;
+        justify-content: space-between;
+        align-items: flex-start;
+        page-break-inside: avoid;
+        break-inside: avoid;
       }
-      .balance-card table {
+      .summary-note {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .summary-note-label {
+        font-size: 12px;
+        font-weight: 500;
+        color: #8a8a91;
+      }
+      .summary-note-content {
+        font-size: 13px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 1.4;
+      }
+      .summary-breakdown {
+        width: 32%;
+      }
+      .summary-table {
         width: 100%;
         border-collapse: collapse;
       }
-      .balance-card table tr td {
-        padding: 0 10px;
-      }
-      .balance-label {
+      .summary-table td {
+        padding: 3px 0;
         font-size: 12px;
-        font-weight: 600;
         color: #000000;
+        line-height: 1.4;
+      }
+      .summary-table td.summary-label {
         text-align: left;
       }
-      .balance-value {
-        font-size: 12px;
-        font-weight: 600;
-        color: #000000;
+      .summary-table td.summary-value {
         text-align: right;
+      }
+      .summary-table td.bold {
+        font-weight: 700;
+      }
+      .summary-table tr.total-row td {
+        padding-top: 4px;
       }
       table th:first-child {
         border-top-left-radius: 10px;
@@ -355,8 +356,7 @@
         .body {
           display: block;
         }
-        .table-purple-wrapper,
-        .table-orange-wrapper {
+        .table-purple-wrapper {
           overflow: visible;
         }
         thead {
@@ -459,17 +459,21 @@
         top: 14px;
         transform: rotate(45deg);
       }
+      .ribbon-purple span {
+        background-color: #f3e5ff;
+        color: #380066;
+      }
       .ribbon-green span {
         background-color: #dbfce7;
         color: #00bd7d;
       }
+      .ribbon-gray span {
+        background-color: #d8d8da;
+        color: #111113;
+      }
       .ribbon-red span {
         background-color: #ffe3e2;
         color: #fb2c36;
-      }
-      .ribbon-yellow span {
-        background-color: #fef9c2;
-        color: #894b00;
       }
     </style>
     <!-- Paged.js polyfill for printable document pagination -->
@@ -525,99 +529,118 @@
       <main class="body">
         <!-- Header Cards (Flex/Grid) -->
         <div class="row-header-cards">
+          <!-- Left Info Card (Supplier Info) -->
           <div class="info-card">
-            {{if .Data.Status}} {{ if eq .Data.Status "OVER_DUE" }}
-            <div class="ribbon-draft ribbon-red"><span>Overdue</span></div>
-            {{ else if eq .Data.Status "PAID" }}
-            <div class="ribbon-draft ribbon-green"><span>Paid</span></div>
+            <div class="info-card-title">{{ .Data.Supplier }}</div>
+            <div class="info-card-text">{{ .Data.SupplierAddress }}</div>
+          </div>
+          <!-- Right Info Card (Dates & Notes) -->
+          <div class="info-card">
+            {{if .Data.Status}} {{ if eq .Data.Status "O" }}
+            <div class="ribbon-draft ribbon-purple">
+              <span>Open</span>
+            </div>
+            {{ else if eq .Data.Status "A" }}
+            <div class="ribbon-draft ribbon-green">
+              <span>Approved</span>
+            </div>
+            {{ else if eq .Data.Status "D" }}
+            <div class="ribbon-draft ribbon-gray">
+              <span>Deleted</span>
+            </div>
             {{ else }}
-            <div class="ribbon-draft ribbon-yellow"><span>Unpaid</span></div>
+            <div class="ribbon-draft ribbon-red">
+              <span>Rejected</span>
+            </div>
             {{ end }} {{ end }}
             <div class="info-card-row">
               <div class="info-card-col">
                 <div class="info-card-label">Date</div>
                 <div class="info-card-value">{{ .Data.TransDate }}</div>
               </div>
-              <div class="info-card-col-red-border">
-                <div class="info-card-label">Due Date</div>
-                <div class="info-card-value">{{ .Data.DueDate }}</div>
+              <div class="info-card-col">
+                <div class="info-card-label">Reff</div>
+                <div class="info-card-value">{{ .Data.Reff }}</div>
               </div>
             </div>
-            <div class="info-card-row">
+            <div class="info-card-row-last">
               <div class="info-card-col">
-                <div class="info-card-label">Company</div>
-                <div class="info-card-value">{{ .Data.CompanyName }}</div>
+                <div class="info-card-label">Store</div>
+                <div class="info-card-value">{{ .Data.Store }}</div>
               </div>
-              <div class="info-card-col">
-                <div class="info-card-label">Branch</div>
-                <div class="info-card-value">{{ .Data.Branch }}</div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr">
+                <div class="info-card-col">
+                  <div class="info-card-label">Payment</div>
+                  <div class="info-card-value">
+                    {{ .Data.Payment }}
+                    <span
+                      style="
+                        margin-left: 5px;
+                        height: 20px;
+                        padding: 0 5px;
+                        border: 1px solid #d8d8da;
+                        border-radius: 30px;
+                        color: #44444c;
+                        font-size: 10px;
+                      "
+                      >{{ .Data.Term }}</span
+                    >
+                  </div>
+                </div>
+                <div class="info-card-col">
+                  <div class="info-card-label">Type</div>
+                  <div class="info-card-value">{{ .Data.Type }}</div>
+                </div>
               </div>
-            </div>
-            <div class="info-card-col">
-              <div class="info-card-label">Note</div>
-              <div class="info-card-value">{{ .Data.Note }}</div>
             </div>
           </div>
         </div>
 
-        <!-- AR Details Table (Purple Theme) -->
-        {{ if .Data.ARItems }}
+        <!-- AP Details Table (Purple Theme) -->
+        {{ if .Data.Items }}
         <div class="table-purple-wrapper">
           <table class="table-purple">
             <thead>
               <tr>
-                <th>Adjustment</th>
-                <th class="text-right">Amount</th>
+                <th style="width: 25%">Inventory</th>
+                {{ if eq .Data.Type "Consumed" }}
+                <th style="width: 25%">Cost Center</th>
+                {{ else }}
+                <th style="width: 25%">Store</th>
+                {{ end }}
+                <th style="width: 10%" class="text-right">Qty</th>
+                <th style="width: 10%">Unit</th>
+                <th style="width: 15%" class="text-right">Price</th>
+                <th style="width: 15%" class="text-right">Amount</th>
               </tr>
             </thead>
             <tbody>
-              {{ range .Data.ARItems }}
+              {{ range .Data.Items }}
               <tr>
-                <td>
-                  <div>{{ .MemoName }}</div>
-                  <div style="font-size: 10px; color: #44444c">
-                    {{ .Account }}
-                  </div>
-                </td>
-                <td class="text-right">{{ .Amount }}</td>
+                <td style="width: 25%">{{ .Inv }}</td>
+                {{ if eq $.Data.Type "Consumed" }}
+                <td style="width: 25%">{{ .CostCenter }}</td>
+                {{ else }}
+                <td style="width: 25%">{{ .Store }}</td>
+                {{ end }}
+                <td style="width: 10%" class="text-right">{{ .Qty }}</td>
+                <td style="width: 10%">{{ .Unit }}</td>
+                <td style="width: 15%" class="text-right">{{ .Price }}</td>
+                <td style="width: 15%" class="text-right">{{ .Amount }}</td>
               </tr>
               {{ end }}
               <tr class="total-row">
-                <td class="text-right">Total Amount</td>
-                <td class="text-right">{{ .Data.TotalAmount }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        {{ end }}
-
-        <!-- Payment Details Table (Orange Theme) -->
-        {{ if .Data.Payments }}
-        <div class="table-orange-wrapper">
-          <table class="table-orange">
-            <thead>
-              <tr>
-                <th style="width: 15%">Payment Date</th>
-                <th style="width: 25%">Transaction No</th>
-                <th style="width: 35%"></th>
-                <th style="width: 25%" class="text-right">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{ range .Data.Payments }}
-              <tr>
-                <td style="width: 15%">{{ .PaymentDate }}</td>
-                <td style="width: 25%">{{ .TransactionNo }}</td>
-                <td style="width: 35%"></td>
-                <td style="width: 25%" class="text-right">{{ .Amount }}</td>
-              </tr>
-              {{ end }}
-              <tr class="total-row">
-                <td style="width: 15%"></td>
                 <td style="width: 25%"></td>
-                <td style="width: 35%">Total Payment</td>
-                <td style="width: 25%" class="text-right">
-                  {{ .Data.TotalPayment }}
+                <td style="width: 25%">Total</td>
+                <td style="width: 10%" class="text-right">
+                  {{ .Data.TotalQty }}
+                </td>
+                <td style="width: 10%" class="text-right"></td>
+                <td style="width: 15%" class="text-right">
+                  {{ .Data.TotalPrice }}
+                </td>
+                <td style="width: 15%" class="text-right">
+                  {{ .Data.TotalAmountItem }}
                 </td>
               </tr>
             </tbody>
@@ -625,18 +648,58 @@
         </div>
         {{ end }}
 
-        <!-- Balance Card -->
-        <div class="balance-card">
-          <table>
-            <tr>
-              <td style="width: 15%"></td>
-              <td style="width: 25%"></td>
-              <td style="width: 35%" class="balance-label">Balance</td>
-              <td style="width: 25%" class="balance-value">
-                {{ .Data.Balance }}
-              </td>
-            </tr>
-          </table>
+        <!-- Summary Card -->
+        <div class="summary-card">
+          <div class="summary-note">
+            <div class="summary-note-label">Note</div>
+            <div class="summary-note-content">
+              {{ if .Data.Note }}{{ .Data.Note }}{{ else }}-{{ end }}
+            </div>
+          </div>
+          <div class="summary-breakdown">
+            <table class="summary-table">
+              <tr>
+                <td class="summary-label bold">Subtotal</td>
+                <td class="summary-value bold">
+                  {{ if .Data.SubTotal }}{{ .Data.SubTotal }}{{ else }}0.00{{
+                  end }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summary-label">Discount</td>
+                <td class="summary-value">
+                  {{ if .Data.Discount }}{{ .Data.Discount }}{{ else }}0.00{{
+                  end }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summary-label">Tax</td>
+                <td class="summary-value">
+                  {{ if .Data.Tax }}{{ .Data.Tax }}{{ else }}0.00{{ end }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summary-label">Additional</td>
+                <td class="summary-value">
+                  {{ if .Data.Additional }}{{ .Data.Additional }}{{ else
+                  }}0.00{{ end }}
+                </td>
+              </tr>
+              <tr>
+                <td class="summary-label">WH Tax</td>
+                <td class="summary-value">
+                  {{ if .Data.WhTax }}{{ .Data.WhTax }}{{ else }}0.00{{ end }}
+                </td>
+              </tr>
+              <tr class="total-row">
+                <td class="summary-label bold">Total</td>
+                <td class="summary-value bold">
+                  {{ if .Data.TotalAmount }}{{ .Data.TotalAmount }}{{ else
+                  }}0.00{{ end }}
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
 
         <div style="display: flex; gap: 12px; align-items: start">
