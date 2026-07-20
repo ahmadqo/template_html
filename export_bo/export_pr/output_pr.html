@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daily Market List</title>
+    <title>Purchase Request</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -175,12 +175,12 @@
 
       .info-card-row {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         margin-bottom: 10px;
       }
       .info-card-row-last {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
       .info-card-col {
         display: flex;
@@ -419,7 +419,7 @@
       <div class="print-footer-wrapper">
         <div class="print-footer-info-row">
           <div class="print-info">
-            Printed: Superadmin on 20 Jul 2026 11:34:31 WIB
+            Printed: Superadmin on 20 Jul 2026 11:57:44 WIB
           </div>
           <div class="print-page-number">Page&nbsp;</div>
         </div>
@@ -456,8 +456,8 @@
           </div>
         </div>
         <div class="header-right">
-          <div class="doc-title">Daily Market List</div>
-          <div class="doc-id-badge">DML.SCH2602.00001</div>
+          <div class="doc-title">Purchase Request</div>
+          <div class="doc-id-badge">PR.SCH2602.00001</div>
         </div>
       </header>
       
@@ -479,18 +479,11 @@
                 <div class="info-card-label">Delivery Date</div>
                 <div class="info-card-value">Jun 23, 2026</div>
               </div>
-              <div class="info-card-col">
-                <div class="info-card-label">Store</div>
-                <div class="info-card-value">Store 1</div>
-              </div>
             </div>
             <div class="info-card-row-last">
               <div class="info-card-col">
-                <div class="info-card-label">Supplier</div>
-                <div class="info-card-value">
-                  Supplier 1  • 20 Days
-                  
-                </div>
+                <div class="info-card-label">Store</div>
+                <div class="info-card-value">Store Jogja</div>
               </div>
               <div class="info-card-col">
                 <div class="info-card-label">Note</div>
@@ -507,151 +500,371 @@
             <thead>
               <tr>
                 <th style="width: 25%">Inventory</th>
-                <th style="width: 25%">Category</th>
-                <th style="width: 10%" class="text-right">Qty</th>
+                <th style="width: 15%" class="text-right">Qty</th>
                 <th style="width: 10%">Unit</th>
-                <th style="width: 15%" class="text-right">Price</th>
-                <th style="width: 15%" class="text-right">Amount</th>
+                <th style="width: 10%" class="text-right">On Hand</th>
+                <th style="width: 15%">Last Purch Date</th>
+                <th style="width: 12%" class="text-right">Last Price</th>
+                <th style="width: 13%" class="text-right">Amount</th>
               </tr>
             </thead>
             <tbody>
               
               <tr>
-                <td style="width: 25%">Apel</td>
-                <td style="width: 25%">Buah-buahan</td>
-                <td style="width: 10%" class="text-right">2.00</td>
-                <td style="width: 10%">Bks</td>
-                <td style="width: 15%" class="text-right">10,000.00</td>
-                <td style="width: 15%" class="text-right">20,000.00</td>
+                <td style="width: 25%">
+                  <div style="display: flex; flex-direction: column">
+                    <span>Kacang Atom</span>
+                    
+                  </div>
+                </td>
+                <td style="width: 15%" class="text-right">200.00</td>
+                <td style="width: 10%">BKU</td>
+                <td style="width: 10%" class="text-right">0.00</td>
+                <td style="width: 15%">Jun 26, 2026</td>
+                <td style="width: 12%" class="text-right">1,000.00</td>
+                <td style="width: 13%" class="text-right">200,000.00</td>
+              </tr>
+              
+              <tr style="background-color: #fffaf5">
+                <td
+                  style="
+                    padding: 5px 10px;
+                    padding-left: 25px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  Supplier
+                </td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    text-align: right;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  Final Price
+                </td>
+                <td
+                  colspan="5"
+                  style="
+                    padding: 5px 10px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  Note
+                </td>
               </tr>
               
               <tr>
-                <td style="width: 25%">Aqua 1 L</td>
-                <td style="width: 25%">Minuman</td>
-                <td style="width: 10%" class="text-right">1.00</td>
-                <td style="width: 10%">Botol</td>
-                <td style="width: 15%" class="text-right">5,000.00</td>
-                <td style="width: 15%" class="text-right">5,000.00</td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  <div style="display: flex; align-items: center; gap: 5px">
+                    
+                    <img
+                      alt=""
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxMSIgdmlld0JveD0iMCAwIDkgMTEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03LjI0MTA1IDBIMS4zNTI5NkMwLjk5NDQ0MSAwLjAwMDk5OTY2NCAwLjY1MDg5IDAuMTQzODY0IDAuMzk3Mzc3IDAuMzk3Mzc3QzAuMTQzODY0IDAuNjUwODkgMC4wMDA5OTk2NjQgMC45OTQ0NDEgMCAxLjM1Mjk2VjkuNDAwMzdDMC4wMDA5OTk2NjQgOS43NTg4OSAwLjE0Mzg2NCAxMC4xMDI0IDAuMzk3Mzc3IDEwLjM1NkMwLjY1MDg5IDEwLjYwOTUgMC45OTQ0NDEgMTAuNzUyMyAxLjM1Mjk2IDEwLjc1MzNINy4yNDEwNUM3LjU5OTg4IDEwLjc1MzMgNy45NDQwMSAxMC42MTA4IDguMTk3NzQgMTAuMzU3MUM4LjQ1MTQ3IDEwLjEwMzMgOC41OTQwMSA5Ljc1OTIgOC41OTQwMSA5LjQwMDM3VjEuMzUyOTZDOC41OTQwMSAwLjk5NDEzNCA4LjQ1MTQ3IDAuNjUwMDAzIDguMTk3NzQgMC4zOTYyNzNDNy45NDQwMSAwLjE0MjU0NCA3LjU5OTg4IDAgNy4yNDEwNSAwWk04LjA1MjgyIDkuNDAwMzdDOC4wNTI4MiA5LjYxNTY3IDcuOTY3MyA5LjgyMjE1IDcuODE1MDYgOS45NzQzOUM3LjY2MjgyIDEwLjEyNjYgNy40NTYzNCAxMC4yMTIxIDcuMjQxMDUgMTAuMjEyMUgxLjM1Mjk2QzEuMTM3NjYgMTAuMjEyMSAwLjkzMTE4NiAxMC4xMjY2IDAuNzc4OTQ4IDkuOTc0MzlDMC42MjY3MTEgOS44MjIxNSAwLjU0MTE4NCA5LjYxNTY3IDAuNTQxMTg0IDkuNDAwMzdWMi40MDI4Nkg4LjA1MjgyVjkuNDAwMzdaIiBmaWxsPSIjMDBCRDdEIi8+CjxwYXRoIGQ9Ik0xLjgwMDA1IDMuNzUzMTFDMS43MjU2NSAzLjc1MzExIDEuNjU0MyAzLjcxODgyIDEuNjAxNjkgMy42NTc3OEMxLjU0OTA5IDMuNTk2NzMgMS41MTk1MyAzLjUxMzk0IDEuNTE5NTMgMy40Mjc2MUMxLjUxOTUzIDMuMzQxMjggMS41NDkwOSAzLjI1ODQ5IDEuNjAxNjkgMy4xOTc0NUMxLjY1NDMgMy4xMzY0MSAxLjcyNTY1IDMuMTAyMTEgMS44MDAwNSAzLjEwMjExSDYuNzk4MjRDNi44NzI2NCAzLjEwMjExIDYuOTQzOTkgMy4xMzY0MSA2Ljk5NjYgMy4xOTc0NUM3LjA0OTIgMy4yNTg0OSA3LjA3ODc2IDMuMzQxMjggNy4wNzg3NiAzLjQyNzYxQzcuMDc4NzYgMy41MTM5NCA3LjA0OTIgMy41OTY3MyA2Ljk5NjYgMy42NTc3OEM2Ljk0Mzk5IDMuNzE4ODIgNi44NzI2NCAzLjc1MzExIDYuNzk4MjQgMy43NTMxMUgxLjgwMDA1Wk0xLjgwMDA1IDUuNzA2MTFDMS43MjU2NSA1LjcwNjExIDEuNjU0MyA1LjY3MTgyIDEuNjAxNjkgNS42MTA3N0MxLjU0OTA5IDUuNTQ5NzMgMS41MTk1MyA1LjQ2Njk0IDEuNTE5NTMgNS4zODA2MUMxLjUxOTUzIDUuMjk0MjggMS41NDkwOSA1LjIxMTQ5IDEuNjAxNjkgNS4xNTA0NUMxLjY1NDMgNS4wODk0MSAxLjcyNTY1IDUuMDU1MTEgMS44MDAwNSA1LjA1NTExSDUuNDQ2NzNDNS41MjExMiA1LjA1NTExIDUuNTkyNDcgNS4wODk0MSA1LjY0NTA4IDUuMTUwNDVDNS42OTc2OSA1LjIxMTQ5IDUuNzI3MjQgNS4yOTQyOCA1LjcyNzI0IDUuMzgwNjFDNS43MjcyNCA1LjQ2Njk0IDUuNjk3NjkgNS41NDk3MyA1LjY0NTA4IDUuNjEwNzdDNS41OTI0NyA1LjY3MTgyIDUuNTIxMTIgNS43MDYxMSA1LjQ0NjczIDUuNzA2MTFIMS44MDAwNVpNMS44MDk1OCA5LjUyNjE4QzEuNzM1MTkgOS41MjYxOCAxLjY2Mzg0IDkuNDkxODggMS42MTEyMyA5LjQzMDg0QzEuNTU4NjIgOS4zNjk4IDEuNTI5MDcgOS4yODcwMSAxLjUyOTA3IDkuMjAwNjhDMS41MjkwNyA5LjExNDM1IDEuNTU4NjIgOS4wMzE1NiAxLjYxMTIzIDguOTcwNTFDMS42NjM4NCA4LjkwOTQ3IDEuNzM1MTkgOC44NzUxOCAxLjgwOTU4IDguODc1MThIMy42MzM0OEMzLjcwNzg4IDguODc1MTggMy43NzkyMyA4LjkwOTQ3IDguODMxODQgOC45NzA1MUMzLjg4NDQ0IDkuMDMxNTYgMy45MTQgOS4xMTQzNSAzLjkxNCA5LjIwMDY4QzMuOTE0IDkuMjg3MDEgMy44ODQ0NCA5LjM2OTggMy44MzE4NCA5LjQzMDg0QzMuNzc5MjMgOS40OTE4OCAzLjcwNzg4IDkuNTI2MTggMy42MzM0OCA5LjUyNjE4SDEuODA5NThaIiBmaWxsPSIjMDBCRDdEIi8+Cjwvc3ZnPgo="
+                      style="width: 9px; height: 11px; object-fit: contain"
+                    />
+                    
+                    <span>Supplier 1</span>
+                  </div>
+                </td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    text-align: right;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  1,500.00
+                </td>
+                <td
+                  colspan="5"
+                  style="
+                    padding: 5px 10px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  Lorem Ipsum sit amet
+                </td>
               </tr>
               
+              <tr>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  <div style="display: flex; align-items: center; gap: 5px">
+                    
+                    <div style="width: 9px; height: 11px"></div>
+                    
+                    <span>Supplier 2</span>
+                  </div>
+                </td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    text-align: right;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  1,200.00
+                </td>
+                <td
+                  colspan="5"
+                  style="
+                    padding: 5px 10px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  
+                </td>
+              </tr>
+              
+              <tr>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  <div style="display: flex; align-items: center; gap: 5px">
+                    
+                    <div style="width: 9px; height: 11px"></div>
+                    
+                    <span>Supplier 3</span>
+                  </div>
+                </td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    text-align: right;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  1,250.00
+                </td>
+                <td
+                  colspan="5"
+                  style="
+                    padding: 5px 10px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  
+                </td>
+              </tr>
+                
+              <tr>
+                <td style="width: 25%">
+                  <div style="display: flex; flex-direction: column">
+                    <span>Kopi Kapal Api</span>
+                    
+                  </div>
+                </td>
+                <td style="width: 15%" class="text-right">10.00</td>
+                <td style="width: 10%">Sachet</td>
+                <td style="width: 10%" class="text-right">0.00</td>
+                <td style="width: 15%">Jun 26, 2026</td>
+                <td style="width: 12%" class="text-right">25,000.00</td>
+                <td style="width: 13%" class="text-right">250,000.00</td>
+              </tr>
+              
+              <tr style="background-color: #fffaf5">
+                <td
+                  style="
+                    padding: 5px 10px;
+                    padding-left: 25px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  Supplier
+                </td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    text-align: right;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  Final Price
+                </td>
+                <td
+                  colspan="5"
+                  style="
+                    padding: 5px 10px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  Note
+                </td>
+              </tr>
+              
+              <tr>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  <div style="display: flex; align-items: center; gap: 5px">
+                    
+                    <img
+                      alt=""
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxMSIgdmlld0JveD0iMCAwIDkgMTEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03LjI0MTA1IDBIMS4zNTI5NkMwLjk5NDQ0MSAwLjAwMDk5OTY2NCAwLjY1MDg5IDAuMTQzODY0IDAuMzk3Mzc3IDAuMzk3Mzc3QzAuMTQzODY0IDAuNjUwODkgMC4wMDA5OTk2NjQgMC45OTQ0NDEgMCAxLjM1Mjk2VjkuNDAwMzdDMC4wMDA5OTk2NjQgOS43NTg4OSAwLjE0Mzg2NCAxMC4xMDI0IDAuMzk3Mzc3IDEwLjM1NkMwLjY1MDg5IDEwLjYwOTUgMC45OTQ0NDEgMTAuNzUyMyAxLjM1Mjk2IDEwLjc1MzNINy4yNDEwNUM3LjU5OTg4IDEwLjc1MzMgNy45NDQwMSAxMC42MTA4IDguMTk3NzQgMTAuMzU3MUM4LjQ1MTQ3IDEwLjEwMzMgOC41OTQwMSA5Ljc1OTIgOC41OTQwMSA5LjQwMDM3VjEuMzUyOTZDOC41OTQwMSAwLjk5NDEzNCA4LjQ1MTQ3IDAuNjUwMDAzIDguMTk3NzQgMC4zOTYyNzNDNy45NDQwMSAwLjE0MjU0NCA3LjU5OTg4IDAgNy4yNDEwNSAwWk04LjA1MjgyIDkuNDAwMzdDOC4wNTI4MiA5LjYxNTY3IDcuOTY3MyA5LjgyMjE1IDcuODE1MDYgOS45NzQzOUM3LjY2MjgyIDEwLjEyNjYgNy40NTYzNCAxMC4yMTIxIDcuMjQxMDUgMTAuMjEyMUgxLjM1Mjk2QzEuMTM3NjYgMTAuMjEyMSAwLjkzMTE4NiAxMC4xMjY2IDAuNzc4OTQ4IDkuOTc0MzlDMC42MjY3MTEgOS44MjIxNSAwLjU0MTE4NCA5LjYxNTY3IDAuNTQxMTg0IDkuNDAwMzdWMi40MDI4Nkg4LjA1MjgyVjkuNDAwMzdaIiBmaWxsPSIjMDBCRDdEIi8+CjxwYXRoIGQ9Ik0xLjgwMDA1IDMuNzUzMTFDMS43MjU2NSAzLjc1MzExIDEuNjU0MyAzLjcxODgyIDEuNjAxNjkgMy42NTc3OEMxLjU0OTA5IDMuNTk2NzMgMS41MTk1MyAzLjUxMzk0IDEuNTE5NTMgMy40Mjc2MUMxLjUxOTUzIDMuMzQxMjggMS41NDkwOSAzLjI1ODQ5IDEuNjAxNjkgMy4xOTc0NUMxLjY1NDMgMy4xMzY0MSAxLjcyNTY1IDMuMTAyMTEgMS44MDAwNSAzLjEwMjExSDYuNzk4MjRDNi44NzI2NCAzLjEwMjExIDYuOTQzOTkgMy4xMzY0MSA2Ljk5NjYgMy4xOTc0NUM3LjA0OTIgMy4yNTg0OSA3LjA3ODc2IDMuMzQxMjggNy4wNzg3NiAzLjQyNzYxQzcuMDc4NzYgMy41MTM5NCA3LjA0OTIgMy41OTY3MyA2Ljk5NjYgMy42NTc3OEM2Ljk0Mzk5IDMuNzE4ODIgNi44NzI2NCAzLjc1MzExIDYuNzk4MjQgMy43NTMxMUgxLjgwMDA1Wk0xLjgwMDA1IDUuNzA2MTFDMS43MjU2NSA1LjcwNjExIDEuNjU0MyA1LjY3MTgyIDEuNjAxNjkgNS42MTA3N0MxLjU0OTA5IDUuNTQ5NzMgMS41MTk1MyA1LjQ2Njk0IDEuNTE5NTMgNS4zODA2MUMxLjUxOTUzIDUuMjk0MjggMS41NDkwOSA1LjIxMTQ5IDEuNjAxNjkgNS4xNTA0NUMxLjY1NDMgNS4wODk0MSAxLjcyNTY1IDUuMDU1MTEgMS44MDAwNSA1LjA1NTExSDUuNDQ2NzNDNS41MjExMiA1LjA1NTExIDUuNTkyNDcgNS4wODk0MSA1LjY0NTA4IDUuMTUwNDVDNS42OTc2OSA1LjIxMTQ5IDUuNzI3MjQgNS4yOTQyOCA1LjcyNzI0IDUuMzgwNjFDNS43MjcyNCA1LjQ2Njk0IDUuNjk3NjkgNS41NDk3MyA1LjY0NTA4IDUuNjEwNzdDNS41OTI0NyA1LjY3MTgyIDUuNTIxMTIgNS43MDYxMSA1LjQ0NjczIDUuNzA2MTFIMS44MDAwNVpNMS44MDk1OCA5LjUyNjE4QzEuNzM1MTkgOS41MjYxOCAxLjY2Mzg0IDkuNDkxODggMS42MTEyMyA5LjQzMDg0QzEuNTU4NjIgOS4zNjk4IDEuNTI5MDcgOS4yODcwMSAxLjUyOTA3IDkuMjAwNjhDMS41MjkwNyA5LjExNDM1IDEuNTU4NjIgOS4wMzE1NiAxLjYxMTIzIDguOTcwNTFDMS42NjM4NCA4LjkwOTQ3IDEuNzM1MTkgOC44NzUxOCAxLjgwOTU4IDguODc1MThIMy42MzM0OEMzLjcwNzg4IDguODc1MTggMy43NzkyMyA4LjkwOTQ3IDguODMxODQgOC45NzA1MUMzLjg4NDQ0IDkuMDMxNTYgMy45MTQgOS4xMTQzNSAzLjkxNCA5LjIwMDY4QzMuOTE0IDkuMjg3MDEgMy44ODQ0NCA5LjM2OTggMy44MzE4NCA5LjQzMDg0QzMuNzc5MjMgOS40OTE4OCAzLjcwNzg4IDkuNTI2MTggMy42MzM0OCA5LjUyNjE4SDEuODA5NThaIiBmaWxsPSIjMDBCRDdEIi8+Cjwvc3ZnPgo="
+                      style="width: 9px; height: 11px; object-fit: contain"
+                    />
+                    
+                    <span>Supplier 1</span>
+                  </div>
+                </td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    text-align: right;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  25,500.00
+                </td>
+                <td
+                  colspan="5"
+                  style="
+                    padding: 5px 10px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  Lorem Ipsum sit amet
+                </td>
+              </tr>
+              
+              <tr>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  <div style="display: flex; align-items: center; gap: 5px">
+                    
+                    <div style="width: 9px; height: 11px"></div>
+                    
+                    <span>Supplier 2</span>
+                  </div>
+                </td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    text-align: right;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  26,200.00
+                </td>
+                <td
+                  colspan="5"
+                  style="
+                    padding: 5px 10px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  
+                </td>
+              </tr>
+              
+              <tr>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  <div style="display: flex; align-items: center; gap: 5px">
+                    
+                    <div style="width: 9px; height: 11px"></div>
+                    
+                    <span>Supplier 3</span>
+                  </div>
+                </td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    text-align: right;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  25,250.00
+                </td>
+                <td
+                  colspan="5"
+                  style="
+                    padding: 5px 10px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  
+                </td>
+              </tr>
+                
+              <tr>
+                <td style="width: 25%">
+                  <div style="display: flex; flex-direction: column">
+                    <span>Beras Bulog</span>
+                    
+                  </div>
+                </td>
+                <td style="width: 15%" class="text-right">10.00</td>
+                <td style="width: 10%">BKU 1</td>
+                <td style="width: 10%" class="text-right">0.00</td>
+                <td style="width: 15%">Jun 26, 2026</td>
+                <td style="width: 12%" class="text-right">20,000.00</td>
+                <td style="width: 13%" class="text-right">200,000.00</td>
+              </tr>
+               
               <tr class="total-row">
-                <td colspan="5" class="text-right">Total</td>
-                <td style="width: 15%" class="text-right">
-                  66,366.00
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        
-
-        
-        
-        <div class="table-purple-wrapper">
-          <table class="table-purple">
-            <thead>
-              <tr>
-                <th style="width: 25%">Inventory</th>
-                <th style="width: 25%">Category</th>
-                <th style="width: 10%" class="text-right">Qty</th>
-                <th style="width: 10%">Unit</th>
-                <th style="width: 15%" class="text-right">Price</th>
-                <th style="width: 15%" class="text-right">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-              <tr class="supplier-group-row">
-                <td
-                  colspan="6"
-                  style="
-                    background-color: #fffaf5;
-                    font-size: 12px;
-                    padding: 7px 10px;
-                    border-bottom: 1px solid #ececec;
-                  "
-                >
-                  Supplier : Cash Puchase
-                </td>
-              </tr>
-              
-              <tr>
-                <td style="width: 25%; padding-left: 20px">Apel</td>
-                <td style="width: 25%">Buah-buahan</td>
-                <td style="width: 10%" class="text-right">2.00</td>
-                <td style="width: 10%">Bks</td>
-                <td style="width: 15%" class="text-right">10,000.00</td>
-                <td style="width: 15%" class="text-right">20,000.00</td>
-              </tr>
-              
-              <tr>
-                <td style="width: 25%; padding-left: 20px">Aqua 1 L</td>
-                <td style="width: 25%">Minuman</td>
-                <td style="width: 10%" class="text-right">1.00</td>
-                <td style="width: 10%">Botol</td>
-                <td style="width: 15%" class="text-right">5,000.00</td>
-                <td style="width: 15%" class="text-right">5,000.00</td>
-              </tr>
-               
-              <tr class="supplier-group-row">
-                <td
-                  colspan="6"
-                  style="
-                    background-color: #fffaf5;
-                    font-size: 12px;
-                    padding: 7px 10px;
-                    border-bottom: 1px solid #ececec;
-                  "
-                >
-                  Supplier : Berdikari Olah Solusi
-                </td>
-              </tr>
-              
-              <tr>
-                <td style="width: 25%; padding-left: 20px">Beras Rojo Lela</td>
-                <td style="width: 25%">Beras</td>
-                <td style="width: 10%" class="text-right">1.00</td>
-                <td style="width: 10%">Box</td>
-                <td style="width: 15%" class="text-right">30,000.00</td>
-                <td style="width: 15%" class="text-right">30,000.00</td>
-              </tr>
-              
-              <tr>
-                <td style="width: 25%; padding-left: 20px">Coca Cola 1000ml</td>
-                <td style="width: 25%">Minuman</td>
-                <td style="width: 10%" class="text-right">2.00</td>
-                <td style="width: 10%">Botol</td>
-                <td style="width: 15%" class="text-right">4,000.00</td>
-                <td style="width: 15%" class="text-right">8,000.00</td>
-              </tr>
-               
-              <tr class="supplier-group-row">
-                <td
-                  colspan="6"
-                  style="
-                    background-color: #fffaf5;
-                    font-size: 12px;
-                    padding: 7px 10px;
-                    border-bottom: 1px solid #ececec;
-                  "
-                >
-                  Supplier : Lotte Mart
-                </td>
-              </tr>
-              
-              <tr>
-                <td style="width: 25%; padding-left: 20px">Coca Cola 2000ml</td>
-                <td style="width: 25%">Minuman</td>
-                <td style="width: 10%" class="text-right">3.00</td>
-                <td style="width: 10%">Botol</td>
-                <td style="width: 15%" class="text-right">1,122.00</td>
-                <td style="width: 15%" class="text-right">3,366.00</td>
-              </tr>
-               
-              <tr class="total-row">
-                <td colspan="5" class="text-right">Total</td>
-                <td style="width: 15%" class="text-right">
-                  66,366.00
+                <td colspan="6" class="text-right">Total</td>
+                <td style="width: 13%" class="text-right">
+                  650,000.00
                 </td>
               </tr>
             </tbody>

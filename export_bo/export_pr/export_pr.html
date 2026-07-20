@@ -175,12 +175,12 @@
 
       .info-card-row {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         margin-bottom: 10px;
       }
       .info-card-row-last {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
       .info-card-col {
         display: flex;
@@ -491,18 +491,11 @@
                 <div class="info-card-label">Delivery Date</div>
                 <div class="info-card-value">{{ .Data.DeliveryDate }}</div>
               </div>
-              <div class="info-card-col">
-                <div class="info-card-label">Store</div>
-                <div class="info-card-value">{{ .Data.Store }}</div>
-              </div>
             </div>
             <div class="info-card-row-last">
               <div class="info-card-col">
-                <div class="info-card-label">Supplier</div>
-                <div class="info-card-value">
-                  {{ .Data.Supplier }} {{if .Data.Term}} • {{ .Data.Term }}
-                  {{end}}
-                </div>
+                <div class="info-card-label">Store</div>
+                <div class="info-card-value">{{ .Data.Store }}</div>
               </div>
               <div class="info-card-col">
                 <div class="info-card-label">Note</div>
@@ -512,84 +505,128 @@
           </div>
         </div>
 
-        <!-- Items -->
+        <!-- Items Group Supplier -->
         {{ if .Data.Items }}
         <div class="table-purple-wrapper">
           <table class="table-purple">
             <thead>
               <tr>
                 <th style="width: 25%">Inventory</th>
-                <th style="width: 25%">Category</th>
-                <th style="width: 10%" class="text-right">Qty</th>
+                <th style="width: 15%" class="text-right">Qty</th>
                 <th style="width: 10%">Unit</th>
-                <th style="width: 15%" class="text-right">Price</th>
-                <th style="width: 15%" class="text-right">Amount</th>
+                <th style="width: 10%" class="text-right">On Hand</th>
+                <th style="width: 15%">Last Purch Date</th>
+                <th style="width: 12%" class="text-right">Last Price</th>
+                <th style="width: 13%" class="text-right">Amount</th>
               </tr>
             </thead>
             <tbody>
               {{ range .Data.Items }}
               <tr>
-                <td style="width: 25%">{{ .Inventory }}</td>
-                <td style="width: 25%">{{ .Category }}</td>
-                <td style="width: 10%" class="text-right">{{ .Qty }}</td>
-                <td style="width: 10%">{{ .Unit }}</td>
-                <td style="width: 15%" class="text-right">{{ .Price }}</td>
-                <td style="width: 15%" class="text-right">{{ .Amount }}</td>
-              </tr>
-              {{ end }}
-              <tr class="total-row">
-                <td colspan="5" class="text-right">Total</td>
-                <td style="width: 15%" class="text-right">
-                  {{ .Data.TotalAmount }}
+                <td style="width: 25%">
+                  <div style="display: flex; flex-direction: column">
+                    <span>{{ .Inv }}</span>
+                    <!--  <span
+                      style="
+                        color: #8a8a91;
+                        font-size: 10px;
+                        font-weight: 400;
+                        margin-top: 2px;
+                      "
+                      >Note</span
+                    > -->
+                  </div>
                 </td>
+                <td style="width: 15%" class="text-right">{{ .Qty }}</td>
+                <td style="width: 10%">{{ .Unit }}</td>
+                <td style="width: 10%" class="text-right">{{ .OnHand }}</td>
+                <td style="width: 15%">{{ .LastPurchaseDate }}</td>
+                <td style="width: 12%" class="text-right">{{ .LastPrice }}</td>
+                <td style="width: 13%" class="text-right">{{ .Amount }}</td>
               </tr>
-            </tbody>
-          </table>
-        </div>
-        {{ end }}
-
-        <!-- Items Group Supplier -->
-        {{ if .Data.SupplierGroups }}
-        <div class="table-purple-wrapper">
-          <table class="table-purple">
-            <thead>
-              <tr>
-                <th style="width: 25%">Inventory</th>
-                <th style="width: 25%">Category</th>
-                <th style="width: 10%" class="text-right">Qty</th>
-                <th style="width: 10%">Unit</th>
-                <th style="width: 15%" class="text-right">Price</th>
-                <th style="width: 15%" class="text-right">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{ range .Data.SupplierGroups }}
-              <tr class="supplier-group-row">
+              {{ if .Supplier }}
+              <tr style="background-color: #fffaf5">
                 <td
-                  colspan="6"
                   style="
-                    background-color: #fffaf5;
-                    font-size: 12px;
-                    padding: 7px 10px;
+                    padding: 5px 10px;
+                    padding-left: 25px;
+                    text-align: left;
+                    color: #000000;
                     border-bottom: 1px solid #ececec;
                   "
                 >
-                  Supplier : {{ .SupplierName }}
+                  Supplier
+                </td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    text-align: right;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  Final Price
+                </td>
+                <td
+                  colspan="5"
+                  style="
+                    padding: 5px 10px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  Note
                 </td>
               </tr>
-              {{ range .Items }}
+              {{ range .Supplier }}
               <tr>
-                <td style="width: 25%; padding-left: 20px">{{ .Inventory }}</td>
-                <td style="width: 25%">{{ .Category }}</td>
-                <td style="width: 10%" class="text-right">{{ .Qty }}</td>
-                <td style="width: 10%">{{ .Unit }}</td>
-                <td style="width: 15%" class="text-right">{{ .Price }}</td>
-                <td style="width: 15%" class="text-right">{{ .Amount }}</td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  <div style="display: flex; align-items: center; gap: 5px">
+                    {{ if .IsPick }}
+                    <img
+                      alt=""
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSIxMSIgdmlld0JveD0iMCAwIDkgMTEiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03LjI0MTA1IDBIMS4zNTI5NkMwLjk5NDQ0MSAwLjAwMDk5OTY2NCAwLjY1MDg5IDAuMTQzODY0IDAuMzk3Mzc3IDAuMzk3Mzc3QzAuMTQzODY0IDAuNjUwODkgMC4wMDA5OTk2NjQgMC45OTQ0NDEgMCAxLjM1Mjk2VjkuNDAwMzdDMC4wMDA5OTk2NjQgOS43NTg4OSAwLjE0Mzg2NCAxMC4xMDI0IDAuMzk3Mzc3IDEwLjM1NkMwLjY1MDg5IDEwLjYwOTUgMC45OTQ0NDEgMTAuNzUyMyAxLjM1Mjk2IDEwLjc1MzNINy4yNDEwNUM3LjU5OTg4IDEwLjc1MzMgNy45NDQwMSAxMC42MTA4IDguMTk3NzQgMTAuMzU3MUM4LjQ1MTQ3IDEwLjEwMzMgOC41OTQwMSA5Ljc1OTIgOC41OTQwMSA5LjQwMDM3VjEuMzUyOTZDOC41OTQwMSAwLjk5NDEzNCA4LjQ1MTQ3IDAuNjUwMDAzIDguMTk3NzQgMC4zOTYyNzNDNy45NDQwMSAwLjE0MjU0NCA3LjU5OTg4IDAgNy4yNDEwNSAwWk04LjA1MjgyIDkuNDAwMzdDOC4wNTI4MiA5LjYxNTY3IDcuOTY3MyA5LjgyMjE1IDcuODE1MDYgOS45NzQzOUM3LjY2MjgyIDEwLjEyNjYgNy40NTYzNCAxMC4yMTIxIDcuMjQxMDUgMTAuMjEyMUgxLjM1Mjk2QzEuMTM3NjYgMTAuMjEyMSAwLjkzMTE4NiAxMC4xMjY2IDAuNzc4OTQ4IDkuOTc0MzlDMC42MjY3MTEgOS44MjIxNSAwLjU0MTE4NCA5LjYxNTY3IDAuNTQxMTg0IDkuNDAwMzdWMi40MDI4Nkg4LjA1MjgyVjkuNDAwMzdaIiBmaWxsPSIjMDBCRDdEIi8+CjxwYXRoIGQ9Ik0xLjgwMDA1IDMuNzUzMTFDMS43MjU2NSAzLjc1MzExIDEuNjU0MyAzLjcxODgyIDEuNjAxNjkgMy42NTc3OEMxLjU0OTA5IDMuNTk2NzMgMS41MTk1MyAzLjUxMzk0IDEuNTE5NTMgMy40Mjc2MUMxLjUxOTUzIDMuMzQxMjggMS41NDkwOSAzLjI1ODQ5IDEuNjAxNjkgMy4xOTc0NUMxLjY1NDMgMy4xMzY0MSAxLjcyNTY1IDMuMTAyMTEgMS44MDAwNSAzLjEwMjExSDYuNzk4MjRDNi44NzI2NCAzLjEwMjExIDYuOTQzOTkgMy4xMzY0MSA2Ljk5NjYgMy4xOTc0NUM3LjA0OTIgMy4yNTg0OSA3LjA3ODc2IDMuMzQxMjggNy4wNzg3NiAzLjQyNzYxQzcuMDc4NzYgMy41MTM5NCA3LjA0OTIgMy41OTY3MyA2Ljk5NjYgMy42NTc3OEM2Ljk0Mzk5IDMuNzE4ODIgNi44NzI2NCAzLjc1MzExIDYuNzk4MjQgMy43NTMxMUgxLjgwMDA1Wk0xLjgwMDA1IDUuNzA2MTFDMS43MjU2NSA1LjcwNjExIDEuNjU0MyA1LjY3MTgyIDEuNjAxNjkgNS42MTA3N0MxLjU0OTA5IDUuNTQ5NzMgMS41MTk1MyA1LjQ2Njk0IDEuNTE5NTMgNS4zODA2MUMxLjUxOTUzIDUuMjk0MjggMS41NDkwOSA1LjIxMTQ5IDEuNjAxNjkgNS4xNTA0NUMxLjY1NDMgNS4wODk0MSAxLjcyNTY1IDUuMDU1MTEgMS44MDAwNSA1LjA1NTExSDUuNDQ2NzNDNS41MjExMiA1LjA1NTExIDUuNTkyNDcgNS4wODk0MSA1LjY0NTA4IDUuMTUwNDVDNS42OTc2OSA1LjIxMTQ5IDUuNzI3MjQgNS4yOTQyOCA1LjcyNzI0IDUuMzgwNjFDNS43MjcyNCA1LjQ2Njk0IDUuNjk3NjkgNS41NDk3MyA1LjY0NTA4IDUuNjEwNzdDNS41OTI0NyA1LjY3MTgyIDUuNTIxMTIgNS43MDYxMSA1LjQ0NjczIDUuNzA2MTFIMS44MDAwNVpNMS44MDk1OCA5LjUyNjE4QzEuNzM1MTkgOS41MjYxOCAxLjY2Mzg0IDkuNDkxODggMS42MTEyMyA5LjQzMDg0QzEuNTU4NjIgOS4zNjk4IDEuNTI5MDcgOS4yODcwMSAxLjUyOTA3IDkuMjAwNjhDMS41MjkwNyA5LjExNDM1IDEuNTU4NjIgOS4wMzE1NiAxLjYxMTIzIDguOTcwNTFDMS42NjM4NCA4LjkwOTQ3IDEuNzM1MTkgOC44NzUxOCAxLjgwOTU4IDguODc1MThIMy42MzM0OEMzLjcwNzg4IDguODc1MTggMy43NzkyMyA4LjkwOTQ3IDguODMxODQgOC45NzA1MUMzLjg4NDQ0IDkuMDMxNTYgMy45MTQgOS4xMTQzNSAzLjkxNCA5LjIwMDY4QzMuOTE0IDkuMjg3MDEgMy44ODQ0NCA5LjM2OTggMy44MzE4NCA5LjQzMDg0QzMuNzc5MjMgOS40OTE4OCAzLjcwNzg4IDkuNTI2MTggMy42MzM0OCA5LjUyNjE4SDEuODA5NThaIiBmaWxsPSIjMDBCRDdEIi8+Cjwvc3ZnPgo="
+                      style="width: 9px; height: 11px; object-fit: contain"
+                    />
+                    {{ else }}
+                    <div style="width: 9px; height: 11px"></div>
+                    {{ end }}
+                    <span>{{ .Supplier }}</span>
+                  </div>
+                </td>
+                <td
+                  style="
+                    padding: 5px 10px;
+                    text-align: right;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  {{ .FinalPrice }}
+                </td>
+                <td
+                  colspan="5"
+                  style="
+                    padding: 5px 10px;
+                    text-align: left;
+                    color: #000000;
+                    border-bottom: 1px solid #ececec;
+                  "
+                >
+                  {{ .Note }}
+                </td>
               </tr>
-              {{ end }} {{ end }}
+              {{ end }} {{ end }} {{ end }}
               <tr class="total-row">
-                <td colspan="5" class="text-right">Total</td>
-                <td style="width: 15%" class="text-right">
+                <td colspan="6" class="text-right">Total</td>
+                <td style="width: 13%" class="text-right">
                   {{ .Data.TotalAmount }}
                 </td>
               </tr>
